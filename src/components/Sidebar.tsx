@@ -50,20 +50,26 @@ const navigationItems = [
   },
 ];
 
-export const Sidebar = () => {
+interface SidebarProps {
+  isCollapsed: boolean;
+}
+
+export const Sidebar = ({ isCollapsed }: SidebarProps) => {
   return (
-    <div className="w-64 bg-primary shadow-elevated flex flex-col">
-      <div className="p-6 border-b border-primary-hover">
+    <div className={`${isCollapsed ? 'w-16' : 'w-64'} bg-primary shadow-elevated flex flex-col transition-all duration-300`}>
+      <div className={`${isCollapsed ? 'p-3' : 'p-6'} border-b border-primary-hover`}>
         <div className="flex items-center space-x-3">
-          <Gauge className="h-8 w-8 text-secondary" />
-          <div>
-            <h1 className="text-lg font-semibold text-primary-foreground">
-              Roll Coolant
-            </h1>
-            <p className="text-sm text-primary-foreground/70">
-              Monitoring System
-            </p>
-          </div>
+          <Gauge className="h-8 w-8 text-secondary shrink-0" />
+          {!isCollapsed && (
+            <div>
+              <h1 className="text-lg font-semibold text-primary-foreground">
+                Roll Coolant
+              </h1>
+              <p className="text-sm text-primary-foreground/70">
+                Monitoring System
+              </p>
+            </div>
+          )}
         </div>
       </div>
       
@@ -75,28 +81,33 @@ export const Sidebar = () => {
               key={item.path}
               to={item.path}
               className={({ isActive }) =>
-                `flex items-center space-x-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
+                `flex items-center ${isCollapsed ? 'justify-center px-3' : 'space-x-3 px-4'} py-3 rounded-lg text-sm font-medium transition-colors ${
                   isActive
                     ? 'bg-secondary text-secondary-foreground shadow-glow'
                     : 'text-primary-foreground/80 hover:bg-primary-hover hover:text-primary-foreground'
                 }`
               }
+              title={isCollapsed ? item.name : ''}
             >
-              <Icon className="h-5 w-5" />
-              <div className="flex-1">
-                <div className="font-medium">{item.name}</div>
-                <div className="text-xs opacity-70">{item.description}</div>
-              </div>
+              <Icon className="h-5 w-5 shrink-0" />
+              {!isCollapsed && (
+                <div className="flex-1">
+                  <div className="font-medium">{item.name}</div>
+                  <div className="text-xs opacity-70">{item.description}</div>
+                </div>
+              )}
             </NavLink>
           );
         })}
       </nav>
       
-      <div className="p-4 border-t border-primary-hover">
-        <div className="text-xs text-primary-foreground/60 text-center">
-          Industrial Monitoring v2.1
+      {!isCollapsed && (
+        <div className="p-4 border-t border-primary-hover">
+          <div className="text-xs text-primary-foreground/60 text-center">
+            Industrial Monitoring v2.1
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
