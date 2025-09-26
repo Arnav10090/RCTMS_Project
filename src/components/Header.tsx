@@ -1,5 +1,5 @@
 import React from 'react';
-import { Bell, Settings, User, Menu, Sun, Moon } from 'lucide-react';
+import { Bell, Settings, User, ChevronLeft, ChevronRight, Sun, Moon } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import { Button } from './ui/button';
 
@@ -22,7 +22,11 @@ export const Header = ({ onToggleSidebar, isSidebarCollapsed }: HeaderProps) => 
             onClick={onToggleSidebar}
             className="shrink-0"
           >
-            <Menu className="h-4 w-4" />
+            {isSidebarCollapsed ? (
+              <ChevronRight className="h-4 w-4" />
+            ) : (
+              <ChevronLeft className="h-4 w-4" />
+            )}
           </Button>
           
           <div>
