@@ -3,7 +3,13 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Index from "./pages/Index";
+import { Layout } from "./components/Layout";
+import { Overview } from "./pages/Overview";
+import { HydraulicSystem } from "./pages/HydraulicSystem";
+import { PumpOperations } from "./pages/PumpOperations";
+import { OilCellarMonitor } from "./pages/OilCellarMonitor";
+import { AlarmManagement } from "./pages/AlarmManagement";
+import { Reports } from "./pages/Reports";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -15,7 +21,14 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Index />} />
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Overview />} />
+            <Route path="hydraulic" element={<HydraulicSystem />} />
+            <Route path="pumps" element={<PumpOperations />} />
+            <Route path="oil-cellar" element={<OilCellarMonitor />} />
+            <Route path="alarms" element={<AlarmManagement />} />
+            <Route path="reports" element={<Reports />} />
+          </Route>
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

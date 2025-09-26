@@ -2,41 +2,66 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Industrial Roll Coolant Monitoring System Design System */
 
 @layer base {
   :root {
+    /* Industrial Color Palette */
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 222.2 47.4% 11.2%;
+    --foreground: 215 25% 27%;
+    
+    /* Industrial Steel Blue Theme */
+    --primary: 218 100% 25%; /* Deep steel blue #1e3a8a */
     --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
-    --radius: 0.5rem;
+    --primary-hover: 218 100% 20%;
+    
+    /* Bright Cyan Accents */
+    --secondary: 191 100% 42%; /* Bright cyan #06b6d4 */
+    --secondary-foreground: 0 0% 100%;
+    --secondary-hover: 191 100% 35%;
+    
+    /* Status Colors */
+    --success: 158 64% 52%; /* Vibrant green #10b981 */
+    --success-foreground: 0 0% 100%;
+    --warning: 43 96% 56%; /* Amber #f59e0b */
+    --warning-foreground: 0 0% 100%;
+    --danger: 0 84% 60%; /* Crimson #ef4444 */
+    --danger-foreground: 0 0% 100%;
+    
+    /* Industrial Grays */
+    --muted: 210 40% 98%; /* Subtle gray #f8fafc */
+    --muted-foreground: 215 16% 47%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 215 25% 27%;
+    
+    /* Cards and Components */
+    --card: 0 0% 100%;
+    --card-foreground: 215 25% 27%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 215 25% 27%;
+    
+    /* Borders and Inputs */
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 191 100% 42%;
+    
+    /* Component Settings */
+    --radius: 0.375rem;
+    
+    /* Industrial Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(218 100% 25%), hsl(191 100% 42%));
+    --gradient-success: linear-gradient(135deg, hsl(158 64% 52%), hsl(142 71% 45%));
+    --gradient-warning: linear-gradient(135deg, hsl(43 96% 56%), hsl(38 92% 50%));
+    --gradient-danger: linear-gradient(135deg, hsl(0 84% 60%), hsl(0 72% 51%));
+    
+    /* Shadows for Industrial Depth */
+    --shadow-industrial: 0 4px 6px -1px hsl(218 100% 25% / 0.1), 0 2px 4px -1px hsl(218 100% 25% / 0.06);
+    --shadow-elevated: 0 10px 15px -3px hsl(218 100% 25% / 0.1), 0 4px 6px -2px hsl(218 100% 25% / 0.05);
+    --shadow-glow: 0 0 20px hsl(191 100% 42% / 0.3);
+    
+    /* Animations */
+    --transition-industrial: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --pulse-duration: 2s;
 
     --sidebar-background: 0 0% 98%;
 
@@ -56,41 +81,44 @@ All colors MUST be HSL.
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
+    /* Industrial Dark Mode */
+    --background: 218 100% 8%; /* Dark steel blue background */
     --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
+    
+    /* Industrial Steel Blue Theme - Dark Mode */
+    --primary: 191 100% 42%; /* Bright cyan becomes primary in dark */
+    --primary-foreground: 218 100% 8%;
+    --primary-hover: 191 100% 35%;
+    
+    /* Secondary becomes darker blue */
+    --secondary: 218 100% 15%;
     --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
+    --secondary-hover: 218 100% 20%;
+    
+    /* Status Colors - Dark Mode */
+    --success: 158 64% 52%;
+    --success-foreground: 0 0% 100%;
+    --warning: 43 96% 56%;
+    --warning-foreground: 0 0% 100%;
+    --danger: 0 84% 60%;
+    --danger-foreground: 0 0% 100%;
+    
+    /* Industrial Grays - Dark Mode */
+    --muted: 218 100% 12%;
+    --muted-foreground: 215 16% 65%;
+    --accent: 218 100% 15%;
     --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    
+    /* Cards and Components - Dark Mode */
+    --card: 218 100% 10%;
+    --card-foreground: 210 40% 98%;
+    --popover: 218 100% 10%;
+    --popover-foreground: 210 40% 98%;
+    
+    /* Borders and Inputs - Dark Mode */
+    --border: 218 50% 20%;
+    --input: 218 50% 20%;
+    --ring: 191 100% 42%;
   }
 }
 
