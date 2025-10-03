@@ -63,6 +63,27 @@ export const OilCellarMonitor = () => {
     <div className="space-y-6">
       {/* Safety Status Header - reduced for HMI-04 */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <DataCard title="Safety Snapshot" icon={CheckCircle} variant="primary">
+          <div className="flex items-center space-x-4">
+            <img src="https://cdn.builder.io/api/v1/image/assets%2F833405ef5a5d4fdeb09b809de0efa6a8%2F383489040ef942c29df205259dfb6787?format=webp&width=800" alt="safety-snapshot" className="w-20 h-20 rounded-md object-cover border border-border" />
+            <div className="flex-1">
+              <div className="text-xs text-muted-foreground">Without PPE</div>
+              <div className={`text-2xl font-bold ${safetyData.personnel.withoutPPE === 0 ? 'text-success' : 'text-danger'}`}>
+                {safetyData.personnel.withoutPPE}
+              </div>
+              <div className="mt-2 text-xs text-muted-foreground">Total Entered</div>
+              <div className="font-mono font-semibold text-primary">{safetyData.personnel.totalEntered}</div>
+              <div className="mt-3">
+                <StatusIndicator
+                  status={safetyData.personnel.withoutPPE === 0 ? 'active' : 'danger'}
+                  label="PPE Compliance"
+                  value={safetyData.personnel.withoutPPE === 0 ? 'Compliant' : 'Violation'}
+                />
+              </div>
+            </div>
+          </div>
+        </DataCard>
+
         <DataCard title="Access Control" icon={Shield} variant="success">
           <div className="space-y-3">
             <StatusIndicator
