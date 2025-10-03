@@ -17,10 +17,11 @@ export const Layout = () => {
           onToggleSidebar={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
           isSidebarCollapsed={isSidebarCollapsed}
         />
-        {(() => {
-          const location = useLocation();
-          return location.pathname !== '/' ? <KpiStrip /> : null;
-        })()}
+        {location.pathname === '/oil-cellar' ? (
+          <KpiStripOilCellar />
+        ) : (
+          location.pathname !== '/' ? <KpiStrip /> : null
+        )}
         <main className="flex-1 p-6 overflow-auto">
           <Outlet />
         </main>
