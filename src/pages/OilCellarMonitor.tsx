@@ -4,6 +4,11 @@ import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, Tabl
 import { Switch } from '@/components/ui/switch';
 import { Button } from '@/components/ui/button';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
+import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from 'recharts';
+import { format, subDays, subMonths } from 'date-fns';
 
 export const OilCellarMonitor = () => {
   const areas = ['Area#1', 'Area#2', 'Area#3', 'Area#4', 'Area#5'];
@@ -24,6 +29,63 @@ export const OilCellarMonitor = () => {
 
   const toggleCell = (row: RowId, col: number, value: boolean) =>
     setMatrix((m) => ({ ...m, [row]: m[row].map((v, i) => (i === col ? value : v)) }));
+
+  const parameterOptions = [
+    'Coil_ID','Coil_Grade','Coil_Width','Coil_Thick.','Coil_Input_Weight','Coil_Start_Time','Coil_End_Time','Coil_Total_Time','Mill_Speed','Production_Rate','Mill_Run_Hrs_Day','Mill_Run_Hrs_Month','Mill-Utilization','R.Coolant_Temp','R.Coolant_Tank_Current_Level','R.Coolant_Tank_Set_Level','R.Coolant_Tank_pH','R.Coolant_Concentration_Current Value','R.Coolant_Concentration_Set Value','Oil_Addition_volume','Water_Addition_Volume','R.Coolant_Tramp_Oil','R.Coolant_ESI_Value','R.Coolant_Saphonification_Value (SAP)','R.Coolant_Conductivity','R.Coolant_Flow','R.Coolant_Pressure','R.Coolan_Pump#1_Status','R.Coolan_Pump#1_Run_Hrs','R.Coolan_Pump#1_Load','R.Coolan_Pump#2_Status','R.Coolan_Pump#2_Run_Hrs','R.Coolan_Pump#2_Load','Agitator#1_Status','Agitator#1_Run_Hrs','Agitator#1_Load','Agitator#2_Status','Agitator#2_Run_Hrs','Agitator#2_Load','Magnetic_Separator_Status','Magnetic_Separator_Run_Hrs','Magnetic_Separator_Load','Skimmer_Status','Skimmer_Run_Hrs','Skimmer_Load','DM_Water_pH','DM_Water_Temp','DM_Water_Conductivity','DM_Water_Volume_Day','Coolant_Oil_Temp'
+  ];
+
+  type Range = 'weekly' | 'monthly' | 'yearly';
+  const [selectedParam, setSelectedParam] = React.useState<string>('Production_Rate');
+  const [range, setRange] = React.useState<Range>('weekly');
+
+  const seeded = (seed: number) => {
+    return function mulberry32(a: number) {
+      return () => {
+        a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a);
+        t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296;
+      };
+    }(seed);
+  };
+
+  const strHash = (s: string) => Array.from(s).reduce((acc, ch) => (acc * 31 + ch.charCodeAt(0)) | 0, 0);
+
+  const getRangeForParam = (param: string): { min: number; max: number; decimals?: number } => {
+    const p = param.toLowerCase();
+    if (p.includes('status')) return { min: 0, max: 1 };
+    if (p.includes('ph')) return { min: 6, max: 9, decimals: 2 };
+    if (p.includes('temp')) return { min: 15, max: 80, decimals: 1 };
+    if (p.includes('pressure')) return { min: 0, max: 10, decimals: 2 };
+    if (p.includes('flow')) return { min: 0, max: 120, decimals: 1 };
+    if (p.includes('conductivity')) return { min: 0, max: 2000 };
+    if (p.includes('concentration')) return { min: 0, max: 20, decimals: 2 };
+    if (p.includes('level')) return { min: 0, max: 100, decimals: 1 };
+    if (p.includes('load')) return { min: 0, max: 100, decimals: 0 };
+    if (p.includes('run_hrs')) return { min: 0, max: 24, decimals: 1 };
+    if (p.includes('oil') || p.includes('water') || p.includes('volume')) return { min: 0, max: 1000 };
+    if (p.includes('speed') || p.includes('utilization') || p.includes('production')) return { min: 0, max: 100 };
+    return { min: 0, max: 100 };
+  };
+
+  const buildXAxis = (r: Range) => {
+    if (r === 'weekly') {
+      return Array.from({ length: 7 }, (_, i) => format(subDays(new Date(), 6 - i), 'EEE'));
+    }
+    if (r === 'monthly') {
+      return Array.from({ length: 30 }, (_, i) => format(subDays(new Date(), 29 - i), 'd MMM'));
+    }
+    return Array.from({ length: 12 }, (_, i) => format(subMonths(new Date(), 11 - i), 'MMM'));
+  };
+
+  const data = React.useMemo(() => {
+    const labels = buildXAxis(range);
+    const rng = seeded(strHash(selectedParam + range));
+    const { min, max, decimals } = getRangeForParam(selectedParam);
+    return labels.map((label) => {
+      const value = min + rng() * (max - min);
+      const rounded = decimals !== undefined ? parseFloat(value.toFixed(decimals)) : Math.round(value);
+      return { label, value };
+    });
+  }, [selectedParam, range]);
 
   return (
     <div className="space-y-6">
@@ -78,6 +140,45 @@ export const OilCellarMonitor = () => {
             ))}
           </TableBody>
         </Table>
+      </DataCard>
+
+      <DataCard title="Trends" variant="primary">
+        <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex items-center gap-3">
+            <div className="w-64">
+              <Select value={selectedParam} onValueChange={setSelectedParam}>
+                <SelectTrigger aria-label="Y-axis parameter">
+                  <SelectValue placeholder="Select parameter" />
+                </SelectTrigger>
+                <SelectContent>
+                  {parameterOptions.map((opt) => (
+                    <SelectItem key={opt} value={opt}>{opt}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+          <Tabs value={range} onValueChange={(v) => setRange(v as Range)}>
+            <TabsList>
+              <TabsTrigger value="weekly">Weekly</TabsTrigger>
+              <TabsTrigger value="monthly">Monthly</TabsTrigger>
+              <TabsTrigger value="yearly">Yearly</TabsTrigger>
+            </TabsList>
+          </Tabs>
+        </div>
+
+        <ChartContainer
+          config={{ value: { label: selectedParam, color: 'hsl(var(--primary))' } }}
+          className="w-full min-h-[340px]"
+        >
+          <BarChart data={data} margin={{ left: 24, right: 12 }}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="label" tickLine={false} axisLine={false} />
+            <YAxis tickLine={false} axisLine={false} width={48} />
+            <ChartTooltip cursor={{ fill: 'hsl(var(--muted)/.4)' }} content={<ChartTooltipContent />} />
+            <Bar dataKey="value" fill="var(--color-value)" radius={[6, 6, 0, 0]} />
+          </BarChart>
+        </ChartContainer>
       </DataCard>
     </div>
   );
