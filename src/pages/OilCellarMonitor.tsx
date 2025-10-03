@@ -8,7 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from 'recharts';
-import { format, subDays, subMonths } from 'date-fns';
+import { format, startOfWeek, addDays, startOfMonth, getDaysInMonth } from 'date-fns';
 
 export const OilCellarMonitor = () => {
   const areas = ['Area#1', 'Area#2', 'Area#3', 'Area#4', 'Area#5'];
@@ -68,12 +68,16 @@ export const OilCellarMonitor = () => {
 
   const buildXAxis = (r: Range) => {
     if (r === 'weekly') {
-      return Array.from({ length: 7 }, (_, i) => format(subDays(new Date(), 6 - i), 'EEE'));
+      const monday = startOfWeek(new Date(), { weekStartsOn: 1 });
+      return Array.from({ length: 7 }, (_, i) => format(addDays(monday, i), 'EEE'));
     }
     if (r === 'monthly') {
-      return Array.from({ length: 30 }, (_, i) => format(subDays(new Date(), 29 - i), 'd MMM'));
+      const start = startOfMonth(new Date());
+      const days = getDaysInMonth(start);
+      return Array.from({ length: days }, (_, i) => format(addDays(start, i), 'd MMM'));
     }
-    return Array.from({ length: 12 }, (_, i) => format(subMonths(new Date(), 11 - i), 'MMM'));
+    const year = new Date().getFullYear();
+    return Array.from({ length: 12 }, (_, i) => format(new Date(year, i, 1), 'MMM'));
   };
 
   const data = React.useMemo(() => {
