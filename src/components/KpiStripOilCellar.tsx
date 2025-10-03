@@ -77,7 +77,7 @@ export const KpiStripOilCellar: React.FC = () => {
         </DataCard>
 
         {/* Safety Snapshot (replaces Main Hydraulic) */}
-        <DataCard title="Safety Snapshot" icon={CheckCircle} variant="primary">
+        <DataCard title="Oil Cellar Status" icon={CheckCircle} variant="primary">
           <div className="space-y-2">
             <div className="text-sm font-medium">Oil Cellar Status</div>
 
