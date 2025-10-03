@@ -64,21 +64,20 @@ export const OilCellarMonitor = () => {
       {/* Safety Status Header - reduced for HMI-04 */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <DataCard title="Safety Snapshot" icon={CheckCircle} variant="primary">
-          <div className="flex items-center space-x-4">
-            <img src="https://cdn.builder.io/api/v1/image/assets%2F833405ef5a5d4fdeb09b809de0efa6a8%2F383489040ef942c29df205259dfb6787?format=webp&width=800" alt="safety-snapshot" className="w-20 h-20 rounded-md object-cover border border-border" />
-            <div className="flex-1">
-              <div className="text-xs text-muted-foreground">Without PPE</div>
-              <div className={`text-2xl font-bold ${safetyData.personnel.withoutPPE === 0 ? 'text-success' : 'text-danger'}`}>
-                {safetyData.personnel.withoutPPE}
-              </div>
-              <div className="mt-2 text-xs text-muted-foreground">Total Entered</div>
-              <div className="font-mono font-semibold text-primary">{safetyData.personnel.totalEntered}</div>
-              <div className="mt-3">
-                <StatusIndicator
-                  status={safetyData.personnel.withoutPPE === 0 ? 'active' : 'danger'}
-                  label="PPE Compliance"
-                  value={safetyData.personnel.withoutPPE === 0 ? 'Compliant' : 'Violation'}
-                />
+          <div className="space-y-2">
+            <div className="text-xs text-muted-foreground">Without PPE</div>
+            <div className={`text-2xl font-mono font-bold ${safetyData.personnel.withoutPPE === 0 ? 'text-success' : 'text-danger'}`}>
+              {safetyData.personnel.withoutPPE}
+            </div>
+
+            <div className="mt-2 text-xs text-muted-foreground">Total Entered</div>
+            <div className="text-lg font-mono font-semibold text-primary">{safetyData.personnel.totalEntered}</div>
+
+            <div className="flex items-center space-x-3 mt-3">
+              <div className={`w-3 h-3 rounded-full ${safetyData.personnel.withoutPPE === 0 ? 'bg-success' : 'bg-danger'}`}></div>
+              <div className="text-sm font-medium">PPE Compliance</div>
+              <div className={`ml-auto text-lg font-mono font-bold ${safetyData.personnel.withoutPPE === 0 ? 'text-success' : 'text-danger'}`}>
+                {safetyData.personnel.withoutPPE === 0 ? 'Compliant' : 'Violation'}
               </div>
             </div>
           </div>
