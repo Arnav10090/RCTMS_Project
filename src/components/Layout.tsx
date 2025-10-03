@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import { Sidebar } from './Sidebar';
 import { Header } from './Header';
 import { KpiStrip } from './KpiStrip';
@@ -15,7 +15,10 @@ export const Layout = () => {
           onToggleSidebar={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
           isSidebarCollapsed={isSidebarCollapsed}
         />
-        <KpiStrip />
+        {(() => {
+          const location = useLocation();
+          return location.pathname !== '/' ? <KpiStrip /> : null;
+        })()}
         <main className="flex-1 p-6 overflow-auto">
           <Outlet />
         </main>
