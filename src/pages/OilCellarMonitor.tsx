@@ -61,51 +61,8 @@ export const OilCellarMonitor = () => {
 
   return (
     <div className="space-y-6">
-      {/* Safety Status Header - reduced for HMI-04 */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <DataCard title="Safety Snapshot" icon={CheckCircle} variant="primary">
-          <div className="space-y-2">
-            <div className="text-xs text-muted-foreground">Without PPE</div>
-            <div className={`text-2xl font-mono font-bold ${safetyData.personnel.withoutPPE === 0 ? 'text-success' : 'text-danger'}`}>
-              {safetyData.personnel.withoutPPE}
-            </div>
-
-            <div className="mt-2 text-xs text-muted-foreground">Total Entered</div>
-            <div className="text-lg font-mono font-semibold text-primary">{safetyData.personnel.totalEntered}</div>
-
-            <div className="flex items-center space-x-3 mt-3">
-              <div className={`w-3 h-3 rounded-full ${safetyData.personnel.withoutPPE === 0 ? 'bg-success' : 'bg-danger'}`}></div>
-              <div className="text-sm font-medium">PPE Compliance</div>
-              <div className={`ml-auto text-lg font-mono font-bold ${safetyData.personnel.withoutPPE === 0 ? 'text-success' : 'text-danger'}`}>
-                {safetyData.personnel.withoutPPE === 0 ? 'Compliant' : 'Violation'}
-              </div>
-            </div>
-          </div>
-        </DataCard>
-
-        <DataCard title="Access Control" icon={Shield} variant="success">
-          <div className="space-y-3">
-            <StatusIndicator
-              status="active"
-              label="Access Status"
-              value="Authorized"
-            />
-            <StatusIndicator
-              status="active"
-              label="Fire Ext. System"
-              value="Active"
-            />
-            <div className="flex justify-between items-center">
-              <span className="text-sm">Unsafe Acts Today</span>
-              <span className={`font-mono font-bold ${
-                safetyData.accessControl.unsafeActs === 0 ? 'text-success' : 'text-warning'
-              }`}>
-                {safetyData.accessControl.unsafeActs}
-              </span>
-            </div>
-          </div>
-        </DataCard>
-      </div>
+      {/* KPI header provided by Layout; duplicates removed on this page */}
+      <div className="h-4" />
 
 
 
