@@ -6,6 +6,7 @@ import { KpiStrip } from './KpiStrip';
 
 export const Layout = () => {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+  const location = useLocation();
 
   return (
     <div className="min-h-screen bg-muted flex">
