@@ -61,75 +61,18 @@ export const OilCellarMonitor = () => {
 
   return (
     <div className="space-y-6">
-      {/* Safety Status Header */}
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-        <DataCard title="Personnel Safety" icon={Users} variant="primary">
-          <div className="space-y-3">
-            <div className="grid grid-cols-2 gap-3">
-              <div>
-                <div className="text-xs text-muted-foreground">Without PPE</div>
-                <div className={`text-2xl font-bold ${
-                  safetyData.personnel.withoutPPE === 0 ? 'text-success' : 'text-danger'
-                }`}>
-                  {safetyData.personnel.withoutPPE}
-                </div>
-              </div>
-              <div>
-                <div className="text-xs text-muted-foreground">Total Entered</div>
-                <div className="text-2xl font-bold text-primary">
-                  {safetyData.personnel.totalEntered}
-                </div>
-              </div>
-            </div>
-            <StatusIndicator 
-              status={safetyData.personnel.withoutPPE === 0 ? 'active' : 'danger'}
-              label="PPE Compliance"
-              value={safetyData.personnel.withoutPPE === 0 ? 'Compliant' : 'Violation'}
-              animate={safetyData.personnel.withoutPPE > 0}
-            />
-          </div>
-        </DataCard>
-
-        <DataCard title="Environmental Conditions" icon={Wind}>
-          <div className="space-y-4">
-            <GaugeDisplay
-              label="Average AQI"
-              value={safetyData.personnel.averageAQI}
-              min={0}
-              max={150}
-              unit=""
-              thresholds={{
-                warning: 50,
-                danger: 100
-              }}
-            />
-            <div className="grid grid-cols-2 gap-2 text-sm">
-              <div>
-                <div className="text-xs text-muted-foreground">Humidity</div>
-                <div className="font-mono font-semibold">
-                  {safetyData.personnel.humidity}%
-                </div>
-              </div>
-              <div>
-                <div className="text-xs text-muted-foreground">Temperature</div>
-                <div className="font-mono font-semibold">
-                  {safetyData.personnel.temperature}°C
-                </div>
-              </div>
-            </div>
-          </div>
-        </DataCard>
-
+      {/* Safety Status Header - reduced for HMI-04 */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <DataCard title="Access Control" icon={Shield} variant="success">
           <div className="space-y-3">
-            <StatusIndicator 
-              status="active" 
-              label="Access Status" 
+            <StatusIndicator
+              status="active"
+              label="Access Status"
               value="Authorized"
             />
-            <StatusIndicator 
-              status="active" 
-              label="Fire Ext. System" 
+            <StatusIndicator
+              status="active"
+              label="Fire Ext. System"
               value="Active"
             />
             <div className="flex justify-between items-center">
@@ -142,30 +85,9 @@ export const OilCellarMonitor = () => {
             </div>
           </div>
         </DataCard>
-
-        <DataCard title="System Health" icon={CheckCircle}>
-          <div className="space-y-3">
-            <div className="space-y-2">
-              <div className="flex items-center justify-between">
-                <span className="text-sm">Lighting System</span>
-                <CheckCircle className="h-4 w-4 text-success" />
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-sm">Air Quality Sensors</span>
-                <CheckCircle className="h-4 w-4 text-success" />
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-sm">Access Control</span>
-                <CheckCircle className="h-4 w-4 text-success" />
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-sm">Emergency Systems</span>
-                <CheckCircle className="h-4 w-4 text-success" />
-              </div>
-            </div>
-          </div>
-        </DataCard>
       </div>
+
+
 
       {/* Main Monitoring Dashboard */}
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
