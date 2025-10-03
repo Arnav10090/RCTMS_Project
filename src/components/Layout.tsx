@@ -3,6 +3,7 @@ import { Outlet, useLocation } from 'react-router-dom';
 import { Sidebar } from './Sidebar';
 import { Header } from './Header';
 import { KpiStrip } from './KpiStrip';
+import { KpiStripOilCellar } from './KpiStripOilCellar';
 
 export const Layout = () => {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
