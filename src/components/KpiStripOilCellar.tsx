@@ -19,7 +19,11 @@ export const KpiStripOilCellar: React.FC = () => {
     },
     safety: {
       withoutPPE: 0,
-      totalEntered: 3
+      totalEntered: 3,
+      averageAQI: 42,
+      humidity: 65.2,
+      temperature: 23.8,
+      status: 'Normal'
     },
     accessControl: {
       status: 'Authorized',
