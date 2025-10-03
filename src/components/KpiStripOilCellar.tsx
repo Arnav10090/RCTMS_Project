@@ -79,16 +79,23 @@ export const KpiStripOilCellar: React.FC = () => {
         {/* Safety Snapshot (replaces Main Hydraulic) */}
         <DataCard title="Safety Snapshot" icon={CheckCircle} variant="primary">
           <div className="space-y-2">
-            <div className="text-xs text-muted-foreground">Without PPE</div>
-            <div className={`text-2xl font-mono font-bold ${systemData.safety.withoutPPE === 0 ? 'text-success' : 'text-danger'}`}>{systemData.safety.withoutPPE}</div>
+            <div className="text-sm font-medium">Oil Cellar Status</div>
 
-            <div className="mt-2 text-xs text-muted-foreground">Total Entered</div>
-            <div className="text-lg font-mono font-semibold text-primary">{systemData.safety.totalEntered}</div>
+            <div className="grid grid-cols-2 gap-2 text-sm mt-2">
+              <div className="text-xs text-muted-foreground">Person w/o PPE</div>
+              <div className="font-mono font-semibold text-foreground">{systemData.safety.withoutPPE}</div>
 
-            <div className="flex items-center space-x-3 mt-3">
-              <div className={`w-3 h-3 rounded-full ${systemData.safety.withoutPPE === 0 ? 'bg-success' : 'bg-danger'}`}></div>
-              <div className="text-sm font-medium">PPE Compliance</div>
-              <div className={`ml-auto text-lg font-mono font-bold ${systemData.safety.withoutPPE === 0 ? 'text-success' : 'text-danger'}`}>{systemData.safety.withoutPPE === 0 ? 'Compliant' : 'Violation'}</div>
+              <div className="text-xs text-muted-foreground">No. of person entered</div>
+              <div className="font-mono font-semibold text-foreground">{systemData.safety.totalEntered}</div>
+
+              <div className="text-xs text-muted-foreground">Avg. AQI</div>
+              <div className="font-mono font-semibold text-foreground">{systemData.safety.averageAQI}</div>
+
+              <div className="text-xs text-muted-foreground">Humidity</div>
+              <div className="font-mono font-semibold text-foreground">{systemData.safety.humidity}%</div>
+
+              <div className="text-xs text-muted-foreground">Temp</div>
+              <div className="font-mono font-semibold text-foreground">{systemData.safety.temperature}°C</div>
             </div>
           </div>
         </DataCard>
