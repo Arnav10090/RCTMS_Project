@@ -47,7 +47,7 @@ export const HydraulicSystem = () => {
       {/* Main Control Interface */}
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
         {/* System Schematic */}
-        <div className="xl:col-span-2">
+        <div className="xl:col-span-3">
           <DataCard title="Hydraulic System Schematic" className="h-96">
             <div className="relative h-full bg-gradient-to-br from-muted/30 to-muted/10 rounded-lg border-2 border-dashed border-border/30">
               <div className="absolute inset-4 flex flex-col justify-between">
@@ -114,13 +114,13 @@ export const HydraulicSystem = () => {
                   {systemData.pumps.slice(0, 2).map((pump) => (
                     <div key={pump.id} className="flex items-center space-x-3">
                       <div className={`w-12 h-12 border-2 rounded-full flex items-center justify-center ${
-                        pump.status === 'running' 
-                          ? 'bg-success/20 border-success' 
+                        pump.status === 'running'
+                          ? 'bg-success/20 border-success'
                           : 'bg-muted/20 border-muted-foreground'
                       }`}>
                         <RotateCcw className={`h-6 w-6 ${
-                          pump.status === 'running' 
-                            ? 'text-success animate-spin-slow' 
+                          pump.status === 'running'
+                            ? 'text-success animate-spin-slow'
                             : 'text-muted-foreground'
                         }`} />
                       </div>
@@ -132,86 +132,6 @@ export const HydraulicSystem = () => {
                       </div>
                     </div>
                   ))}
-                </div>
-              </div>
-            </div>
-          </DataCard>
-        </div>
-
-        {/* Control Panel */}
-        <div className="space-y-4">
-          <DataCard title="Pump Control Matrix">
-            <div className="space-y-3">
-              {systemData.pumps.map((pump) => (
-                <div key={pump.id} className="space-y-2">
-                  <div className="flex items-center justify-between">
-                    <div className="text-sm font-medium">{pump.name}</div>
-                    <StatusIndicator 
-                      status={pump.status === 'running' ? 'active' : 'idle'}
-                      label=""
-                      animate={false}
-                    />
-                  </div>
-                  <div className="flex space-x-2">
-                    <Button 
-                      variant={pump.status === 'running' ? 'default' : 'outline'} 
-                      size="sm"
-                      className="flex-1"
-                    >
-                      <Play className="h-3 w-3 mr-1" />
-                      Start
-                    </Button>
-                    <Button 
-                      variant={pump.status === 'standby' ? 'default' : 'outline'} 
-                      size="sm"
-                      className="flex-1"
-                    >
-                      <Square className="h-3 w-3 mr-1" />
-                      Stop
-                    </Button>
-                  </div>
-                  {pump.status === 'running' && (
-                    <div className="text-xs space-y-1">
-                      <div className="flex justify-between">
-                        <span>Speed:</span>
-                        <span className="font-mono">{pump.speed}%</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span>Power:</span>
-                        <span className="font-mono">{pump.power} kW</span>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          </DataCard>
-
-          <DataCard title="System Performance">
-            <div className="space-y-3">
-              <GaugeDisplay
-                label="Overall Efficiency"
-                value={94.2}
-                min={70}
-                max={100}
-                unit="%"
-                thresholds={{
-                  warning: 85,
-                  danger: 75
-                }}
-              />
-              <div className="text-xs space-y-1">
-                <div className="flex justify-between">
-                  <span>Energy Consumption:</span>
-                  <span className="font-mono">27.0 kW</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Uptime Today:</span>
-                  <span className="font-mono text-success">98.7%</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Next Maintenance:</span>
-                  <span className="font-mono text-warning">72h</span>
                 </div>
               </div>
             </div>
