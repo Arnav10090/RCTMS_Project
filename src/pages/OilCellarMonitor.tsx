@@ -121,8 +121,8 @@ export const OilCellarMonitor = () => {
           <TableCaption className="pt-4 text-xs text-muted-foreground">Interactive table — switches represent the "xxx" marks.</TableCaption>
           <TableHeader>
             <TableRow className="bg-card/60 hover:bg-card/60">
-              <TableHead className="w-16 sticky left-0 bg-card z-10">SN</TableHead>
-              <TableHead className="min-w-[220px] sticky left-16 bg-card z-10">Description</TableHead>
+              <TableHead className="w-16 sticky left-0 bg-card z-10 text-center">SN</TableHead>
+              <TableHead className="min-w-[220px] sticky left-16 bg-card z-10 text-center">Description</TableHead>
               {areas.map((a) => (
                 <TableHead key={a} className="text-center">{a}</TableHead>
               ))}
