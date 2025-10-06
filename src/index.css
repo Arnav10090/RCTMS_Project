@@ -131,3 +131,10 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* When sidebar is collapsed, reduce horizontal padding in operation table */
+.sidebar-collapsed .reduce-gap th,
+.sidebar-collapsed .reduce-gap td {
+  padding-left: 0.5rem; /* 2 */
+  padding-right: 0.5rem; /* 2 */
+}
