@@ -140,30 +140,19 @@ export const AlarmManagement = () => {
               </div>
 
               {/* Filter Buttons */}
-                <Button
-                  className="shrink-0"
-                  variant={filterLevel === 'all' ? 'default' : 'outline'}
-                  size="sm"
-                  onClick={() => setFilterLevel('all')}
-                >
-                  All
-                </Button>
-                <Button
-                  className="shrink-0"
-                  variant={filterLevel === 'active' ? 'default' : 'outline'}
-                  size="sm"
-                  onClick={() => setFilterLevel('active')}
-                >
-                  Active
-                </Button>
-                <Button
-                  className="shrink-0"
-                  variant={filterLevel === 'inactive' ? 'default' : 'outline'}
-                  size="sm"
-                  onClick={() => setFilterLevel('inactive')}
-                >
-                  Inactive
-                </Button>
+                <div className="w-40 shrink-0">
+                  <label className="text-xs text-muted-foreground mb-1 block">Status</label>
+                  <Select value={["all","active","inactive"].includes(filterLevel as any) ? (filterLevel as any) : 'all'} onValueChange={(v) => setFilterLevel(v as any)}>
+                    <SelectTrigger aria-label="Status" className="h-9" >
+                      <SelectValue placeholder="Status" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="all">All</SelectItem>
+                      <SelectItem value="active">Active</SelectItem>
+                      <SelectItem value="inactive">Inactive</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
 
                 {/* Alarm Level dropdown */}
                 <div className="w-40 shrink-0">
