@@ -4,6 +4,15 @@ import { Input } from '@/components/ui/input';
 import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from '@/components/ui/select';
 import { ChevronLeft, ChevronRight, Search, X } from 'lucide-react';
 
+type TableKey = 'coolant' | 'oilCellar' | 'rollPumps' | 'hpPumps';
+
+const TABLE_OPTIONS: { value: TableKey; label: string }[] = [
+  { value: 'coolant', label: 'Coolant Report' },
+  { value: 'oilCellar', label: 'Oil Cellar Report' },
+  { value: 'rollPumps', label: 'Roll Coolant Pump Status' },
+  { value: 'hpPumps', label: 'HP Pump Status' }
+];
+
 // Utilities
 function toISODate(d: Date) {
   return d.toISOString().slice(0, 10);
