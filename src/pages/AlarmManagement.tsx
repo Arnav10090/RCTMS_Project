@@ -8,7 +8,8 @@ import {
   Volume2,
   VolumeX,
   CheckSquare,
-  Download
+  Download,
+  X
 } from 'lucide-react';
 import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from '@/components/ui/select';
 
@@ -112,6 +113,14 @@ export const AlarmManagement = () => {
     unacknowledged: alarms.filter(a => !a.acknowledged && !a.recoveredTime).length
   };
 
+  const hasActiveFilters = searchTerm.trim() !== '' || filterLevel !== 'all' || alarmLevelFilter !== 'all';
+  const resetFilters = () => {
+    setSearchTerm('');
+    setFilterLevel('all');
+    setAlarmLevelFilter('all');
+  };
+  const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
+
   return (
     <div className="space-y-6">
       {/* Control Panel */}
@@ -182,6 +191,34 @@ export const AlarmManagement = () => {
                   Acknowledged
                 </Button>
             </div>
+
+            {hasActiveFilters && (
+              <div className="flex items-center justify-between flex-wrap gap-2 mb-4">
+                <div className="flex items-center flex-wrap gap-2">
+                  {searchTerm.trim() !== '' && (
+                    <Button variant="secondary" size="sm" onClick={() => setSearchTerm('')}>
+                      Search: "{searchTerm}"
+                      <X className="ml-2 h-4 w-4" />
+                    </Button>
+                  )}
+                  {filterLevel !== 'all' && (
+                    <Button variant="secondary" size="sm" onClick={() => setFilterLevel('all')}>
+                      Status: {capitalize(filterLevel)}
+                      <X className="ml-2 h-4 w-4" />
+                    </Button>
+                  )}
+                  {alarmLevelFilter !== 'all' && (
+                    <Button variant="secondary" size="sm" onClick={() => setAlarmLevelFilter('all')}>
+                      Level: {capitalize(alarmLevelFilter)}
+                      <X className="ml-2 h-4 w-4" />
+                    </Button>
+                  )}
+                </div>
+                <Button variant="destructive" size="sm" onClick={resetFilters}>
+                  Reset Filters
+                </Button>
+              </div>
+            )}
 
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center space-x-4">
