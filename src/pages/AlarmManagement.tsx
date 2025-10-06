@@ -144,14 +144,24 @@ export const AlarmManagement = () => {
     const matchesSearch = alarm.message.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          alarm.device.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          alarm.alarmNo.toLowerCase().includes(searchTerm.toLowerCase());
-    
-    const matchesFilter = filterLevel === 'all' || 
+
+    const matchesFilter = filterLevel === 'all' ||
                          (filterLevel === 'active' && !alarm.recoveredTime) ||
                          (filterLevel === 'acknowledged' && alarm.acknowledged) ||
                          (filterLevel === 'critical' && alarm.level === 'critical');
-    
+
     return matchesSearch && matchesFilter;
   });
+
+  // Pagination state
+  const [pageSize, setPageSize] = useState<number>(10);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const totalPages = Math.max(1, Math.ceil(filteredAlarms.length / pageSize));
+  const startIndex = (currentPage - 1) * pageSize;
+  const paginatedAlarms = filteredAlarms.slice(startIndex, startIndex + pageSize);
+  React.useEffect(() => {
+    if (currentPage > totalPages) setCurrentPage(1);
+  }, [filteredAlarms, pageSize, currentPage, totalPages]);
 
   const alarmStats = {
     total: alarms.length,
