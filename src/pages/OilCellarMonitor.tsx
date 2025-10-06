@@ -113,18 +113,12 @@ export const OilCellarMonitor = () => {
       <div className="h-1" />
 
       <DataCard title="HMI-04: Oil Cellar Matrix" className="overflow-x-auto" variant="primary">
-        <div className="mb-3 flex items-center justify-between gap-2">
+        <div className="mb-3">
           <div className="text-sm text-muted-foreground">Toggle cells to mark availability/status for each area.</div>
-          <div className="flex gap-2">
-            <Button size="sm" variant="outline" onClick={() => setAllInRow('lighting', true)}>Lighting: All On</Button>
-            <Button size="sm" variant="outline" onClick={() => setAllInRow('lighting', false)}>Lighting: All Off</Button>
-            <Button size="sm" variant="outline" onClick={() => setAllInRow('aqi', true)}>AQI: All On</Button>
-            <Button size="sm" variant="outline" onClick={() => setAllInRow('aqi', false)}>AQI: All Off</Button>
-          </div>
         </div>
 
         <Table className="rounded-lg overflow-hidden">
-          <TableCaption className="pt-4 text-xs text-muted-foreground">Interactive table �� switches represent the "xxx" marks.</TableCaption>
+          <TableCaption className="pt-4 text-xs text-muted-foreground">Interactive table — switches represent the "xxx" marks.</TableCaption>
           <TableHeader>
             <TableRow className="bg-card/60 hover:bg-card/60">
               <TableHead className="w-16 sticky left-0 bg-card z-10">SN</TableHead>
