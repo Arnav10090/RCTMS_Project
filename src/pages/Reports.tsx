@@ -544,43 +544,44 @@ export const Reports = () => {
           />
         )}
 
-        {/* HP Pump Status */}
-        <TableSection
-          title="HP Pump Status"
-          data={hp}
-          headers={[
-            'SN',
-            'Date',
-            'Pump No',
-            'Status (Run/Stand-by)',
-            'Run Hrs',
-            'Avg. Load',
-            'Avg System Pressure',
-            'Avg. Tank Level',
-            'Avg. Oil Temp',
-            'Oil Cleanliness',
-            'Water Saturation'
-          ]}
-          renderRow={(r: HpPumpRow, idx, start) => (
-            <tr key={r.id} className="hover:bg-gray-50">
-              <td className="px-4 py-3 text-sm text-gray-900">{start + idx + 1}</td>
-              <td className="px-4 py-3 text-sm text-gray-900 font-mono">{r.date}</td>
-              <td className="px-4 py-3 text-sm text-gray-900 font-semibold">{r.pumpNo}</td>
-              <td className="px-4 py-3 text-sm">
-                <span className={`px-3 py-1 rounded-full text-xs font-medium ${r.status === 'Run' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'}`}>
-                  {r.status}
-                </span>
-              </td>
-              <td className="px-4 py-3 text-sm text-gray-900">{r.runHrs}</td>
-              <td className="px-4 py-3 text-sm text-gray-900">{r.avgLoad}</td>
-              <td className="px-4 py-3 text-sm text-gray-900">{r.avgSystemPressure}</td>
-              <td className="px-4 py-3 text-sm text-gray-900">{r.avgTankLevel}</td>
-              <td className="px-4 py-3 text-sm text-gray-900">{r.avgOilTemp}</td>
-              <td className="px-4 py-3 text-sm text-gray-900 font-mono">{r.oilCleanliness}</td>
-              <td className="px-4 py-3 text-sm text-gray-900">{r.waterSaturation}</td>
-            </tr>
-          )}
-        />
+        {selectedTable === 'hpPumps' && (
+          <TableSection
+            title="HP Pump Status"
+            data={hp}
+            headers={[
+              'SN',
+              'Date',
+              'Pump No',
+              'Status (Run/Stand-by)',
+              'Run Hrs',
+              'Avg. Load',
+              'Avg System Pressure',
+              'Avg. Tank Level',
+              'Avg. Oil Temp',
+              'Oil Cleanliness',
+              'Water Saturation'
+            ]}
+            renderRow={(r: HpPumpRow, idx, start) => (
+              <tr key={r.id} className="hover:bg-gray-50">
+                <td className="px-4 py-3 text-sm text-gray-900">{start + idx + 1}</td>
+                <td className="px-4 py-3 text-sm text-gray-900 font-mono">{r.date}</td>
+                <td className="px-4 py-3 text-sm text-gray-900 font-semibold">{r.pumpNo}</td>
+                <td className="px-4 py-3 text-sm">
+                  <span className={`px-3 py-1 rounded-full text-xs font-medium ${r.status === 'Run' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'}`}>
+                    {r.status}
+                  </span>
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-900">{r.runHrs}</td>
+                <td className="px-4 py-3 text-sm text-gray-900">{r.avgLoad}</td>
+                <td className="px-4 py-3 text-sm text-gray-900">{r.avgSystemPressure}</td>
+                <td className="px-4 py-3 text-sm text-gray-900">{r.avgTankLevel}</td>
+                <td className="px-4 py-3 text-sm text-gray-900">{r.avgOilTemp}</td>
+                <td className="px-4 py-3 text-sm text-gray-900 font-mono">{r.oilCleanliness}</td>
+                <td className="px-4 py-3 text-sm text-gray-900">{r.waterSaturation}</td>
+              </tr>
+            )}
+          />
+        )}
       </div>
     </div>
   );
