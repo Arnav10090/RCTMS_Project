@@ -229,78 +229,7 @@ export const PumpOperations = () => {
 
   return (
     <div className="space-y-6">
-      {/* System Summary Cards */}
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
-        <DataCard title="Roll Coolant System" variant="primary">
-          <div className="space-y-2">
-            <div className="flex justify-between items-center">
-              <span className="text-sm">Active Equipment</span>
-              <span className="font-mono font-bold text-primary">
-                {getGroupSummary('coolant').running}/{getGroupSummary('coolant').total}
-              </span>
-            </div>
-            <div className="flex justify-between items-center">
-              <span className="text-sm">Avg. Utilization</span>
-              <span className="font-mono font-bold text-primary">
-                {getGroupSummary('coolant').avgUtilization.toFixed(1)}%
-              </span>
-            </div>
-          </div>
-        </DataCard>
-
-        <DataCard title="Main Hydraulic" variant="success">
-          <div className="space-y-2">
-            <div className="flex justify-between items-center">
-              <span className="text-sm">Active Equipment</span>
-              <span className="font-mono font-bold text-success">
-                {getGroupSummary('main-hydraulic').running}/{getGroupSummary('main-hydraulic').total}
-              </span>
-            </div>
-            <div className="flex justify-between items-center">
-              <span className="text-sm">Avg. Utilization</span>
-              <span className="font-mono font-bold text-success">
-                {getGroupSummary('main-hydraulic').avgUtilization.toFixed(1)}%
-              </span>
-            </div>
-          </div>
-        </DataCard>
-
-        <DataCard title="Auxiliary Hydraulic">
-          <div className="space-y-2">
-            <div className="flex justify-between items-center">
-              <span className="text-sm">Active Equipment</span>
-              <span className="font-mono font-bold">
-                {getGroupSummary('aux-hydraulic').running}/{getGroupSummary('aux-hydraulic').total}
-              </span>
-            </div>
-            <div className="flex justify-between items-center">
-              <span className="text-sm">Avg. Utilization</span>
-              <span className="font-mono font-bold">
-                {getGroupSummary('aux-hydraulic').avgUtilization.toFixed(1)}%
-              </span>
-            </div>
-          </div>
-        </DataCard>
-
-        <DataCard title="Lubrication System" variant="warning">
-          <div className="space-y-2">
-            <div className="flex justify-between items-center">
-              <span className="text-sm">Active Equipment</span>
-              <span className="font-mono font-bold text-warning">
-                {getGroupSummary('lubrication').running}/{getGroupSummary('lubrication').total}
-              </span>
-            </div>
-            <div className="flex justify-between items-center">
-              <span className="text-sm">Avg. Utilization</span>
-              <span className="font-mono font-bold text-warning">
-                {getGroupSummary('lubrication').avgUtilization.toFixed(1)}%
-              </span>
-            </div>
-          </div>
-        </DataCard>
-      </div>
-
-      {/* Equipment Operations Table */}
+          {/* Equipment Operations Table */}
       <DataCard title="Equipment Operations Matrix" className="overflow-x-auto">
         <div className="min-w-full">
           <div className="grid grid-cols-12 gap-2 pb-3 mb-4 border-b border-border text-xs font-semibold text-muted-foreground">
@@ -384,68 +313,6 @@ export const PumpOperations = () => {
         </div>
       </DataCard>
 
-      {/* System Performance Dashboard */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <DataCard title="Performance Metrics" icon={TrendingUp}>
-          <div className="space-y-4">
-            <div className="space-y-2">
-              <div className="flex justify-between">
-                <span className="text-sm">Total Power Consumption</span>
-                <span className="font-mono font-bold">127.8 kW</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-sm">System Efficiency</span>
-                <span className="font-mono font-bold text-success">94.2%</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-sm">Active Equipment</span>
-                <span className="font-mono font-bold text-primary">9/15</span>
-              </div>
-            </div>
-          </div>
-        </DataCard>
-
-        <DataCard title="Maintenance Alerts" icon={Clock}>
-          <div className="space-y-3">
-            <div className="space-y-2">
-              <div className="flex items-center justify-between">
-                <span className="text-sm">Next PM Due</span>
-                <span className="font-mono text-warning">AH003 - 2h</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-sm">Filter Replacement</span>
-                <span className="font-mono text-warning">MS001 - 48h</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-sm">Oil Change</span>
-                <span className="font-mono text-success">MH001 - 168h</span>
-              </div>
-            </div>
-            <Button variant="outline" size="sm" className="w-full">
-              View Full Schedule
-            </Button>
-          </div>
-        </DataCard>
-
-        <DataCard title="Energy Overview" icon={Zap}>
-          <div className="space-y-4">
-            <div className="space-y-2">
-              <div className="flex justify-between">
-                <span className="text-sm">Today's Consumption</span>
-                <span className="font-mono font-bold">2,847 kWh</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-sm">Monthly Average</span>
-                <span className="font-mono font-bold">2,623 kWh</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-sm">Efficiency Trend</span>
-                <span className="font-mono font-bold text-success">↗ +2.3%</span>
-              </div>
-            </div>
-          </div>
-        </DataCard>
-      </div>
     </div>
   );
 };
