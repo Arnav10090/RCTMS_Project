@@ -7,7 +7,7 @@ export const AlarmFooter: React.FC = () => {
 
   return (
     <div className="fixed bottom-0 inset-x-0 z-40">
-      <div className="mx-4 mb-4 rounded-md shadow-industrial border border-border bg-card overflow-hidden">
+      <div className="mx-0 mb-0 rounded-none shadow-industrial border-t border-border bg-card overflow-hidden">
         <div className="flex items-center justify-between px-4 py-2">
           <div className="text-sm font-medium">Acknowledged Alarms ({acknowledged.length})</div>
           <button
