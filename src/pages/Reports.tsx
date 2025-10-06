@@ -385,7 +385,7 @@ const TableSection = ({
   );
 };
 
-export default function Reports() {
+export const Reports = () => {
   const [coolant] = React.useState(() => genCoolant());
   const [cellar] = React.useState(() => genOilCellar());
   const [pumps] = React.useState(() => genPumps());
