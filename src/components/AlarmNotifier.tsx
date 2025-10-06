@@ -42,9 +42,7 @@ export const AlarmNotifier: React.FC = () => {
     };
 
     const id = setInterval(showToast, 60_000);
-    // fire one after 3s to indicate behavior without long wait
-    const warmup = setTimeout(showToast, 3000);
-    return () => { clearInterval(id); clearTimeout(warmup); };
+    return () => { clearInterval(id); };
   }, [addAcknowledged]);
 
   return null;
