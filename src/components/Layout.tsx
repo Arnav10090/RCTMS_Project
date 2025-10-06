@@ -12,7 +12,7 @@ export const Layout = () => {
   return (
     <div className="min-h-screen bg-muted flex">
       <Sidebar isCollapsed={isSidebarCollapsed} />
-      <div className="flex-1 flex flex-col">
+      <div className={`flex-1 flex flex-col ${isSidebarCollapsed ? 'sidebar-collapsed' : ''}`}>
         <Header
           onToggleSidebar={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
           isSidebarCollapsed={isSidebarCollapsed}
