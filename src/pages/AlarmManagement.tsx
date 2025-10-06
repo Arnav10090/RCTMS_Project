@@ -193,20 +193,18 @@ export const AlarmManagement = () => {
       {/* Alarm Table */}
       <DataCard title={`Alarm List (${filteredAlarms.length} items)`} className="overflow-x-auto">
         <div className="min-w-full">
-          <div className="grid grid-cols-12 gap-2 pb-3 mb-4 border-b border-border text-xs font-semibold text-muted-foreground">
+          <div className="grid grid-cols-10 gap-2 pb-3 mb-4 border-b border-border text-xs font-semibold text-muted-foreground">
             <div className="col-span-1">NO.</div>
             <div className="col-span-3">ALARM LEVEL & NO. & MESSAGE</div>
             <div className="col-span-2">DEVICE</div>
             <div className="col-span-2">EVENT TIME</div>
             <div className="col-span-2">RECOVERED TIME</div>
-            <div className="col-span-1">STATUS</div>
-            <div className="col-span-1">ACTIONS</div>
           </div>
 
           {paginatedAlarms.map((alarm, idx) => (
             <div
               key={alarm.id}
-              className={`grid grid-cols-12 gap-2 py-3 border-b border-border/50 text-sm hover:bg-muted/20 transition-colors ${
+              className={`grid grid-cols-10 gap-2 py-3 border-b border-border/50 text-sm hover:bg-muted/20 transition-colors ${
                 !alarm.acknowledged && !alarm.recoveredTime ? 'bg-danger/5' : ''
               }`}
             >
@@ -240,20 +238,6 @@ export const AlarmManagement = () => {
                 )}
               </div>
 
-              <div className="col-span-1 flex items-center">
-                {getStatusIcon(alarm)}
-              </div>
-
-              <div className="col-span-1 flex space-x-1">
-                {!alarm.acknowledged && (
-                  <Button variant="outline" size="sm" className="p-1">
-                    <CheckSquare className="h-3 w-3" />
-                  </Button>
-                )}
-                <Button variant="outline" size="sm" className="p-1">
-                  <MessageSquare className="h-3 w-3" />
-                </Button>
-              </div>
             </div>
           ))}
         </div>
