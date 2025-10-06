@@ -28,7 +28,7 @@ export const AlarmManagement = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [audioEnabled, setAudioEnabled] = useState(true);
   const [filterLevel, setFilterLevel] = useState<string>('all');
-  const [alarmLevelFilter, setAlarmLevelFilter] = useState<'all' | 'low' | 'medium'>('all');
+  const [alarmLevelFilter, setAlarmLevelFilter] = useState<'all' | 'low' | 'medium' | 'high' | 'critical'>('all');
   
   const generateAlarms = (count: number): Alarm[] => {
     const levels: Alarm['level'][] = ['critical', 'high', 'medium', 'low'];
@@ -88,8 +88,8 @@ export const AlarmManagement = () => {
 
     const matchesFilter = (filterLevel === 'all' ||
                          (filterLevel === 'active' && !alarm.recoveredTime) ||
-                         (filterLevel === 'acknowledged' && alarm.acknowledged) ||
-                         (filterLevel === 'critical' && alarm.level === 'critical'))
+                         (filterLevel === 'inactive' && !!alarm.recoveredTime) ||
+                         (filterLevel === 'acknowledged' && alarm.acknowledged))
                          && (alarmLevelFilter === 'all' || alarm.level === alarmLevelFilter);
 
     return matchesSearch && matchesFilter;
@@ -120,13 +120,13 @@ export const AlarmManagement = () => {
           <DataCard title="Alarm Control Panel">
             <div className="flex flex-wrap items-center gap-4 mb-4">
               {/* Search */}
-              <div className="flex items-center space-x-2 flex-1 min-w-64">
+              <div className="flex items-center space-x-2 w-64">
                 <Search className="h-4 w-4 text-muted-foreground" />
                 <Input
                   placeholder="Search alarms..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="flex-1"
+                  className="w-full"
                 />
               </div>
 
@@ -147,11 +147,11 @@ export const AlarmManagement = () => {
                   Active
                 </Button>
                 <Button
-                  variant={filterLevel === 'critical' ? 'default' : 'outline'}
+                  variant={filterLevel === 'inactive' ? 'default' : 'outline'}
                   size="sm"
-                  onClick={() => setFilterLevel('critical')}
+                  onClick={() => setFilterLevel('inactive')}
                 >
-                  Critical
+                  Inactive
                 </Button>
 
                 {/* Alarm Level dropdown */}
@@ -163,8 +163,10 @@ export const AlarmManagement = () => {
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="all">All</SelectItem>
-                      <SelectItem value="low">Low</SelectItem>
+                      <SelectItem value="critical">Critical</SelectItem>
+                      <SelectItem value="high">High</SelectItem>
                       <SelectItem value="medium">Medium</SelectItem>
+                      <SelectItem value="low">Low</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
