@@ -263,17 +263,17 @@ export const AlarmManagement = () => {
             <div className="col-span-1">ACTIONS</div>
           </div>
 
-          {filteredAlarms.map((alarm, index) => (
-            <div 
-              key={alarm.id} 
+          {paginatedAlarms.map((alarm, idx) => (
+            <div
+              key={alarm.id}
               className={`grid grid-cols-12 gap-2 py-3 border-b border-border/50 text-sm hover:bg-muted/20 transition-colors ${
                 !alarm.acknowledged && !alarm.recoveredTime ? 'bg-danger/5' : ''
               }`}
             >
               <div className="col-span-1 font-mono">
-                {(index + 1).toString().padStart(2, '0')}
+                {(startIndex + idx + 1).toString().padStart(2, '0')}
               </div>
-              
+
               <div className="col-span-3">
                 <div className="space-y-1">
                   <div className="flex items-center space-x-2">
@@ -285,25 +285,25 @@ export const AlarmManagement = () => {
                   <div className="text-sm font-medium">{alarm.message}</div>
                 </div>
               </div>
-              
+
               <div className="col-span-2 font-mono">
                 {alarm.device}
               </div>
-              
+
               <div className="col-span-2 font-mono text-xs">
                 {alarm.eventTime}
               </div>
-              
+
               <div className="col-span-2 font-mono text-xs">
                 {alarm.recoveredTime || (
                   <span className="text-muted-foreground">Not recovered</span>
                 )}
               </div>
-              
+
               <div className="col-span-1 flex items-center">
                 {getStatusIcon(alarm)}
               </div>
-              
+
               <div className="col-span-1 flex space-x-1">
                 {!alarm.acknowledged && (
                   <Button variant="outline" size="sm" className="p-1">
@@ -321,6 +321,33 @@ export const AlarmManagement = () => {
         {filteredAlarms.length === 0 && (
           <div className="text-center py-8 text-muted-foreground">
             No alarms match the current filter criteria.
+          </div>
+        )}
+
+        {/* Pagination Controls */}
+        {filteredAlarms.length > 0 && (
+          <div className="mt-3 flex items-center justify-between">
+            <div className="text-sm text-muted-foreground">
+              Showing {filteredAlarms.length === 0 ? 0 : startIndex + 1} - {Math.min(startIndex + pageSize, filteredAlarms.length)} of {filteredAlarms.length}
+            </div>
+            <div className="flex items-center space-x-2">
+              <select
+                value={pageSize}
+                onChange={(e) => { setPageSize(Number(e.target.value)); setCurrentPage(1); }}
+                className="bg-card border border-border text-sm rounded px-2 py-1"
+              >
+                <option value={5}>5</option>
+                <option value={10}>10</option>
+                <option value={25}>25</option>
+                <option value={50}>50</option>
+              </select>
+
+              <div className="flex items-center space-x-1">
+                <Button size="sm" variant="outline" onClick={() => setCurrentPage((p) => Math.max(1, p - 1))} disabled={currentPage === 1}>Prev</Button>
+                <div className="px-2 text-sm">Page {currentPage} / {totalPages}</div>
+                <Button size="sm" variant="outline" onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))} disabled={currentPage === totalPages}>Next</Button>
+              </div>
+            </div>
           </div>
         )}
       </DataCard>
