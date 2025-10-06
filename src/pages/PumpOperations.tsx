@@ -232,84 +232,95 @@ export const PumpOperations = () => {
           {/* Equipment Operations Table */}
       <DataCard title="Equipment Operations Matrix" className="overflow-x-auto">
         <div className="min-w-full">
-          <div className="grid grid-cols-12 gap-2 pb-3 mb-4 border-b border-border text-xs font-semibold text-muted-foreground">
-            <div className="col-span-1">NO.</div>
-            <div className="col-span-2">SERIAL NUMBER</div>
-            <div className="col-span-2">PUMP DESCRIPTION</div>
-            <div className="col-span-1">STATUS</div>
-            <div className="col-span-1">MODE</div>
-            <div className="col-span-1">MONTHLY HRS</div>
-            <div className="col-span-1">CUMULATIVE HRS</div>
-            <div className="col-span-1">MONTHLY %</div>
-            <div className="col-span-1">CUMULATIVE %</div>
-            <div className="col-span-1">ACTIONS</div>
-          </div>
+          <table className="min-w-full table-auto text-sm">
+            <thead>
+              <tr className="text-xs text-muted-foreground border-b border-border">
+                <th className="px-3 py-2 text-left w-12">SN</th>
+                <th className="px-3 py-2 text-left">Pump Description</th>
+                <th className="px-3 py-2 text-left w-56">Operation</th>
+                <th className="px-3 py-2 text-left w-36">Mode</th>
+                <th className="px-3 py-2 text-left w-32">Running Hrs</th>
+                <th className="px-3 py-2 text-left w-40">Utilization (%)</th>
+              </tr>
+            </thead>
+            <tbody>
+              {equipment.map((item, idx) => (
+                <tr key={item.id} className="border-b border-border/50 hover:bg-muted/20">
+                  <td className="px-3 py-3 font-mono">{(idx + 1).toString().padStart(2, '0')}</td>
+                  <td className="px-3 py-3">{item.description}</td>
 
-          {equipment.map((item, index) => (
-            <div key={item.id} className="grid grid-cols-12 gap-2 py-3 border-b border-border/50 text-sm hover:bg-muted/20 transition-colors">
-              <div className="col-span-1 font-mono">
-                {(index + 1).toString().padStart(2, '0')}
-              </div>
-              
-              <div className="col-span-2 font-mono text-xs">
-                {item.serialNumber}
-              </div>
-              
-              <div className="col-span-2 font-medium">
-                {item.description}
-              </div>
-              
-              <div className="col-span-1">
-                <StatusIndicator 
-                  status={getStatusColor(item.operationStatus) as any}
-                  label=""
-                  animate={item.operationStatus === 'start'}
-                />
-              </div>
-              
-              <div className="col-span-1">
-                <span className={`px-2 py-1 rounded text-xs font-medium ${
-                  item.mode === 'auto' 
-                    ? 'bg-success/20 text-success' 
-                    : 'bg-warning/20 text-warning'
-                }`}>
-                  {item.mode.toUpperCase()}
-                </span>
-              </div>
-              
-              <div className="col-span-1 font-mono">
-                {item.monthlyHours.toFixed(1)}
-              </div>
-              
-              <div className="col-span-1 font-mono">
-                {item.cumulativeHours.toLocaleString()}
-              </div>
-              
-              <div className="col-span-1 font-mono">
-                {item.monthlyUtilization.toFixed(1)}%
-              </div>
-              
-              <div className="col-span-1 font-mono">
-                {item.cumulativeUtilization.toFixed(1)}%
-              </div>
-              
-              <div className="col-span-1 flex space-x-1">
-                {item.operationStatus !== 'start' && (
-                  <Button variant="outline" size="sm" className="p-1">
-                    <Play className="h-3 w-3" />
-                  </Button>
-                )}
-                {item.operationStatus === 'start' && (
-                  <Button variant="outline" size="sm" className="p-1">
-                    <Square className="h-3 w-3" />
-                  </Button>
-                )}
-                <Button variant="outline" size="sm" className="p-1">
-                  <Settings className="h-3 w-3" />
-                </Button>
-              </div>
-            </div>
-          ))}
+                  <td className="px-3 py-3">
+                    <div className="flex items-center gap-3">
+                      <div className="px-2 py-1 rounded bg-yellow-200 text-xs font-medium">I/L</div>
+
+                      <button
+                        className={`px-3 py-2 rounded text-white text-xs font-semibold ${item.operationStatus === 'start' ? 'bg-green-600' : 'bg-green-500/30 border border-green-600'}`}
+                        onClick={() => {
+                          const copy = [...equipment];
+                          copy[idx] = { ...copy[idx], operationStatus: 'start' };
+                          // @ts-ignore
+                          setEquipment(copy);
+                        }}
+                        aria-pressed={item.operationStatus === 'start'}
+                      >
+                        START
+                      </button>
+
+                      <button
+                        className={`px-3 py-2 rounded text-white text-xs font-semibold ${item.operationStatus === 'stop' ? 'bg-red-600' : 'bg-red-500/30 border border-red-600'}`}
+                        onClick={() => {
+                          const copy = [...equipment];
+                          copy[idx] = { ...copy[idx], operationStatus: 'stop' };
+                          // @ts-ignore
+                          setEquipment(copy);
+                        }}
+                        aria-pressed={item.operationStatus === 'stop'}
+                      >
+                        STOP
+                      </button>
+                    </div>
+                  </td>
+
+                  <td className="px-3 py-3">
+                    <div className="flex items-center gap-2">
+                      <button
+                        className={`px-2 py-1 text-xs rounded ${item.mode === 'auto' ? 'bg-success/20 text-success' : 'bg-muted/10 text-muted-foreground'}`}
+                        onClick={() => {
+                          const copy = [...equipment];
+                          copy[idx] = { ...copy[idx], mode: 'auto' };
+                          // @ts-ignore
+                          setEquipment(copy);
+                        }}
+                      >
+                        AUTO
+                      </button>
+                      <button
+                        className={`px-2 py-1 text-xs rounded ${item.mode === 'manual' ? 'bg-warning/20 text-warning' : 'bg-muted/10 text-muted-foreground'}`}
+                        onClick={() => {
+                          const copy = [...equipment];
+                          copy[idx] = { ...copy[idx], mode: 'manual' };
+                          // @ts-ignore
+                          setEquipment(copy);
+                        }}
+                      >
+                        MAN
+                      </button>
+                    </div>
+                  </td>
+
+                  <td className="px-3 py-3 font-mono">
+                    <div>{item.monthlyHours.toFixed(1)}</div>
+                    <div className="text-xs text-muted-foreground">cum: {item.cumulativeHours.toLocaleString()}</div>
+                  </td>
+
+                  <td className="px-3 py-3 font-mono">
+                    <div>{item.monthlyUtilization.toFixed(1)}%</div>
+                    <div className="text-xs text-muted-foreground">cum: {item.cumulativeUtilization.toFixed(1)}%</div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </DataCard>
 
