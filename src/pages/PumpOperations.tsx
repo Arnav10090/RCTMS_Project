@@ -237,7 +237,7 @@ export const PumpOperations = () => {
               <tr className="text-xs text-muted-foreground border-b border-border">
                 <th rowSpan={2} className="px-3 py-2 text-left w-12">SN</th>
                 <th rowSpan={2} className="px-3 py-2 text-left">Pump Description</th>
-                <th rowSpan={2} className="px-3 py-2 text-left w-56">Operation</th>
+                <th rowSpan={2} className="px-3 py-2 text-left w-56 op-col">Operation</th>
                 <th rowSpan={2} className="px-3 py-2 text-left w-36">Mode</th>
                 <th colSpan={2} className="px-3 py-2 text-left">Running Hrs</th>
                 <th colSpan={2} className="px-3 py-2 text-left">Utilization (%)</th>
