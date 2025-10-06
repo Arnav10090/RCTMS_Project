@@ -245,18 +245,18 @@ export const PumpOperations = () => {
             </colgroup>
             <thead>
               <tr className="text-xs text-muted-foreground border-b border-border">
-                <th rowSpan={2} className="px-3 py-2 text-left w-12">SN</th>
+                <th rowSpan={2} className="px-3 py-2 text-center w-12">SN</th>
                 <th rowSpan={2} className="px-3 py-2 text-center desc-col">Pump Description</th>
                 <th rowSpan={2} className="px-3 py-2 text-center w-56 op-col">Operation</th>
                 <th rowSpan={2} className="px-3 py-2 text-center w-36">Mode</th>
-                <th colSpan={2} className="px-3 py-2 text-left">Running Hrs</th>
-                <th colSpan={2} className="px-3 py-2 text-left">Utilization (%)</th>
+                <th colSpan={2} className="px-3 py-2 text-center">Running Hrs</th>
+                <th colSpan={2} className="px-3 py-2 text-center">Utilization (%)</th>
               </tr>
               <tr className="text-xs text-muted-foreground border-b border-border">
-                <th className="px-3 py-2 text-left w-24">Month</th>
-                <th className="px-3 py-2 text-left w-24">Cum</th>
-                <th className="px-3 py-2 text-left w-24">Month</th>
-                <th className="px-3 py-2 text-left w-24">Cum</th>
+                <th className="px-3 py-2 text-center w-24">Month</th>
+                <th className="px-3 py-2 text-center w-24">Cum</th>
+                <th className="px-3 py-2 text-center w-24">Month</th>
+                <th className="px-3 py-2 text-center w-24">Cum</th>
               </tr>
             </thead>
             <tbody>
