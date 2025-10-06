@@ -5,6 +5,16 @@ export type AckAlarm = {
   level: 'low' | 'medium' | 'high' | 'critical';
   message: string;
   time: string; // ISO or display
+  device?: string;
+};
+
+type OverflowListener = (a: AckAlarm) => void;
+let overflowListeners: OverflowListener[] = [];
+export const subscribeAlarmOverflow = (cb: OverflowListener) => {
+  overflowListeners.push(cb);
+  return () => {
+    overflowListeners = overflowListeners.filter((x) => x !== cb);
+  };
 };
 
 interface AlarmContextValue {
@@ -42,7 +52,19 @@ export const AlarmProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
   const value = useMemo<AlarmContextValue>(() => ({
     acknowledged,
-    addAcknowledged: (a: AckAlarm) => setAcknowledged(prev => [a, ...prev]),
+    addAcknowledged: (a: AckAlarm) => {
+      setAcknowledged(prev => {
+        const next = [a, ...prev];
+        if (next.length > 10) {
+          const overflow = next[next.length - 1];
+          const trimmed = next.slice(0, 10);
+          // notify listeners outside of render cycle
+          setTimeout(() => overflowListeners.forEach((l) => l(overflow)), 0);
+          return trimmed;
+        }
+        return next;
+      });
+    },
     removeAcknowledged: (id: string) => setAcknowledged(prev => prev.filter(x => x.id !== id)),
     collapsed,
     setCollapsed,
