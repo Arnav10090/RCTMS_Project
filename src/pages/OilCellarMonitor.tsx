@@ -131,8 +131,8 @@ export const OilCellarMonitor = () => {
           <TableBody>
             {rows.map((row, rIdx) => (
               <TableRow key={row.id} className="hover:bg-accent/40">
-                <TableCell className="font-mono text-xs sticky left-0 bg-background/70 backdrop-blur z-10">{rIdx + 1}</TableCell>
-                <TableCell className="font-medium sticky left-16 bg-background/70 backdrop-blur z-10">{row.label}</TableCell>
+                <TableCell className="font-mono text-xs sticky left-0 bg-background/70 backdrop-blur z-10 text-center">{rIdx + 1}</TableCell>
+                <TableCell className="font-medium sticky left-16 bg-background/70 backdrop-blur z-10 text-center">{row.label}</TableCell>
                 {areas.map((_, cIdx) => (
                   <TableCell key={`${row.id}-${cIdx}`} className="text-center">
                     {row.id === 'lighting' ? (
