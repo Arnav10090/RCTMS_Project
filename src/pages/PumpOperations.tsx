@@ -255,8 +255,8 @@ export const PumpOperations = () => {
                   <td className="px-3 py-3 font-mono">{(idx + 1).toString().padStart(2, '0')}</td>
                   <td className="px-3 py-3 desc-col">{item.description}</td>
 
-                  <td className="px-3 py-3">
-                    <div className="flex items-center gap-3">
+                  <td className="px-3 py-3 operation">
+                    <div className="flex items-center gap-3 btn-group">
                       <div className="px-2 py-1 rounded bg-yellow-200 text-xs font-medium">I/L</div>
 
                       <button
