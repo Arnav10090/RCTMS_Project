@@ -181,70 +181,14 @@ export const Overview = () => {
         {/* P&ID Diagram */}
         <div className="xl:col-span-8">
           <DataCard title="System P&ID Diagram" className="h-96">
-            <div className="relative h-full bg-gradient-to-br from-muted/30 to-muted/10 rounded-lg border-2 border-dashed border-border/30 flex items-center justify-center">
-              {/* Interactive System Schematic */}
-              <div className="text-center space-y-4">
-                <div className="grid grid-cols-3 gap-8 items-center">
-                  {/* Clean Tank */}
-                  <div className="text-center">
-                    <div className="w-16 h-20 bg-success/20 border-2 border-success rounded-lg mx-auto mb-2 relative overflow-hidden">
-                      <div 
-                        className="absolute bottom-0 w-full bg-gradient-success transition-all duration-1000"
-                        style={{ height: `${systemData.coolantSystem.tankLevel}%` }}
-                      />
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <Droplet className="h-6 w-6 text-success" />
-                      </div>
-                    </div>
-                    <div className="text-xs font-semibold text-success">Clean Tank</div>
-                    <div className="text-xs text-muted-foreground font-mono">
-                      {systemData.coolantSystem.tankLevel}%
-                    </div>
-                  </div>
-
-                  {/* Pump System */}
-                  <div className="text-center">
-                    <div className="w-12 h-12 bg-primary/20 border-2 border-primary rounded-full mx-auto mb-2 flex items-center justify-center">
-                      <RotateCcw className="h-6 w-6 text-primary animate-spin-slow" />
-                    </div>
-                    <div className="text-xs font-semibold text-primary">Main Pump</div>
-                    <div className="text-xs text-muted-foreground">Active</div>
-                  </div>
-
-                  {/* Dirty Tank */}
-                  <div className="text-center">
-                    <div className="w-16 h-20 bg-warning/20 border-2 border-warning rounded-lg mx-auto mb-2 relative overflow-hidden">
-                      <div 
-                        className="absolute bottom-0 w-full bg-gradient-warning transition-all duration-1000"
-                        style={{ height: '45%' }}
-                      />
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <AlertCircle className="h-6 w-6 text-warning" />
-                      </div>
-                    </div>
-                    <div className="text-xs font-semibold text-warning">Dirty Tank</div>
-                    <div className="text-xs text-muted-foreground font-mono">45%</div>
-                  </div>
-                </div>
-
-                {/* Flow Lines */}
-                <div className="flex justify-center items-center space-x-8 mt-6">
-                  <div className="flex items-center space-x-2">
-                    <div className="w-4 h-1 bg-success rounded-full" />
-                    <div className="w-4 h-1 bg-success rounded-full animate-flow" />
-                    <div className="w-4 h-1 bg-success rounded-full" />
-                    <span className="text-xs text-success">Clean Flow</span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <div className="w-4 h-1 bg-warning rounded-full" />
-                    <div className="w-4 h-1 bg-warning rounded-full animate-flow" />
-                    <div className="w-4 h-1 bg-warning rounded-full" />
-                    <span className="text-xs text-warning">Return Flow</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </DataCard>
+          <div className="relative h-full rounded-lg overflow-hidden flex items-center justify-center bg-card/30">
+            <img
+              src="https://cdn.builder.io/api/v1/image/assets%2F833405ef5a5d4fdeb09b809de0efa6a8%2Fe2dcf5b83c724ccf81e120cbbb762b58?format=webp&width=1200"
+              alt="System P&ID Diagram"
+              className="object-contain w-full h-full"
+            />
+          </div>
+        </DataCard>
         </div>
 
         {/* System Status Panel */}
