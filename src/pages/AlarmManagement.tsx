@@ -29,93 +29,33 @@ export const AlarmManagement = () => {
   const [audioEnabled, setAudioEnabled] = useState(true);
   const [filterLevel, setFilterLevel] = useState<string>('all');
   
-  const [alarms] = useState<Alarm[]>([
-    {
-      id: 1,
-      level: 'critical',
-      alarmNo: 'HYD-001',
-      message: 'Main Hydraulic Pressure Low - Below 120 bar',
-      device: 'Main Hyd #1',
-      eventTime: '2024/03/15 14:32:15',
-      recoveredTime: null,
-      acknowledged: false
-    },
-    {
-      id: 2,
-      level: 'high',
-      alarmNo: 'COOL-025',
-      message: 'Coolant Tank Level Low - Below 30%',
-      device: 'Clean Tank',
-      eventTime: '2024/03/15 14:28:42',
-      recoveredTime: null,
-      acknowledged: true,
-      operator: 'J.Smith'
-    },
-    {
-      id: 3,
-      level: 'medium',
-      alarmNo: 'TEMP-012',
-      message: 'Oil Temperature High - Above 55°C',
-      device: 'Oil Tank',
-      eventTime: '2024/03/15 14:15:33',
-      recoveredTime: '2024/03/15 14:45:12',
-      acknowledged: true,
-      operator: 'M.Garcia'
-    },
-    {
-      id: 4,
-      level: 'critical',
-      alarmNo: 'PUMP-008',
-      message: 'Roll Coolant Pump#1 Motor Fault',
-      device: 'RCP001',
-      eventTime: '2024/03/15 13:58:21',
-      recoveredTime: null,
-      acknowledged: false
-    },
-    {
-      id: 5,
-      level: 'high',
-      alarmNo: 'FILT-003',
-      message: 'Magnetic Separator High Differential Pressure',
-      device: 'MS001',
-      eventTime: '2024/03/15 13:45:18',
-      recoveredTime: '2024/03/15 14:12:05',
-      acknowledged: true,
-      operator: 'D.Chen'
-    },
-    {
-      id: 6,
-      level: 'low',
-      alarmNo: 'MAINT-007',
-      message: 'Scheduled Maintenance Due - Aux Hyd Pump#2',
-      device: 'AH002',
-      eventTime: '2024/03/15 12:00:00',
-      recoveredTime: null,
-      acknowledged: true,
-      operator: 'System'
-    },
-    {
-      id: 7,
-      level: 'medium',
-      alarmNo: 'VIB-015',
-      message: 'High Vibration Detected - Gear Lubn Pump#1',
-      device: 'GL001',
-      eventTime: '2024/03/15 11:33:27',
-      recoveredTime: null,
-      acknowledged: false
-    },
-    {
-      id: 8,
-      level: 'high',
-      alarmNo: 'FLOW-009',
-      message: 'Low Flow Rate - Main Circulation',
-      device: 'P001',
-      eventTime: '2024/03/15 10:42:15',
-      recoveredTime: '2024/03/15 11:15:33',
-      acknowledged: true,
-      operator: 'J.Smith'
-    }
-  ]);
+  const generateAlarms = (count: number): Alarm[] => {
+    const levels: Alarm['level'][] = ['critical', 'high', 'medium', 'low'];
+    const devices = ['Main Hyd #1', 'Clean Tank', 'Oil Tank', 'RCP001', 'MS001', 'AH002', 'GL001', 'P001', 'Filter-01', 'HX-02'];
+    return Array.from({ length: count }, (_, i) => {
+      const level = levels[i % levels.length];
+      const alarmNo = `${level.substring(0,3).toUpperCase()}-${(100+i).toString().padStart(3,'0')}`;
+      const message = `${level.toUpperCase()} - Simulated alarm message #${i+1}`;
+      const device = devices[i % devices.length];
+      const eventTime = new Date(Date.now() - i * 3600 * 1000).toISOString().replace('T',' ').slice(0,19);
+      const recoveredTime = i % 5 === 0 ? new Date(Date.now() - (i-1) * 3600 * 1000).toISOString().replace('T',' ').slice(0,19) : null;
+      const acknowledged = i % 4 === 0;
+      const operator = acknowledged ? `Operator${(i%6)+1}` : undefined;
+      return {
+        id: i+1,
+        level,
+        alarmNo,
+        message,
+        device,
+        eventTime,
+        recoveredTime,
+        acknowledged,
+        operator
+      } as Alarm;
+    });
+  };
+
+  const [alarms] = useState<Alarm[]>(() => generateAlarms(50));
 
   const getLevelColor = (level: string) => {
     switch (level) {
