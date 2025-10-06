@@ -26,7 +26,7 @@ interface Equipment {
 }
 
 export const PumpOperations = () => {
-  const [equipment] = useState<Equipment[]>([
+  const [equipment, setEquipment] = useState<Equipment[]>([
     {
       id: 'RCP001',
       serialNumber: 'RCP-2024-001',
