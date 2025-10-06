@@ -180,8 +180,8 @@ export const Overview = () => {
       {/* Central System Visualization */}
       <div className="grid grid-cols-1 xl:grid-cols-12 gap-6">
         {/* P&ID Diagram */}
-        <div className="xl:col-span-8">
-          <DataCard title="System P&ID Diagram" className="h-96">
+        <div className="xl:col-span-12">
+          <DataCard title="System P&ID Diagram" className="h-[70vh]">
             <div className="h-full w-full">
               {/* Interactive, editable SVG diagram component */}
               <div className="p-2 h-full">
