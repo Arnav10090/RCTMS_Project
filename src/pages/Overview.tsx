@@ -181,14 +181,13 @@ export const Overview = () => {
         {/* P&ID Diagram */}
         <div className="xl:col-span-8">
           <DataCard title="System P&ID Diagram" className="h-96">
-          <div className="relative h-full rounded-lg overflow-hidden flex items-center justify-center bg-card/30">
-            <img
-              src="https://cdn.builder.io/api/v1/image/assets%2F833405ef5a5d4fdeb09b809de0efa6a8%2Fe2dcf5b83c724ccf81e120cbbb762b58?format=webp&width=1200"
-              alt="System P&ID Diagram"
-              className="object-contain w-full h-full"
-            />
-          </div>
-        </DataCard>
+            <div className="h-full w-full">
+              {/* Interactive, editable SVG diagram component */}
+              <div className="p-2 h-full">
+                <PidDiagram />
+              </div>
+            </div>
+          </DataCard>
         </div>
 
         {/* System Status Panel */}
