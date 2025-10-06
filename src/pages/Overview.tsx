@@ -191,52 +191,6 @@ export const Overview = () => {
           </DataCard>
         </div>
 
-        {/* System Status Panel */}
-        <div className="xl:col-span-4 space-y-4">
-          <DataCard title="System Trends" icon={TrendingUp}>
-            <div className="space-y-3">
-              <div className="text-xs text-muted-foreground">Last 24 Hours</div>
-              <div className="space-y-2">
-                <div className="flex items-center justify-between">
-                  <span className="text-sm">Temperature</span>
-                  <span className="text-sm font-mono text-success">↗ +2.1°C</span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-sm">Pressure</span>
-                  <span className="text-sm font-mono text-success">↗ +5.3 bar</span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-sm">Flow Rate</span>
-                  <span className="text-sm font-mono text-warning">↘ -0.8 L/min</span>
-                </div>
-              </div>
-            </div>
-          </DataCard>
-
-          <DataCard title="Lubrication System" icon={Thermometer}>
-            <div className="space-y-3">
-              <StatusIndicator 
-                status="active" 
-                label="Gear Lubrication" 
-                value="Normal"
-              />
-              <div className="text-sm space-y-1">
-                <div className="flex justify-between">
-                  <span>Pump #1</span>
-                  <span className="font-mono text-success">Running</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Pump #2</span>
-                  <span className="font-mono text-muted-foreground">Standby</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Oil Distribution</span>
-                  <span className="font-mono text-success">Optimal</span>
-                </div>
-              </div>
-            </div>
-          </DataCard>
-        </div>
       </div>
     </div>
   );
