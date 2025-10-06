@@ -423,37 +423,38 @@ export const Reports = () => {
           </Select>
         </div>
 
-        {/* Coolant Report */}
-        <TableSection
-          title="Coolant Report"
-          data={coolant}
-          headers={[
-            'SN',
-            'Date',
-            'Oil Conc. %',
-            'Conductivity μS/cm',
-            'pH',
-            'Temp Deg.C',
-            'ESI',
-            'Tramp %',
-            'Saponification Value (mmKOH/GM)',
-            'Tank Lvl kL'
-          ]}
-          renderRow={(r: CoolantRow, idx, start) => (
-            <tr key={r.id} className="hover:bg-gray-50">
-              <td className="px-4 py-3 text-sm text-gray-900">{start + idx + 1}</td>
-              <td className="px-4 py-3 text-sm text-gray-900 font-mono">{r.date}</td>
-              <td className="px-4 py-3 text-sm text-gray-900">{r.oilConc}</td>
-              <td className="px-4 py-3 text-sm text-gray-900">{r.conductivity}</td>
-              <td className="px-4 py-3 text-sm text-gray-900">{r.pH}</td>
-              <td className="px-4 py-3 text-sm text-gray-900">{r.tempC}</td>
-              <td className="px-4 py-3 text-sm text-gray-900">{r.esi}</td>
-              <td className="px-4 py-3 text-sm text-gray-900">{r.tramp}</td>
-              <td className="px-4 py-3 text-sm text-gray-900">{r.saponification}</td>
-              <td className="px-4 py-3 text-sm text-gray-900">{r.tankLvl}</td>
-            </tr>
-          )}
-        />
+        {selectedTable === 'coolant' && (
+          <TableSection
+            title="Coolant Report"
+            data={coolant}
+            headers={[
+              'SN',
+              'Date',
+              'Oil Conc. %',
+              'Conductivity μS/cm',
+              'pH',
+              'Temp Deg.C',
+              'ESI',
+              'Tramp %',
+              'Saponification Value (mmKOH/GM)',
+              'Tank Lvl kL'
+            ]}
+            renderRow={(r: CoolantRow, idx, start) => (
+              <tr key={r.id} className="hover:bg-gray-50">
+                <td className="px-4 py-3 text-sm text-gray-900">{start + idx + 1}</td>
+                <td className="px-4 py-3 text-sm text-gray-900 font-mono">{r.date}</td>
+                <td className="px-4 py-3 text-sm text-gray-900">{r.oilConc}</td>
+                <td className="px-4 py-3 text-sm text-gray-900">{r.conductivity}</td>
+                <td className="px-4 py-3 text-sm text-gray-900">{r.pH}</td>
+                <td className="px-4 py-3 text-sm text-gray-900">{r.tempC}</td>
+                <td className="px-4 py-3 text-sm text-gray-900">{r.esi}</td>
+                <td className="px-4 py-3 text-sm text-gray-900">{r.tramp}</td>
+                <td className="px-4 py-3 text-sm text-gray-900">{r.saponification}</td>
+                <td className="px-4 py-3 text-sm text-gray-900">{r.tankLvl}</td>
+              </tr>
+            )}
+          />
+        )}
 
         {/* Oil Cellar Report */}
         <TableSection
