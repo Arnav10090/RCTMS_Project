@@ -179,3 +179,32 @@
   padding-left: 0.25rem !important;
   padding-right: 0.25rem !important;
 }
+
+/* Ensure equal columns and prevent overlap */
+.reduce-gap {
+  --col-count: 8;
+}
+
+.reduce-gap table {
+  table-layout: fixed; /* ensure equal width columns when using colgroup */
+  width: 100%;
+}
+
+.reduce-gap td, .reduce-gap th {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.reduce-gap .btn-group button {
+  padding: 0.25rem 0.4rem !important;
+  font-size: 0.675rem !important;
+  line-height: 1 !important;
+  white-space: nowrap;
+}
+
+/* slightly reduce horizontal padding for table cells globally to prevent wrapping */
+.reduce-gap .px-3 { padding-left: 0.5rem; padding-right: 0.5rem; }
+
+/* ensure header row centered remains */
+.reduce-gap thead th { vertical-align: middle; }
