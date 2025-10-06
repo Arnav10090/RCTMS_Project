@@ -4,16 +4,11 @@ const PidDiagram: React.FC = () => {
   return (
     <div className="w-full h-full bg-white p-8 overflow-auto">
       <svg width="1100" height="600" viewBox="0 0 1100 600" className="border border-gray-300">
-        {/* Grid */}
         <defs>
-          <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#e5e7eb" strokeWidth="1" />
-          </pattern>
           <marker id="arrowblack" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
             <path d="M0,0 L0,6 L9,3 z" fill="#000" />
           </marker>
         </defs>
-        <rect width="1100" height="600" fill="url(#grid)" />
 
         {/* DM Water label and line */}
         <text x="50" y="70" fontSize="14" fontFamily="Arial">DM Water</text>
