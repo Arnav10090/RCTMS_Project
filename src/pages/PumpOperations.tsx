@@ -235,12 +235,18 @@ export const PumpOperations = () => {
           <table className="min-w-full table-auto text-sm">
             <thead>
               <tr className="text-xs text-muted-foreground border-b border-border">
-                <th className="px-3 py-2 text-left w-12">SN</th>
-                <th className="px-3 py-2 text-left">Pump Description</th>
-                <th className="px-3 py-2 text-left w-56">Operation</th>
-                <th className="px-3 py-2 text-left w-36">Mode</th>
-                <th className="px-3 py-2 text-left w-32">Running Hrs</th>
-                <th className="px-3 py-2 text-left w-40">Utilization (%)</th>
+                <th rowSpan={2} className="px-3 py-2 text-left w-12">SN</th>
+                <th rowSpan={2} className="px-3 py-2 text-left">Pump Description</th>
+                <th rowSpan={2} className="px-3 py-2 text-left w-56">Operation</th>
+                <th rowSpan={2} className="px-3 py-2 text-left w-36">Mode</th>
+                <th colSpan={2} className="px-3 py-2 text-left">Running Hrs</th>
+                <th colSpan={2} className="px-3 py-2 text-left">Utilization (%)</th>
+              </tr>
+              <tr className="text-xs text-muted-foreground border-b border-border">
+                <th className="px-3 py-2 text-left w-24">Month</th>
+                <th className="px-3 py-2 text-left w-24">Cum</th>
+                <th className="px-3 py-2 text-left w-24">Month</th>
+                <th className="px-3 py-2 text-left w-24">Cum</th>
               </tr>
             </thead>
             <tbody>
@@ -258,7 +264,6 @@ export const PumpOperations = () => {
                         onClick={() => {
                           const copy = [...equipment];
                           copy[idx] = { ...copy[idx], operationStatus: 'start' };
-                          // @ts-ignore
                           setEquipment(copy);
                         }}
                         aria-pressed={item.operationStatus === 'start'}
@@ -271,7 +276,6 @@ export const PumpOperations = () => {
                         onClick={() => {
                           const copy = [...equipment];
                           copy[idx] = { ...copy[idx], operationStatus: 'stop' };
-                          // @ts-ignore
                           setEquipment(copy);
                         }}
                         aria-pressed={item.operationStatus === 'stop'}
@@ -288,7 +292,6 @@ export const PumpOperations = () => {
                         onClick={() => {
                           const copy = [...equipment];
                           copy[idx] = { ...copy[idx], mode: 'auto' };
-                          // @ts-ignore
                           setEquipment(copy);
                         }}
                       >
@@ -299,7 +302,6 @@ export const PumpOperations = () => {
                         onClick={() => {
                           const copy = [...equipment];
                           copy[idx] = { ...copy[idx], mode: 'manual' };
-                          // @ts-ignore
                           setEquipment(copy);
                         }}
                       >
@@ -308,15 +310,11 @@ export const PumpOperations = () => {
                     </div>
                   </td>
 
-                  <td className="px-3 py-3 font-mono">
-                    <div>{item.monthlyHours.toFixed(1)}</div>
-                    <div className="text-xs text-muted-foreground">cum: {item.cumulativeHours.toLocaleString()}</div>
-                  </td>
+                  <td className="px-3 py-3 font-mono">{item.monthlyHours.toFixed(1)}</td>
+                  <td className="px-3 py-3 font-mono">{item.cumulativeHours.toLocaleString()}</td>
 
-                  <td className="px-3 py-3 font-mono">
-                    <div>{item.monthlyUtilization.toFixed(1)}%</div>
-                    <div className="text-xs text-muted-foreground">cum: {item.cumulativeUtilization.toFixed(1)}%</div>
-                  </td>
+                  <td className="px-3 py-3 font-mono">{item.monthlyUtilization.toFixed(1)}%</td>
+                  <td className="px-3 py-3 font-mono">{item.cumulativeUtilization.toFixed(1)}%</td>
                 </tr>
               ))}
             </tbody>
