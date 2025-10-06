@@ -2,14 +2,12 @@ import React, { useState } from 'react';
 import { DataCard } from '@/components/DataCard';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { 
-  AlertTriangle, 
-  Search, 
-  Volume2, 
+import {
+  AlertTriangle,
+  Search,
+  Volume2,
   VolumeX,
   CheckSquare,
-  RotateCcw,
-  Filter,
   Download,
   MessageSquare
 } from 'lucide-react';
