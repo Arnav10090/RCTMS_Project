@@ -10,6 +10,7 @@ import {
   CheckSquare,
   Download
 } from 'lucide-react';
+import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from '@/components/ui/select';
 
 interface Alarm {
   id: number;
