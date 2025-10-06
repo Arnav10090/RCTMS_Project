@@ -488,8 +488,47 @@ export const Reports = () => {
               'Area#4',
               'Area#5',
               'Inspection Status',
-              'Next Exp. Due'
+              'Next Insp. Due'
             ]}
+            renderHeader={() => {
+              const topCellClass = "border border-gray-200 px-3 py-2 text-xs font-semibold text-gray-700 text-center whitespace-nowrap align-middle";
+              const subCellClass = "border border-gray-200 px-3 py-1.5 text-xs font-medium text-gray-600 text-center whitespace-nowrap";
+              return (
+                <>
+                  <tr>
+                    <th rowSpan={2} className={topCellClass}>SN</th>
+                    <th className={topCellClass}>Date</th>
+                    <th className={topCellClass}>Temp</th>
+                    <th className={topCellClass}>Humidity</th>
+                    <th colSpan={3} className={topCellClass}>AQI</th>
+                    <th rowSpan={2} className={topCellClass}>Access Control Status</th>
+                    <th rowSpan={2} className={topCellClass}>Person Entered</th>
+                    <th rowSpan={2} className={topCellClass}>No. of persons w/o ppe</th>
+                    <th colSpan={3} className={topCellClass}>Unsafe Acts</th>
+                    <th colSpan={5} className={topCellClass}>Illumination Level</th>
+                    <th colSpan={2} className={topCellClass}>Fire Det. system</th>
+                  </tr>
+                  <tr>
+                    <th className={subCellClass}>dd/mm/yy</th>
+                    <th className={subCellClass}>Deg.C</th>
+                    <th className={subCellClass}>%</th>
+                    <th className={subCellClass}>Area#1</th>
+                    <th className={subCellClass}>Area#2</th>
+                    <th className={subCellClass}>Area#3</th>
+                    <th className={subCellClass}>Welding</th>
+                    <th className={subCellClass}>Cutting</th>
+                    <th className={subCellClass}>Others</th>
+                    <th className={subCellClass}>Area#1</th>
+                    <th className={subCellClass}>Area#2</th>
+                    <th className={subCellClass}>Area#3</th>
+                    <th className={subCellClass}>Area#4</th>
+                    <th className={subCellClass}>Area#5</th>
+                    <th className={subCellClass}>Inspection Status</th>
+                    <th className={subCellClass}>Next Insp. Due</th>
+                  </tr>
+                </>
+              );
+            }}
             renderRow={(r: OilCellarRow, idx, start) => (
               <tr key={r.id} className="hover:bg-gray-50">
                 <td className="px-4 py-3 text-sm text-gray-900">{start + idx + 1}</td>
