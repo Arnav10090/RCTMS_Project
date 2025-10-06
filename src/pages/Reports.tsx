@@ -291,7 +291,7 @@ export const Reports = () => {
       {/* Oil Cellar Report */}
       <DataCard title={`Oil Cellar Report (${cellarFilt.length})`} className="overflow-x-auto">
         <div className="min-w-[1300px]">
-          <div className="grid grid-cols-18 gap-2 pb-3 mb-3 border-b border-border text-xs font-semibold text-muted-foreground">
+          <div className="grid grid-cols-20 gap-2 pb-3 mb-3 border-b border-border text-xs font-semibold text-muted-foreground">
             <div>SN</div>
             <div>Date</div>
             <div>Temp °C</div>
@@ -314,7 +314,7 @@ export const Reports = () => {
             <div>Next Due</div>
           </div>
           {cellarPg.slice.map((r, idx) => (
-            <div key={r.id} className="grid grid-cols-18 gap-2 py-2 border-b border-border/50 text-sm">
+            <div key={r.id} className="grid grid-cols-20 gap-2 py-2 border-b border-border/50 text-sm">
               <div>{(cellarPg.page - 1) * cellarPg.size + idx + 1}</div>
               <div className="font-mono text-xs">{r.date}</div>
               <div>{r.tempC}</div>
