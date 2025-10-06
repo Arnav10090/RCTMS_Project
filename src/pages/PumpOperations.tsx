@@ -232,7 +232,17 @@ export const PumpOperations = () => {
       {/* Equipment Operations Table */}
       <DataCard title="Equipment Operations Matrix" className="overflow-x-auto">
         <div className="min-w-full">
-          <table className="min-w-full table-auto text-sm reduce-gap text-center">
+          <table className="min-w-full table-fixed text-sm reduce-gap text-center">
+            <colgroup>
+              <col style={{ width: '12.5%' }} />
+              <col style={{ width: '12.5%' }} />
+              <col style={{ width: '12.5%' }} />
+              <col style={{ width: '12.5%' }} />
+              <col style={{ width: '12.5%' }} />
+              <col style={{ width: '12.5%' }} />
+              <col style={{ width: '12.5%' }} />
+              <col style={{ width: '12.5%' }} />
+            </colgroup>
             <thead>
               <tr className="text-xs text-muted-foreground border-b border-border">
                 <th rowSpan={2} className="px-3 py-2 text-left w-12">SN</th>
