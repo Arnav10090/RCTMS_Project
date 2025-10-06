@@ -138,3 +138,17 @@
   padding-left: 0.5rem; /* 2 */
   padding-right: 0.5rem; /* 2 */
 }
+
+/* Tighter spacing for operation column when sidebar collapsed */
+.sidebar-collapsed .reduce-gap th.op-col,
+.sidebar-collapsed .reduce-gap td.operation {
+  width: 9rem !important;
+}
+
+.sidebar-collapsed .reduce-gap td.desc-col {
+  padding-right: 0.25rem !important;
+}
+
+.sidebar-collapsed .reduce-gap .btn-group {
+  gap: 0.5rem !important;
+}
