@@ -33,7 +33,7 @@ export const KpiStrip: React.FC = () => {
   };
 
   return (
-    <div className="px-6 pb-4">
+    <div className="mt-6 px-6 pb-4">
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
         <DataCard title="Running Coil Data" icon={Activity} variant="primary">
           <div className="space-y-3">

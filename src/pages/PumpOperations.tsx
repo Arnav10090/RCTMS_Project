@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { DataCard } from '@/components/DataCard';
 import { StatusIndicator } from '@/components/StatusIndicator';
 import { Button } from '@/components/ui/button';
-import { 
-  Play, 
-  Square, 
+import {
+  Play,
+  Square,
   Settings,
   RotateCcw,
   Clock,
@@ -26,7 +26,7 @@ interface Equipment {
 }
 
 export const PumpOperations = () => {
-  const [equipment] = useState<Equipment[]>([
+  const [equipment, setEquipment] = useState<Equipment[]>([
     {
       id: 'RCP001',
       serialNumber: 'RCP-2024-001',
@@ -223,229 +223,115 @@ export const PumpOperations = () => {
     const running = groupEquipment.filter(e => e.operationStatus === 'start').length;
     const total = groupEquipment.length;
     const avgUtilization = groupEquipment.reduce((sum, e) => sum + e.monthlyUtilization, 0) / total;
-    
+
     return { running, total, avgUtilization };
   };
 
   return (
     <div className="space-y-6">
-      {/* System Summary Cards */}
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
-        <DataCard title="Roll Coolant System" variant="primary">
-          <div className="space-y-2">
-            <div className="flex justify-between items-center">
-              <span className="text-sm">Active Equipment</span>
-              <span className="font-mono font-bold text-primary">
-                {getGroupSummary('coolant').running}/{getGroupSummary('coolant').total}
-              </span>
-            </div>
-            <div className="flex justify-between items-center">
-              <span className="text-sm">Avg. Utilization</span>
-              <span className="font-mono font-bold text-primary">
-                {getGroupSummary('coolant').avgUtilization.toFixed(1)}%
-              </span>
-            </div>
-          </div>
-        </DataCard>
-
-        <DataCard title="Main Hydraulic" variant="success">
-          <div className="space-y-2">
-            <div className="flex justify-between items-center">
-              <span className="text-sm">Active Equipment</span>
-              <span className="font-mono font-bold text-success">
-                {getGroupSummary('main-hydraulic').running}/{getGroupSummary('main-hydraulic').total}
-              </span>
-            </div>
-            <div className="flex justify-between items-center">
-              <span className="text-sm">Avg. Utilization</span>
-              <span className="font-mono font-bold text-success">
-                {getGroupSummary('main-hydraulic').avgUtilization.toFixed(1)}%
-              </span>
-            </div>
-          </div>
-        </DataCard>
-
-        <DataCard title="Auxiliary Hydraulic">
-          <div className="space-y-2">
-            <div className="flex justify-between items-center">
-              <span className="text-sm">Active Equipment</span>
-              <span className="font-mono font-bold">
-                {getGroupSummary('aux-hydraulic').running}/{getGroupSummary('aux-hydraulic').total}
-              </span>
-            </div>
-            <div className="flex justify-between items-center">
-              <span className="text-sm">Avg. Utilization</span>
-              <span className="font-mono font-bold">
-                {getGroupSummary('aux-hydraulic').avgUtilization.toFixed(1)}%
-              </span>
-            </div>
-          </div>
-        </DataCard>
-
-        <DataCard title="Lubrication System" variant="warning">
-          <div className="space-y-2">
-            <div className="flex justify-between items-center">
-              <span className="text-sm">Active Equipment</span>
-              <span className="font-mono font-bold text-warning">
-                {getGroupSummary('lubrication').running}/{getGroupSummary('lubrication').total}
-              </span>
-            </div>
-            <div className="flex justify-between items-center">
-              <span className="text-sm">Avg. Utilization</span>
-              <span className="font-mono font-bold text-warning">
-                {getGroupSummary('lubrication').avgUtilization.toFixed(1)}%
-              </span>
-            </div>
-          </div>
-        </DataCard>
-      </div>
-
       {/* Equipment Operations Table */}
       <DataCard title="Equipment Operations Matrix" className="overflow-x-auto">
         <div className="min-w-full">
-          <div className="grid grid-cols-12 gap-2 pb-3 mb-4 border-b border-border text-xs font-semibold text-muted-foreground">
-            <div className="col-span-1">NO.</div>
-            <div className="col-span-2">SERIAL NUMBER</div>
-            <div className="col-span-2">PUMP DESCRIPTION</div>
-            <div className="col-span-1">STATUS</div>
-            <div className="col-span-1">MODE</div>
-            <div className="col-span-1">MONTHLY HRS</div>
-            <div className="col-span-1">CUMULATIVE HRS</div>
-            <div className="col-span-1">MONTHLY %</div>
-            <div className="col-span-1">CUMULATIVE %</div>
-            <div className="col-span-1">ACTIONS</div>
-          </div>
+          <table className="min-w-full table-fixed text-sm reduce-gap text-center">
+            <colgroup>
+              <col style={{ width: '8%' }} />
+              <col style={{ width: '24%' }} />
+              <col style={{ width: '12%' }} />
+              <col style={{ width: '8%' }} />
+              <col style={{ width: '12%' }} />
+              <col style={{ width: '12%' }} />
+              <col style={{ width: '12%' }} />
+              <col style={{ width: '12%' }} />
+            </colgroup>
+            <thead>
+              <tr className="text-xs text-muted-foreground border-b border-border">
+                <th rowSpan={2} className="px-3 py-2 text-center w-12">SN</th>
+                <th rowSpan={2} className="px-3 py-2 text-center desc-col">Pump Description</th>
+                <th rowSpan={2} className="px-3 py-2 text-center w-56 op-col">Operation</th>
+                <th rowSpan={2} className="px-3 py-2 text-center w-36" style={{textAlign: 'center'}}>Mode</th>
+                <th colSpan={2} className="px-3 py-2 text-center">Running Hrs</th>
+                <th colSpan={2} className="px-3 py-2 text-center">Utilization (%)</th>
+              </tr>
+              <tr className="text-xs text-muted-foreground border-b border-border">
+                <th className="px-3 py-2 text-center w-24">Month</th>
+                <th className="px-3 py-2 text-center w-24">Cum</th>
+                <th className="px-3 py-2 text-center w-24">Month</th>
+                <th className="px-3 py-2 text-center w-24">Cum</th>
+              </tr>
+            </thead>
+            <tbody>
+              {equipment.map((item, idx) => (
+                <tr key={item.id} className="border-b border-border/50 hover:bg-muted/20">
+                  <td className="px-3 py-3 font-mono">{(idx + 1).toString().padStart(2, '0')}</td>
+                  <td className="px-3 py-3 desc-col">{item.description}</td>
 
-          {equipment.map((item, index) => (
-            <div key={item.id} className="grid grid-cols-12 gap-2 py-3 border-b border-border/50 text-sm hover:bg-muted/20 transition-colors">
-              <div className="col-span-1 font-mono">
-                {(index + 1).toString().padStart(2, '0')}
-              </div>
-              
-              <div className="col-span-2 font-mono text-xs">
-                {item.serialNumber}
-              </div>
-              
-              <div className="col-span-2 font-medium">
-                {item.description}
-              </div>
-              
-              <div className="col-span-1">
-                <StatusIndicator 
-                  status={getStatusColor(item.operationStatus) as any}
-                  label=""
-                  animate={item.operationStatus === 'start'}
-                />
-              </div>
-              
-              <div className="col-span-1">
-                <span className={`px-2 py-1 rounded text-xs font-medium ${
-                  item.mode === 'auto' 
-                    ? 'bg-success/20 text-success' 
-                    : 'bg-warning/20 text-warning'
-                }`}>
-                  {item.mode.toUpperCase()}
-                </span>
-              </div>
-              
-              <div className="col-span-1 font-mono">
-                {item.monthlyHours.toFixed(1)}
-              </div>
-              
-              <div className="col-span-1 font-mono">
-                {item.cumulativeHours.toLocaleString()}
-              </div>
-              
-              <div className="col-span-1 font-mono">
-                {item.monthlyUtilization.toFixed(1)}%
-              </div>
-              
-              <div className="col-span-1 font-mono">
-                {item.cumulativeUtilization.toFixed(1)}%
-              </div>
-              
-              <div className="col-span-1 flex space-x-1">
-                {item.operationStatus !== 'start' && (
-                  <Button variant="outline" size="sm" className="p-1">
-                    <Play className="h-3 w-3" />
-                  </Button>
-                )}
-                {item.operationStatus === 'start' && (
-                  <Button variant="outline" size="sm" className="p-1">
-                    <Square className="h-3 w-3" />
-                  </Button>
-                )}
-                <Button variant="outline" size="sm" className="p-1">
-                  <Settings className="h-3 w-3" />
-                </Button>
-              </div>
-            </div>
-          ))}
+                  <td className="px-3 py-3 operation">
+                    <div className="flex items-center gap-3 btn-group">
+                      <div className="px-2 py-1 rounded bg-yellow-200 text-xs font-medium">I/L</div>
+
+                      <button
+                        className={`px-3 py-2 rounded text-white text-xs font-semibold ${item.operationStatus === 'start' ? 'bg-green-600' : 'bg-green-500/30 border border-green-600'}`}
+                        onClick={() => {
+                          const copy = [...equipment];
+                          copy[idx] = { ...copy[idx], operationStatus: 'start' };
+                          setEquipment(copy);
+                        }}
+                        aria-pressed={item.operationStatus === 'start'}
+                      >
+                        START
+                      </button>
+
+                      <button
+                        className={`px-3 py-2 rounded text-white text-xs font-semibold ${item.operationStatus === 'stop' ? 'bg-red-600' : 'bg-red-500/30 border border-red-600'}`}
+                        onClick={() => {
+                          const copy = [...equipment];
+                          copy[idx] = { ...copy[idx], operationStatus: 'stop' };
+                          setEquipment(copy);
+                        }}
+                        aria-pressed={item.operationStatus === 'stop'}
+                      >
+                        STOP
+                      </button>
+                    </div>
+                  </td>
+
+                  <td className="px-3 py-3 text-center">
+                    <div className="inline-flex items-center gap-2 justify-center">
+                      <button
+                        className={`px-2 py-1 text-xs rounded ${item.mode === 'auto' ? 'bg-success/20 text-success' : 'bg-muted/10 text-muted-foreground'}`}
+                        onClick={() => {
+                          const copy = [...equipment];
+                          copy[idx] = { ...copy[idx], mode: 'auto' };
+                          setEquipment(copy);
+                        }}
+                      >
+                        AUTO
+                      </button>
+                      <button
+                        className={`px-2 py-1 text-xs rounded ${item.mode === 'manual' ? 'bg-warning/20 text-warning' : 'bg-muted/10 text-muted-foreground'}`}
+                        onClick={() => {
+                          const copy = [...equipment];
+                          copy[idx] = { ...copy[idx], mode: 'manual' };
+                          setEquipment(copy);
+                        }}
+                      >
+                        MAN
+                      </button>
+                    </div>
+                  </td>
+
+                  <td className="px-3 py-3 font-mono">{item.monthlyHours.toFixed(1)}</td>
+                  <td className="px-3 py-3 font-mono">{item.cumulativeHours.toLocaleString()}</td>
+
+                  <td className="px-3 py-3 font-mono">{item.monthlyUtilization.toFixed(1)}%</td>
+                  <td className="px-3 py-3 font-mono">{item.cumulativeUtilization.toFixed(1)}%</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </DataCard>
 
-      {/* System Performance Dashboard */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <DataCard title="Performance Metrics" icon={TrendingUp}>
-          <div className="space-y-4">
-            <div className="space-y-2">
-              <div className="flex justify-between">
-                <span className="text-sm">Total Power Consumption</span>
-                <span className="font-mono font-bold">127.8 kW</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-sm">System Efficiency</span>
-                <span className="font-mono font-bold text-success">94.2%</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-sm">Active Equipment</span>
-                <span className="font-mono font-bold text-primary">9/15</span>
-              </div>
-            </div>
-          </div>
-        </DataCard>
-
-        <DataCard title="Maintenance Alerts" icon={Clock}>
-          <div className="space-y-3">
-            <div className="space-y-2">
-              <div className="flex items-center justify-between">
-                <span className="text-sm">Next PM Due</span>
-                <span className="font-mono text-warning">AH003 - 2h</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-sm">Filter Replacement</span>
-                <span className="font-mono text-warning">MS001 - 48h</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-sm">Oil Change</span>
-                <span className="font-mono text-success">MH001 - 168h</span>
-              </div>
-            </div>
-            <Button variant="outline" size="sm" className="w-full">
-              View Full Schedule
-            </Button>
-          </div>
-        </DataCard>
-
-        <DataCard title="Energy Overview" icon={Zap}>
-          <div className="space-y-4">
-            <div className="space-y-2">
-              <div className="flex justify-between">
-                <span className="text-sm">Today's Consumption</span>
-                <span className="font-mono font-bold">2,847 kWh</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-sm">Monthly Average</span>
-                <span className="font-mono font-bold">2,623 kWh</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-sm">Efficiency Trend</span>
-                <span className="font-mono font-bold text-success">↗ +2.3%</span>
-              </div>
-            </div>
-          </div>
-        </DataCard>
-      </div>
     </div>
   );
 };

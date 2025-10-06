@@ -2,17 +2,15 @@ import React, { useState } from 'react';
 import { DataCard } from '@/components/DataCard';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { 
-  AlertTriangle, 
-  Search, 
-  Volume2, 
+import {
+  AlertTriangle,
+  Search,
+  Volume2,
   VolumeX,
   CheckSquare,
-  RotateCcw,
-  Filter,
-  Download,
-  MessageSquare
+  Download
 } from 'lucide-react';
+import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from '@/components/ui/select';
 
 interface Alarm {
   id: number;
@@ -30,94 +28,35 @@ export const AlarmManagement = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [audioEnabled, setAudioEnabled] = useState(true);
   const [filterLevel, setFilterLevel] = useState<string>('all');
+  const [alarmLevelFilter, setAlarmLevelFilter] = useState<'all' | 'low' | 'medium'>('all');
   
-  const [alarms] = useState<Alarm[]>([
-    {
-      id: 1,
-      level: 'critical',
-      alarmNo: 'HYD-001',
-      message: 'Main Hydraulic Pressure Low - Below 120 bar',
-      device: 'Main Hyd #1',
-      eventTime: '2024/03/15 14:32:15',
-      recoveredTime: null,
-      acknowledged: false
-    },
-    {
-      id: 2,
-      level: 'high',
-      alarmNo: 'COOL-025',
-      message: 'Coolant Tank Level Low - Below 30%',
-      device: 'Clean Tank',
-      eventTime: '2024/03/15 14:28:42',
-      recoveredTime: null,
-      acknowledged: true,
-      operator: 'J.Smith'
-    },
-    {
-      id: 3,
-      level: 'medium',
-      alarmNo: 'TEMP-012',
-      message: 'Oil Temperature High - Above 55°C',
-      device: 'Oil Tank',
-      eventTime: '2024/03/15 14:15:33',
-      recoveredTime: '2024/03/15 14:45:12',
-      acknowledged: true,
-      operator: 'M.Garcia'
-    },
-    {
-      id: 4,
-      level: 'critical',
-      alarmNo: 'PUMP-008',
-      message: 'Roll Coolant Pump#1 Motor Fault',
-      device: 'RCP001',
-      eventTime: '2024/03/15 13:58:21',
-      recoveredTime: null,
-      acknowledged: false
-    },
-    {
-      id: 5,
-      level: 'high',
-      alarmNo: 'FILT-003',
-      message: 'Magnetic Separator High Differential Pressure',
-      device: 'MS001',
-      eventTime: '2024/03/15 13:45:18',
-      recoveredTime: '2024/03/15 14:12:05',
-      acknowledged: true,
-      operator: 'D.Chen'
-    },
-    {
-      id: 6,
-      level: 'low',
-      alarmNo: 'MAINT-007',
-      message: 'Scheduled Maintenance Due - Aux Hyd Pump#2',
-      device: 'AH002',
-      eventTime: '2024/03/15 12:00:00',
-      recoveredTime: null,
-      acknowledged: true,
-      operator: 'System'
-    },
-    {
-      id: 7,
-      level: 'medium',
-      alarmNo: 'VIB-015',
-      message: 'High Vibration Detected - Gear Lubn Pump#1',
-      device: 'GL001',
-      eventTime: '2024/03/15 11:33:27',
-      recoveredTime: null,
-      acknowledged: false
-    },
-    {
-      id: 8,
-      level: 'high',
-      alarmNo: 'FLOW-009',
-      message: 'Low Flow Rate - Main Circulation',
-      device: 'P001',
-      eventTime: '2024/03/15 10:42:15',
-      recoveredTime: '2024/03/15 11:15:33',
-      acknowledged: true,
-      operator: 'J.Smith'
-    }
-  ]);
+  const generateAlarms = (count: number): Alarm[] => {
+    const levels: Alarm['level'][] = ['critical', 'high', 'medium', 'low'];
+    const devices = ['Main Hyd #1', 'Clean Tank', 'Oil Tank', 'RCP001', 'MS001', 'AH002', 'GL001', 'P001', 'Filter-01', 'HX-02'];
+    return Array.from({ length: count }, (_, i) => {
+      const level = levels[i % levels.length];
+      const alarmNo = `${level.substring(0,3).toUpperCase()}-${(100+i).toString().padStart(3,'0')}`;
+      const message = `${level.toUpperCase()} - Simulated alarm message #${i+1}`;
+      const device = devices[i % devices.length];
+      const eventTime = new Date(Date.now() - i * 3600 * 1000).toISOString().replace('T',' ').slice(0,19);
+      const recoveredTime = i % 5 === 0 ? new Date(Date.now() - (i-1) * 3600 * 1000).toISOString().replace('T',' ').slice(0,19) : null;
+      const acknowledged = i % 4 === 0;
+      const operator = acknowledged ? `Operator${(i%6)+1}` : undefined;
+      return {
+        id: i+1,
+        level,
+        alarmNo,
+        message,
+        device,
+        eventTime,
+        recoveredTime,
+        acknowledged,
+        operator
+      } as Alarm;
+    });
+  };
+
+  const [alarms] = useState<Alarm[]>(() => generateAlarms(50));
 
   const getLevelColor = (level: string) => {
     switch (level) {
@@ -146,14 +85,25 @@ export const AlarmManagement = () => {
     const matchesSearch = alarm.message.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          alarm.device.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          alarm.alarmNo.toLowerCase().includes(searchTerm.toLowerCase());
-    
-    const matchesFilter = filterLevel === 'all' || 
+
+    const matchesFilter = (filterLevel === 'all' ||
                          (filterLevel === 'active' && !alarm.recoveredTime) ||
                          (filterLevel === 'acknowledged' && alarm.acknowledged) ||
-                         (filterLevel === 'critical' && alarm.level === 'critical');
-    
+                         (filterLevel === 'critical' && alarm.level === 'critical'))
+                         && (alarmLevelFilter === 'all' || alarm.level === alarmLevelFilter);
+
     return matchesSearch && matchesFilter;
   });
+
+  // Pagination state
+  const [pageSize, setPageSize] = useState<number>(10);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const totalPages = Math.max(1, Math.ceil(filteredAlarms.length / pageSize));
+  const startIndex = (currentPage - 1) * pageSize;
+  const paginatedAlarms = filteredAlarms.slice(startIndex, startIndex + pageSize);
+  React.useEffect(() => {
+    if (currentPage > totalPages) setCurrentPage(1);
+  }, [filteredAlarms, pageSize, currentPage, totalPages]);
 
   const alarmStats = {
     total: alarms.length,
@@ -164,32 +114,9 @@ export const AlarmManagement = () => {
 
   return (
     <div className="space-y-6">
-      {/* Alarm Statistics */}
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-        <DataCard title="Total Alarms" variant="primary">
-          <div className="text-3xl font-bold text-primary">{alarmStats.total}</div>
-          <div className="text-sm text-muted-foreground">All time count</div>
-        </DataCard>
-
-        <DataCard title="Active Alarms" variant="warning">
-          <div className="text-3xl font-bold text-warning">{alarmStats.active}</div>
-          <div className="text-sm text-muted-foreground">Requiring attention</div>
-        </DataCard>
-
-        <DataCard title="Critical Alarms" variant="danger">
-          <div className="text-3xl font-bold text-danger animate-pulse-glow">{alarmStats.critical}</div>
-          <div className="text-sm text-muted-foreground">Immediate action</div>
-        </DataCard>
-
-        <DataCard title="Unacknowledged">
-          <div className="text-3xl font-bold text-foreground">{alarmStats.unacknowledged}</div>
-          <div className="text-sm text-muted-foreground">Need acknowledgment</div>
-        </DataCard>
-      </div>
-
       {/* Control Panel */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        <div className="lg:col-span-8">
+        <div className="lg:col-span-12">
           <DataCard title="Alarm Control Panel">
             <div className="flex flex-wrap items-center gap-4 mb-4">
               {/* Search */}
@@ -226,6 +153,22 @@ export const AlarmManagement = () => {
                 >
                   Critical
                 </Button>
+
+                {/* Alarm Level dropdown */}
+                <div className="w-40">
+                  <label className="text-xs text-muted-foreground mb-1 block">Alarm Level</label>
+                  <Select value={alarmLevelFilter} onValueChange={(v) => setAlarmLevelFilter(v as any)}>
+                    <SelectTrigger aria-label="Alarm Level" className="h-9" >
+                      <SelectValue placeholder="Alarm Level" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="all">All</SelectItem>
+                      <SelectItem value="low">Low</SelectItem>
+                      <SelectItem value="medium">Medium</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
                 <Button
                   variant={filterLevel === 'acknowledged' ? 'default' : 'outline'}
                   size="sm"
@@ -263,55 +206,30 @@ export const AlarmManagement = () => {
             </div>
           </DataCard>
         </div>
-
-        <div className="lg:col-span-4">
-          <DataCard title="Quick Actions">
-            <div className="space-y-3">
-              <Button variant="outline" className="w-full justify-start">
-                <RotateCcw className="h-4 w-4 mr-2" />
-                Reset All Filters
-              </Button>
-              <Button variant="outline" className="w-full justify-start">
-                <Filter className="h-4 w-4 mr-2" />
-                Advanced Filter
-              </Button>
-              <Button variant="outline" className="w-full justify-start">
-                <MessageSquare className="h-4 w-4 mr-2" />
-                Alarm History
-              </Button>
-              <Button variant="destructive" className="w-full justify-start">
-                <AlertTriangle className="h-4 w-4 mr-2" />
-                Emergency Reset
-              </Button>
-            </div>
-          </DataCard>
-        </div>
       </div>
 
       {/* Alarm Table */}
       <DataCard title={`Alarm List (${filteredAlarms.length} items)`} className="overflow-x-auto">
         <div className="min-w-full">
-          <div className="grid grid-cols-12 gap-2 pb-3 mb-4 border-b border-border text-xs font-semibold text-muted-foreground">
+          <div className="grid grid-cols-10 gap-2 pb-3 mb-4 border-b border-border text-xs font-semibold text-muted-foreground">
             <div className="col-span-1">NO.</div>
             <div className="col-span-3">ALARM LEVEL & NO. & MESSAGE</div>
             <div className="col-span-2">DEVICE</div>
             <div className="col-span-2">EVENT TIME</div>
             <div className="col-span-2">RECOVERED TIME</div>
-            <div className="col-span-1">STATUS</div>
-            <div className="col-span-1">ACTIONS</div>
           </div>
 
-          {filteredAlarms.map((alarm, index) => (
-            <div 
-              key={alarm.id} 
-              className={`grid grid-cols-12 gap-2 py-3 border-b border-border/50 text-sm hover:bg-muted/20 transition-colors ${
+          {paginatedAlarms.map((alarm, idx) => (
+            <div
+              key={alarm.id}
+              className={`grid grid-cols-10 gap-2 py-3 border-b border-border/50 text-sm hover:bg-muted/20 transition-colors ${
                 !alarm.acknowledged && !alarm.recoveredTime ? 'bg-danger/5' : ''
               }`}
             >
               <div className="col-span-1 font-mono">
-                {(index + 1).toString().padStart(2, '0')}
+                {(startIndex + idx + 1).toString().padStart(2, '0')}
               </div>
-              
+
               <div className="col-span-3">
                 <div className="space-y-1">
                   <div className="flex items-center space-x-2">
@@ -323,35 +241,21 @@ export const AlarmManagement = () => {
                   <div className="text-sm font-medium">{alarm.message}</div>
                 </div>
               </div>
-              
+
               <div className="col-span-2 font-mono">
                 {alarm.device}
               </div>
-              
+
               <div className="col-span-2 font-mono text-xs">
                 {alarm.eventTime}
               </div>
-              
+
               <div className="col-span-2 font-mono text-xs">
                 {alarm.recoveredTime || (
                   <span className="text-muted-foreground">Not recovered</span>
                 )}
               </div>
-              
-              <div className="col-span-1 flex items-center">
-                {getStatusIcon(alarm)}
-              </div>
-              
-              <div className="col-span-1 flex space-x-1">
-                {!alarm.acknowledged && (
-                  <Button variant="outline" size="sm" className="p-1">
-                    <CheckSquare className="h-3 w-3" />
-                  </Button>
-                )}
-                <Button variant="outline" size="sm" className="p-1">
-                  <MessageSquare className="h-3 w-3" />
-                </Button>
-              </div>
+
             </div>
           ))}
         </div>
@@ -359,6 +263,43 @@ export const AlarmManagement = () => {
         {filteredAlarms.length === 0 && (
           <div className="text-center py-8 text-muted-foreground">
             No alarms match the current filter criteria.
+          </div>
+        )}
+
+        {/* Pagination Controls */}
+        {filteredAlarms.length > 0 && (
+          <div className="mt-3 flex items-center justify-between">
+            <div className="text-sm text-muted-foreground">
+              Showing {filteredAlarms.length === 0 ? 0 : startIndex + 1} - {Math.min(startIndex + pageSize, filteredAlarms.length)} of {filteredAlarms.length}
+            </div>
+            <div className="flex items-center space-x-2">
+              <select
+                value={pageSize}
+                onChange={(e) => { setPageSize(Number(e.target.value)); setCurrentPage(1); }}
+                className="bg-card border border-border text-sm rounded px-2 py-1"
+              >
+                <option value={5}>5</option>
+                <option value={10}>10</option>
+                <option value={25}>25</option>
+                <option value={50}>50</option>
+              </select>
+
+              <div className="flex items-center space-x-1">
+                <div className="flex flex-col items-center">
+                  <div className="flex space-x-1">
+                    <Button size="sm" variant="outline" onClick={() => { setCurrentPage(1); }} disabled={currentPage === 1}>&laquo;</Button>
+                    <Button size="sm" variant="outline" onClick={() => setCurrentPage((p) => Math.max(1, p - 1))} disabled={currentPage === 1}>&lsaquo;</Button>
+                    <Button size="sm" variant="outline" onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))} disabled={currentPage === totalPages}>&rsaquo;</Button>
+                    <Button size="sm" variant="outline" onClick={() => { setCurrentPage(totalPages); }} disabled={currentPage === totalPages}>&raquo;</Button>
+                  </div>
+                  <div className="text-xs text-muted-foreground mt-1 w-full flex justify-between">
+                    <span>BWD</span>
+                    <span>FWD</span>
+                  </div>
+                </div>
+                <div className="px-2 text-sm">Page {currentPage} / {totalPages}</div>
+              </div>
+            </div>
           </div>
         )}
       </DataCard>
