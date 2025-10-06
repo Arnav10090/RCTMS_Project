@@ -28,6 +28,7 @@ export const AlarmManagement = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [audioEnabled, setAudioEnabled] = useState(true);
   const [filterLevel, setFilterLevel] = useState<string>('all');
+  const [alarmLevelFilter, setAlarmLevelFilter] = useState<'all' | 'low' | 'medium'>('all');
   
   const generateAlarms = (count: number): Alarm[] => {
     const levels: Alarm['level'][] = ['critical', 'high', 'medium', 'low'];
