@@ -2,16 +2,17 @@ import React from 'react';
 import { DataCard } from '@/components/DataCard';
 import { StatusIndicator } from '@/components/StatusIndicator';
 import { GaugeDisplay } from '@/components/GaugeDisplay';
-import { 
-  Activity, 
-  Droplet, 
-  Thermometer, 
-  Gauge, 
+import {
+  Activity,
+  Droplet,
+  Thermometer,
+  Gauge,
   Wrench,
   AlertCircle,
   TrendingUp,
   RotateCcw
 } from 'lucide-react';
+import PidDiagram from '@/components/PidDiagram';
 
 export const Overview = () => {
   // Mock real-time data - in production this would come from your API
