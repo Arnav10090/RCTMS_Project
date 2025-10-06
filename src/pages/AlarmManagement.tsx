@@ -153,6 +153,22 @@ export const AlarmManagement = () => {
                 >
                   Critical
                 </Button>
+
+                {/* Alarm Level dropdown */}
+                <div className="w-40">
+                  <label className="text-xs text-muted-foreground mb-1 block">Alarm Level</label>
+                  <Select value={alarmLevelFilter} onValueChange={(v) => setAlarmLevelFilter(v as any)}>
+                    <SelectTrigger aria-label="Alarm Level" className="h-9" >
+                      <SelectValue placeholder="Alarm Level" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="all">All</SelectItem>
+                      <SelectItem value="low">Low</SelectItem>
+                      <SelectItem value="medium">Medium</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
                 <Button
                   variant={filterLevel === 'acknowledged' ? 'default' : 'outline'}
                   size="sm"
