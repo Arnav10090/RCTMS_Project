@@ -164,32 +164,9 @@ export const AlarmManagement = () => {
 
   return (
     <div className="space-y-6">
-      {/* Alarm Statistics */}
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-        <DataCard title="Total Alarms" variant="primary">
-          <div className="text-3xl font-bold text-primary">{alarmStats.total}</div>
-          <div className="text-sm text-muted-foreground">All time count</div>
-        </DataCard>
-
-        <DataCard title="Active Alarms" variant="warning">
-          <div className="text-3xl font-bold text-warning">{alarmStats.active}</div>
-          <div className="text-sm text-muted-foreground">Requiring attention</div>
-        </DataCard>
-
-        <DataCard title="Critical Alarms" variant="danger">
-          <div className="text-3xl font-bold text-danger animate-pulse-glow">{alarmStats.critical}</div>
-          <div className="text-sm text-muted-foreground">Immediate action</div>
-        </DataCard>
-
-        <DataCard title="Unacknowledged">
-          <div className="text-3xl font-bold text-foreground">{alarmStats.unacknowledged}</div>
-          <div className="text-sm text-muted-foreground">Need acknowledgment</div>
-        </DataCard>
-      </div>
-
       {/* Control Panel */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        <div className="lg:col-span-8">
+        <div className="lg:col-span-12">
           <DataCard title="Alarm Control Panel">
             <div className="flex flex-wrap items-center gap-4 mb-4">
               {/* Search */}
@@ -259,29 +236,6 @@ export const AlarmManagement = () => {
                   <VolumeX className="h-4 w-4 mr-2" />
                 )}
                 Audio {audioEnabled ? 'On' : 'Off'}
-              </Button>
-            </div>
-          </DataCard>
-        </div>
-
-        <div className="lg:col-span-4">
-          <DataCard title="Quick Actions">
-            <div className="space-y-3">
-              <Button variant="outline" className="w-full justify-start">
-                <RotateCcw className="h-4 w-4 mr-2" />
-                Reset All Filters
-              </Button>
-              <Button variant="outline" className="w-full justify-start">
-                <Filter className="h-4 w-4 mr-2" />
-                Advanced Filter
-              </Button>
-              <Button variant="outline" className="w-full justify-start">
-                <MessageSquare className="h-4 w-4 mr-2" />
-                Alarm History
-              </Button>
-              <Button variant="destructive" className="w-full justify-start">
-                <AlertTriangle className="h-4 w-4 mr-2" />
-                Emergency Reset
               </Button>
             </div>
           </DataCard>
