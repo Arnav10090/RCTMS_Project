@@ -143,30 +143,39 @@
 /* When sidebar is collapsed, reduce horizontal padding in operation table */
 .sidebar-collapsed .reduce-gap th,
 .sidebar-collapsed .reduce-gap td {
-  padding-left: 0.5rem;
-  /* 2 */
-  padding-right: 0.5rem;
-  /* 2 */
+  padding-left: 0.375rem !important;
+  padding-right: 0.375rem !important;
 }
 
 /* Tighter spacing for operation column when sidebar collapsed */
 .sidebar-collapsed .reduce-gap th.op-col,
 .sidebar-collapsed .reduce-gap td.operation {
   width: 9rem !important;
-  padding-left: 0.25rem !important;
-  padding-right: 0.25rem !important;
+  padding-left: 0rem !important;
+  padding-right: 0rem !important;
 }
 
+/* Minimize padding on description column */
 .sidebar-collapsed .reduce-gap td.desc-col {
-  padding-right: 0.25rem !important;
+  padding-right: 0rem !important;
+  padding-left: 0.375rem !important;
 }
 
 /* Reduce gap in SN column when sidebar collapsed */
 .sidebar-collapsed .reduce-gap td:first-child,
 .sidebar-collapsed .reduce-gap th:first-child {
   padding-right: 0.25rem !important;
+  padding-left: 0.5rem !important;
 }
 
+/* Tighten the button group spacing */
 .sidebar-collapsed .reduce-gap .btn-group {
-  gap: 0.5rem !important;
+  gap: 0.375rem !important;
+}
+
+/* Reduce Mode column padding */
+.sidebar-collapsed .reduce-gap td:nth-child(4),
+.sidebar-collapsed .reduce-gap th:nth-child(4) {
+  padding-left: 0.25rem !important;
+  padding-right: 0.25rem !important;
 }
