@@ -5,12 +5,12 @@ import { Input } from '@/components/ui/input';
 import {
   AlertTriangle,
   Search,
-  Volume2,
-  VolumeX,
   CheckSquare,
-  Download
+  Download,
+  X
 } from 'lucide-react';
 import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from '@/components/ui/select';
+import { subscribeAlarmOverflow, AckAlarm } from '@/components/AlarmContext';
 
 interface Alarm {
   id: number;
@@ -26,9 +26,8 @@ interface Alarm {
 
 export const AlarmManagement = () => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [audioEnabled, setAudioEnabled] = useState(true);
   const [filterLevel, setFilterLevel] = useState<string>('all');
-  const [alarmLevelFilter, setAlarmLevelFilter] = useState<'all' | 'low' | 'medium'>('all');
+  const [alarmLevelFilter, setAlarmLevelFilter] = useState<'all' | 'low' | 'medium' | 'high' | 'critical'>('all');
   
   const generateAlarms = (count: number): Alarm[] => {
     const levels: Alarm['level'][] = ['critical', 'high', 'medium', 'low'];
@@ -56,7 +55,7 @@ export const AlarmManagement = () => {
     });
   };
 
-  const [alarms] = useState<Alarm[]>(() => generateAlarms(50));
+  const [alarms, setAlarms] = useState<Alarm[]>(() => generateAlarms(50));
 
   const getLevelColor = (level: string) => {
     switch (level) {
@@ -88,12 +87,33 @@ export const AlarmManagement = () => {
 
     const matchesFilter = (filterLevel === 'all' ||
                          (filterLevel === 'active' && !alarm.recoveredTime) ||
-                         (filterLevel === 'acknowledged' && alarm.acknowledged) ||
-                         (filterLevel === 'critical' && alarm.level === 'critical'))
+                         (filterLevel === 'inactive' && !!alarm.recoveredTime) ||
+                         (filterLevel === 'acknowledged' && alarm.acknowledged))
                          && (alarmLevelFilter === 'all' || alarm.level === alarmLevelFilter);
 
     return matchesSearch && matchesFilter;
   });
+
+  React.useEffect(() => {
+    const unsub = subscribeAlarmOverflow((a: AckAlarm) => {
+      setAlarms(prev => [
+        {
+          id: Date.now(),
+          level: a.level,
+          alarmNo: `ACK-${Date.now().toString().slice(-6)}`,
+          message: a.message,
+          device: a.device || 'HMI',
+          eventTime: a.time,
+          recoveredTime: null,
+          acknowledged: true,
+          operator: 'System',
+        },
+        ...prev,
+      ]);
+      setCurrentPage(1);
+    });
+    return () => { unsub(); };
+  }, []);
 
   // Pagination state
   const [pageSize, setPageSize] = useState<number>(10);
@@ -112,50 +132,85 @@ export const AlarmManagement = () => {
     unacknowledged: alarms.filter(a => !a.acknowledged && !a.recoveredTime).length
   };
 
+  const hasActiveFilters = searchTerm.trim() !== '' || filterLevel !== 'all' || alarmLevelFilter !== 'all';
+  const resetFilters = () => {
+    setSearchTerm('');
+    setFilterLevel('all');
+    setAlarmLevelFilter('all');
+  };
+  const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
+
+  const toCsv = (rows: (string | number | null | undefined)[][]) =>
+    rows
+      .map(r =>
+        r
+          .map(v => {
+            const s = v == null ? '' : String(v);
+            return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
+          })
+          .join(',')
+      )
+      .join('\n');
+
+  const handleExport = () => {
+    const headers = ['No.', 'Level', 'Alarm No.', 'Message', 'Device', 'Event Time', 'Recovered Time', 'Acknowledged'];
+    const rows = filteredAlarms.map((a, i) => [
+      i + 1,
+      a.level.toUpperCase(),
+      a.alarmNo,
+      a.message,
+      a.device,
+      a.eventTime,
+      a.recoveredTime || '',
+      a.acknowledged ? 'Yes' : 'No',
+    ]);
+    const csv = toCsv([headers, ...rows]);
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `alarms_${new Date().toISOString().slice(0, 10)}.csv`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  };
+
   return (
     <div className="space-y-6">
       {/* Control Panel */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         <div className="lg:col-span-12">
           <DataCard title="Alarm Control Panel">
-            <div className="flex flex-wrap items-center gap-4 mb-4">
+            <div className="flex flex-wrap items-center justify-between w-full gap-y-4 mb-4">
               {/* Search */}
-              <div className="flex items-center space-x-2 flex-1 min-w-64">
+              <div className="flex items-center space-x-2 w-64 shrink-0">
                 <Search className="h-4 w-4 text-muted-foreground" />
                 <Input
                   placeholder="Search alarms..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="flex-1"
+                  className="w-full"
                 />
               </div>
 
               {/* Filter Buttons */}
-              <div className="flex items-center space-x-2">
-                <Button
-                  variant={filterLevel === 'all' ? 'default' : 'outline'}
-                  size="sm"
-                  onClick={() => setFilterLevel('all')}
-                >
-                  All
-                </Button>
-                <Button
-                  variant={filterLevel === 'active' ? 'default' : 'outline'}
-                  size="sm"
-                  onClick={() => setFilterLevel('active')}
-                >
-                  Active
-                </Button>
-                <Button
-                  variant={filterLevel === 'critical' ? 'default' : 'outline'}
-                  size="sm"
-                  onClick={() => setFilterLevel('critical')}
-                >
-                  Critical
-                </Button>
+                <div className="w-40 shrink-0">
+                  <label className="text-xs text-muted-foreground mb-1 block">Status</label>
+                  <Select value={["all","active","inactive"].includes(filterLevel as any) ? (filterLevel as any) : 'all'} onValueChange={(v) => setFilterLevel(v as any)}>
+                    <SelectTrigger aria-label="Status" className="h-9" >
+                      <SelectValue placeholder="Status" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="all">All</SelectItem>
+                      <SelectItem value="active">Active</SelectItem>
+                      <SelectItem value="inactive">Inactive</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
 
                 {/* Alarm Level dropdown */}
-                <div className="w-40">
+                <div className="w-40 shrink-0">
                   <label className="text-xs text-muted-foreground mb-1 block">Alarm Level</label>
                   <Select value={alarmLevelFilter} onValueChange={(v) => setAlarmLevelFilter(v as any)}>
                     <SelectTrigger aria-label="Alarm Level" className="h-9" >
@@ -163,47 +218,58 @@ export const AlarmManagement = () => {
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="all">All</SelectItem>
-                      <SelectItem value="low">Low</SelectItem>
+                      <SelectItem value="critical">Critical</SelectItem>
+                      <SelectItem value="high">High</SelectItem>
                       <SelectItem value="medium">Medium</SelectItem>
+                      <SelectItem value="low">Low</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
 
-                <Button
-                  variant={filterLevel === 'acknowledged' ? 'default' : 'outline'}
-                  size="sm"
-                  onClick={() => setFilterLevel('acknowledged')}
-                >
-                  Acknowledged
-                </Button>
-              </div>
+                <div className="flex items-center gap-2 shrink-0">
+                  <Button
+                    className="shrink-0"
+                    variant={filterLevel === 'acknowledged' ? 'default' : 'outline'}
+                    size="sm"
+                    onClick={() => setFilterLevel('acknowledged')}
+                  >
+                    Acknowledged
+                  </Button>
+                  <Button variant="outline" size="sm" onClick={handleExport}>
+                    <Download className="h-4 w-4 mr-2" />
+                    Export
+                  </Button>
+                </div>
             </div>
 
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center space-x-4">
-                <Button variant="outline" size="sm">
-                  <CheckSquare className="h-4 w-4 mr-2" />
-                  Acknowledge Selected
-                </Button>
-                <Button variant="outline" size="sm">
-                  <Download className="h-4 w-4 mr-2" />
-                  Export
+            {hasActiveFilters && (
+              <div className="flex items-center justify-between flex-wrap gap-2 mb-4">
+                <div className="flex items-center flex-wrap gap-2">
+                  {searchTerm.trim() !== '' && (
+                    <Button variant="secondary" size="sm" onClick={() => setSearchTerm('')}>
+                      Search: "{searchTerm}"
+                      <X className="ml-2 h-4 w-4" />
+                    </Button>
+                  )}
+                  {filterLevel !== 'all' && (
+                    <Button variant="secondary" size="sm" onClick={() => setFilterLevel('all')}>
+                      Status: {capitalize(filterLevel)}
+                      <X className="ml-2 h-4 w-4" />
+                    </Button>
+                  )}
+                  {alarmLevelFilter !== 'all' && (
+                    <Button variant="secondary" size="sm" onClick={() => setAlarmLevelFilter('all')}>
+                      Level: {capitalize(alarmLevelFilter)}
+                      <X className="ml-2 h-4 w-4" />
+                    </Button>
+                  )}
+                </div>
+                <Button variant="destructive" size="sm" onClick={resetFilters}>
+                  Reset Filters
                 </Button>
               </div>
+            )}
 
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => setAudioEnabled(!audioEnabled)}
-              >
-                {audioEnabled ? (
-                  <Volume2 className="h-4 w-4 mr-2" />
-                ) : (
-                  <VolumeX className="h-4 w-4 mr-2" />
-                )}
-                Audio {audioEnabled ? 'On' : 'Off'}
-              </Button>
-            </div>
           </DataCard>
         </div>
       </div>
