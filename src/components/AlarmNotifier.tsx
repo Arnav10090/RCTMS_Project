@@ -1,7 +1,14 @@
 import React from 'react';
-import { ToastAction } from '@/components/ui/toast';
-import { toast } from '@/hooks/use-toast';
 import { useAlarmContext } from './AlarmContext';
+import {
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogDescription,
+  AlertDialogAction,
+} from '@/components/ui/alert-dialog';
 
 const SAMPLE_MESSAGES = [
   'Hydraulic pressure spike detected',
@@ -12,38 +19,60 @@ const SAMPLE_MESSAGES = [
   'Overcurrent detected on motor M3',
 ];
 
-const LEVELS = ['low','medium','high','critical'] as const;
+const LEVELS = ['low', 'medium', 'high', 'critical'] as const;
 
-function randomItem<T>(arr: readonly T[]) { return arr[Math.floor(Math.random() * arr.length)]; }
+function randomItem<T>(arr: readonly T[]) {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
 
 export const AlarmNotifier: React.FC = () => {
   const { addAcknowledged } = useAlarmContext();
+  const [alarm, setAlarm] = React.useState<null | { id: string; level: typeof LEVELS[number]; message: string; time: string }>(null);
 
   React.useEffect(() => {
-    const showToast = () => {
-      const alarm = {
+    const showModal = () => {
+      setAlarm({
         id: Math.random().toString(36).slice(2),
         level: randomItem(LEVELS),
         message: randomItem(SAMPLE_MESSAGES),
         time: new Date().toLocaleString(),
-      } as const;
-
-      let dismiss: (() => void) | undefined;
-      const t = toast({
-        title: `New ${alarm.level.toUpperCase()} Alarm`,
-        description: `${alarm.message} — ${alarm.time}`,
-        action: (
-          <ToastAction altText="Acknowledge" onClick={() => { addAcknowledged(alarm); dismiss?.(); }}>
-            Acknowledge
-          </ToastAction>
-        ),
       });
-      dismiss = t.dismiss;
     };
+    const id = setInterval(showModal, 60_000);
+    return () => {
+      clearInterval(id);
+    };
+  }, []);
 
-    const id = setInterval(showToast, 60_000);
-    return () => { clearInterval(id); };
-  }, [addAcknowledged]);
+  const open = !!alarm;
 
-  return null;
+  return (
+    <AlertDialog open={open} onOpenChange={() => { /* block close until acknowledge */ }}>
+      <AlertDialogContent
+        onEscapeKeyDown={(e) => e.preventDefault()}
+        onPointerDownOutside={(e) => e.preventDefault()}
+        onInteractOutside={(e) => e.preventDefault()}
+        className="sm:rounded-xl"
+      >
+        <AlertDialogHeader>
+          <AlertDialogTitle>New {alarm?.level.toUpperCase()} Alarm</AlertDialogTitle>
+          <AlertDialogDescription>
+            {alarm?.message} — {alarm?.time}
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogAction
+            onClick={() => {
+              if (alarm) {
+                addAcknowledged(alarm);
+                setAlarm(null);
+              }
+            }}
+          >
+            Acknowledge
+          </AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  );
 };
