@@ -207,17 +207,21 @@ function genHpPumps(n = 30): HpPumpRow[] {
 }
 
 // Individual Table Component
-const TableSection = ({
-  title,
-  data,
-  headers,
-  renderRow
-}: {
+type TableSectionProps = {
   title: string;
   data: any[];
   headers: string[];
   renderRow: (item: any, idx: number, startIdx: number) => React.ReactNode;
-}) => {
+  renderHeader?: (headers: string[]) => React.ReactNode;
+};
+
+const TableSection = ({
+  title,
+  data,
+  headers,
+  renderRow,
+  renderHeader
+}: TableSectionProps) => {
   const [search, setSearch] = React.useState('');
   const [from, setFrom] = React.useState<string>('');
   const [to, setTo] = React.useState<string>('');
@@ -309,13 +313,17 @@ const TableSection = ({
       <div className="overflow-x-auto">
         <table className="w-full">
           <thead className="bg-gray-50 border-b border-gray-200">
-            <tr>
-              {headers.map((header, idx) => (
-                <th key={idx} className="px-4 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider whitespace-nowrap">
-                  {header}
-                </th>
-              ))}
-            </tr>
+            {renderHeader ? (
+              renderHeader(headers)
+            ) : (
+              <tr>
+                {headers.map((header, idx) => (
+                  <th key={idx} className="px-4 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider whitespace-nowrap">
+                    {header}
+                  </th>
+                ))}
+              </tr>
+            )}
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
             {pager.slice.length === 0 ? (
