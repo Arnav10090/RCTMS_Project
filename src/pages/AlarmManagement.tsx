@@ -86,10 +86,11 @@ export const AlarmManagement = () => {
                          alarm.device.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          alarm.alarmNo.toLowerCase().includes(searchTerm.toLowerCase());
 
-    const matchesFilter = filterLevel === 'all' ||
+    const matchesFilter = (filterLevel === 'all' ||
                          (filterLevel === 'active' && !alarm.recoveredTime) ||
                          (filterLevel === 'acknowledged' && alarm.acknowledged) ||
-                         (filterLevel === 'critical' && alarm.level === 'critical');
+                         (filterLevel === 'critical' && alarm.level === 'critical'))
+                         && (alarmLevelFilter === 'all' || alarm.level === alarmLevelFilter);
 
     return matchesSearch && matchesFilter;
   });
