@@ -31,7 +31,7 @@ export const AlarmNotifier: React.FC = () => {
 
   React.useEffect(() => {
     const showModal = () => {
-      setAlarm({
+      setAlarm((prev) => prev ?? {
         id: Math.random().toString(36).slice(2),
         level: randomItem(LEVELS),
         message: randomItem(SAMPLE_MESSAGES),
