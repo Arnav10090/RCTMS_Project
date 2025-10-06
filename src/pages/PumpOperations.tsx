@@ -234,14 +234,14 @@ export const PumpOperations = () => {
         <div className="min-w-full">
           <table className="min-w-full table-fixed text-sm reduce-gap text-center">
             <colgroup>
-              <col style={{ width: '12.5%' }} />
-              <col style={{ width: '12.5%' }} />
-              <col style={{ width: '12.5%' }} />
-              <col style={{ width: '12.5%' }} />
-              <col style={{ width: '12.5%' }} />
-              <col style={{ width: '12.5%' }} />
-              <col style={{ width: '12.5%' }} />
-              <col style={{ width: '12.5%' }} />
+              <col style={{ width: '8%' }} />
+              <col style={{ width: '24%' }} />
+              <col style={{ width: '12%' }} />
+              <col style={{ width: '8%' }} />
+              <col style={{ width: '12%' }} />
+              <col style={{ width: '12%' }} />
+              <col style={{ width: '12%' }} />
+              <col style={{ width: '12%' }} />
             </colgroup>
             <thead>
               <tr className="text-xs text-muted-foreground border-b border-border">
