@@ -19,16 +19,35 @@ export const OilCellarMonitor = () => {
 
   type RowId = typeof rows[number]['id'];
 
-  const [matrix, setMatrix] = React.useState<Record<RowId, boolean[]>>({
-    lighting: [true, true, true, false, true],
-    aqi: [true, true, true, false, false],
+  const [lighting, setLighting] = React.useState<boolean[]>([true, true, true, false, true]);
+
+  const rngFor = (key: string) => {
+    try {
+      return seeded(strHash(key));
+    } catch {
+      return Math.random;
+    }
+  };
+
+  const [aqiValues, setAqiValues] = React.useState<number[]>(() => {
+    const rng = rngFor('aqi');
+    return Array.from({ length: areas.length }, () => parseFloat((15 + rng() * 80).toFixed(1)));
   });
 
-  const setAllInRow = (row: RowId, value: boolean) =>
-    setMatrix((m) => ({ ...m, [row]: Array.from({ length: areas.length }, () => value) }));
+  const setAllInRow = (row: RowId, value: boolean) => {
+    if (row === 'lighting') {
+      setLighting(Array.from({ length: areas.length }, () => value));
+      return;
+    }
+    // for AQI: set to either a mid value or zero
+    setAqiValues(Array.from({ length: areas.length }, () => value ? 50.0 : 0.0));
+  };
 
-  const toggleCell = (row: RowId, col: number, value: boolean) =>
-    setMatrix((m) => ({ ...m, [row]: m[row].map((v, i) => (i === col ? value : v)) }));
+  const toggleCell = (row: RowId, col: number, value: boolean) => {
+    if (row === 'lighting') {
+      setLighting((l) => l.map((v, i) => (i === col ? value : v)));
+    }
+  };
 
   const parameterOptions = [
     'Coil_ID','Coil_Grade','Coil_Width','Coil_Thick.','Coil_Input_Weight','Coil_Start_Time','Coil_End_Time','Coil_Total_Time','Mill_Speed','Production_Rate','Mill_Run_Hrs_Day','Mill_Run_Hrs_Month','Mill-Utilization','R.Coolant_Temp','R.Coolant_Tank_Current_Level','R.Coolant_Tank_Set_Level','R.Coolant_Tank_pH','R.Coolant_Concentration_Current Value','R.Coolant_Concentration_Set Value','Oil_Addition_volume','Water_Addition_Volume','R.Coolant_Tramp_Oil','R.Coolant_ESI_Value','R.Coolant_Saphonification_Value (SAP)','R.Coolant_Conductivity','R.Coolant_Flow','R.Coolant_Pressure','R.Coolan_Pump#1_Status','R.Coolan_Pump#1_Run_Hrs','R.Coolan_Pump#1_Load','R.Coolan_Pump#2_Status','R.Coolan_Pump#2_Run_Hrs','R.Coolan_Pump#2_Load','Agitator#1_Status','Agitator#1_Run_Hrs','Agitator#1_Load','Agitator#2_Status','Agitator#2_Run_Hrs','Agitator#2_Load','Magnetic_Separator_Status','Magnetic_Separator_Run_Hrs','Magnetic_Separator_Load','Skimmer_Status','Skimmer_Run_Hrs','Skimmer_Load','DM_Water_pH','DM_Water_Temp','DM_Water_Conductivity','DM_Water_Volume_Day','Coolant_Oil_Temp'
