@@ -295,8 +295,8 @@ export const PumpOperations = () => {
                     </div>
                   </td>
 
-                  <td className="px-3 py-3">
-                    <div className="flex items-center gap-2">
+                  <td className="px-3 py-3 text-center">
+                    <div className="inline-flex items-center gap-2 justify-center">
                       <button
                         className={`px-2 py-1 text-xs rounded ${item.mode === 'auto' ? 'bg-success/20 text-success' : 'bg-muted/10 text-muted-foreground'}`}
                         onClick={() => {
