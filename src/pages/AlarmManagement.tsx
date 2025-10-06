@@ -10,6 +10,7 @@ import {
   X
 } from 'lucide-react';
 import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from '@/components/ui/select';
+import { subscribeAlarmOverflow, AckAlarm } from '@/components/AlarmContext';
 
 interface Alarm {
   id: number;
@@ -54,7 +55,7 @@ export const AlarmManagement = () => {
     });
   };
 
-  const [alarms] = useState<Alarm[]>(() => generateAlarms(50));
+  const [alarms, setAlarms] = useState<Alarm[]>(() => generateAlarms(50));
 
   const getLevelColor = (level: string) => {
     switch (level) {
@@ -92,6 +93,27 @@ export const AlarmManagement = () => {
 
     return matchesSearch && matchesFilter;
   });
+
+  React.useEffect(() => {
+    const unsub = subscribeAlarmOverflow((a: AckAlarm) => {
+      setAlarms(prev => [
+        {
+          id: Date.now(),
+          level: a.level,
+          alarmNo: `ACK-${Date.now().toString().slice(-6)}`,
+          message: a.message,
+          device: a.device || 'HMI',
+          eventTime: a.time,
+          recoveredTime: null,
+          acknowledged: true,
+          operator: 'System',
+        },
+        ...prev,
+      ]);
+      setCurrentPage(1);
+    });
+    return () => { unsub(); };
+  }, []);
 
   // Pagination state
   const [pageSize, setPageSize] = useState<number>(10);
