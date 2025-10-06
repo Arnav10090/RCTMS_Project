@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { DataCard } from '@/components/DataCard';
 import { StatusIndicator } from '@/components/StatusIndicator';
 import { Button } from '@/components/ui/button';
-import { 
-  Play, 
-  Square, 
+import {
+  Play,
+  Square,
   Settings,
   RotateCcw,
   Clock,
@@ -223,20 +223,20 @@ export const PumpOperations = () => {
     const running = groupEquipment.filter(e => e.operationStatus === 'start').length;
     const total = groupEquipment.length;
     const avgUtilization = groupEquipment.reduce((sum, e) => sum + e.monthlyUtilization, 0) / total;
-    
+
     return { running, total, avgUtilization };
   };
 
   return (
     <div className="space-y-6">
-          {/* Equipment Operations Table */}
+      {/* Equipment Operations Table */}
       <DataCard title="Equipment Operations Matrix" className="overflow-x-auto">
         <div className="min-w-full">
           <table className="min-w-full table-auto text-sm reduce-gap">
             <thead>
               <tr className="text-xs text-muted-foreground border-b border-border">
                 <th rowSpan={2} className="px-3 py-2 text-left w-12">SN</th>
-                <th rowSpan={2} className="px-3 py-2 text-left">Pump Description</th>
+                <th rowSpan={2} className="px-3 py-2 text-left desc-col">Pump Description</th>
                 <th rowSpan={2} className="px-3 py-2 text-left w-56 op-col">Operation</th>
                 <th rowSpan={2} className="px-3 py-2 text-left w-36">Mode</th>
                 <th colSpan={2} className="px-3 py-2 text-left">Running Hrs</th>
