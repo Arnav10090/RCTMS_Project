@@ -253,7 +253,7 @@ export const PumpOperations = () => {
               {equipment.map((item, idx) => (
                 <tr key={item.id} className="border-b border-border/50 hover:bg-muted/20">
                   <td className="px-3 py-3 font-mono">{(idx + 1).toString().padStart(2, '0')}</td>
-                  <td className="px-3 py-3">{item.description}</td>
+                  <td className="px-3 py-3 desc-col">{item.description}</td>
 
                   <td className="px-3 py-3">
                     <div className="flex items-center gap-3">
