@@ -399,10 +399,30 @@ export const Reports = () => {
   const [cellar] = React.useState(() => genOilCellar());
   const [pumps] = React.useState(() => genPumps());
   const [hp] = React.useState(() => genHpPumps());
+  const [selectedTable, setSelectedTable] = React.useState<TableKey>('coolant');
 
   return (
     <div className="min-h-screen bg-gray-100 p-6">
       <div className="max-w-[1600px] mx-auto space-y-6">
+        <div className="bg-white border border-gray-200 rounded-lg shadow-sm px-6 py-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <h1 className="text-lg font-semibold text-gray-900">Reports</h1>
+            <p className="text-sm text-gray-500">Select a report table to display.</p>
+          </div>
+          <Select value={selectedTable} onValueChange={(value) => setSelectedTable(value as TableKey)}>
+            <SelectTrigger className="w-full sm:w-64">
+              <SelectValue placeholder="Select report" />
+            </SelectTrigger>
+            <SelectContent>
+              {TABLE_OPTIONS.map((option) => (
+                <SelectItem key={option.value} value={option.value}>
+                  {option.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+
         {/* Coolant Report */}
         <TableSection
           title="Coolant Report"
