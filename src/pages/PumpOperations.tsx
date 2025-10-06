@@ -248,7 +248,7 @@ export const PumpOperations = () => {
                 <th rowSpan={2} className="px-3 py-2 text-center w-12">SN</th>
                 <th rowSpan={2} className="px-3 py-2 text-center desc-col">Pump Description</th>
                 <th rowSpan={2} className="px-3 py-2 text-center w-56 op-col">Operation</th>
-                <th rowSpan={2} className="px-3 py-2 text-center w-36">Mode</th>
+                <th rowSpan={2} className="px-3 py-2 text-center w-36" style={{textAlign: 'center'}}>Mode</th>
                 <th colSpan={2} className="px-3 py-2 text-center">Running Hrs</th>
                 <th colSpan={2} className="px-3 py-2 text-center">Utilization (%)</th>
               </tr>
