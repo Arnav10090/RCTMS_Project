@@ -2,8 +2,8 @@ import React from 'react';
 
 const PidDiagram: React.FC = () => {
   return (
-    <div className="w-full h-full bg-white p-8 overflow-auto">
-      <svg width="1100" height="600" viewBox="0 0 1100 600" className="border border-gray-300">
+    <div className="w-full h-full bg-white p-4 overflow-hidden">
+      <svg width="100%" height="100%" viewBox="0 0 1100 600" preserveAspectRatio="xMinYMid meet" className="block w-full h-full border border-gray-300">
         <defs>
           <marker id="arrowblack" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
             <path d="M0,0 L0,6 L9,3 z" fill="#000" />
