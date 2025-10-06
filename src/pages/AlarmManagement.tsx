@@ -283,9 +283,19 @@ export const AlarmManagement = () => {
               </select>
 
               <div className="flex items-center space-x-1">
-                <Button size="sm" variant="outline" onClick={() => setCurrentPage((p) => Math.max(1, p - 1))} disabled={currentPage === 1}>Prev</Button>
+                <div className="flex flex-col items-center">
+                  <div className="flex space-x-1">
+                    <Button size="sm" variant="outline" onClick={() => { setCurrentPage(1); }} disabled={currentPage === 1}>&laquo;</Button>
+                    <Button size="sm" variant="outline" onClick={() => setCurrentPage((p) => Math.max(1, p - 1))} disabled={currentPage === 1}>&lsaquo;</Button>
+                    <Button size="sm" variant="outline" onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))} disabled={currentPage === totalPages}>&rsaquo;</Button>
+                    <Button size="sm" variant="outline" onClick={() => { setCurrentPage(totalPages); }} disabled={currentPage === totalPages}>&raquo;</Button>
+                  </div>
+                  <div className="text-xs text-muted-foreground mt-1 w-full flex justify-between">
+                    <span>BWD</span>
+                    <span>FWD</span>
+                  </div>
+                </div>
                 <div className="px-2 text-sm">Page {currentPage} / {totalPages}</div>
-                <Button size="sm" variant="outline" onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))} disabled={currentPage === totalPages}>Next</Button>
               </div>
             </div>
           </div>
