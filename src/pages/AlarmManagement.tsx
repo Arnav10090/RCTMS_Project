@@ -8,8 +8,7 @@ import {
   Volume2,
   VolumeX,
   CheckSquare,
-  Download,
-  MessageSquare
+  Download
 } from 'lucide-react';
 
 interface Alarm {
