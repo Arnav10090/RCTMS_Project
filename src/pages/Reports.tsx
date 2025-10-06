@@ -456,61 +456,62 @@ export const Reports = () => {
           />
         )}
 
-        {/* Oil Cellar Report */}
-        <TableSection
-          title="Oil Cellar Report"
-          data={cellar}
-          headers={[
-            'SN',
-            'Date',
-            'Temp Deg.C',
-            'Humidity %',
-            'AQI Area#1',
-            'AQI Area#2',
-            'AQI Area#3',
-            'Access Control Status',
-            'Person Entered',
-            'No. of persons w/o ppe',
-            'Welding',
-            'Cutting',
-            'Others',
-            'Area#1',
-            'Area#2',
-            'Area#3',
-            'Area#4',
-            'Area#5',
-            'Inspection Status',
-            'Next Exp. Due'
-          ]}
-          renderRow={(r: OilCellarRow, idx, start) => (
-            <tr key={r.id} className="hover:bg-gray-50">
-              <td className="px-4 py-3 text-sm text-gray-900">{start + idx + 1}</td>
-              <td className="px-4 py-3 text-sm text-gray-900 font-mono">{r.date}</td>
-              <td className="px-4 py-3 text-sm text-gray-900">{r.tempC}</td>
-              <td className="px-4 py-3 text-sm text-gray-900">{r.humidity}</td>
-              <td className="px-4 py-3 text-sm text-gray-900">{r.aqiA1}</td>
-              <td className="px-4 py-3 text-sm text-gray-900">{r.aqiA2}</td>
-              <td className="px-4 py-3 text-sm text-gray-900">{r.aqiA3}</td>
-              <td className="px-4 py-3 text-sm text-gray-900">{r.accessControl}</td>
-              <td className="px-4 py-3 text-sm text-gray-900">{r.personsEntered}</td>
-              <td className="px-4 py-3 text-sm text-gray-900">{r.noPpe}</td>
-              <td className="px-4 py-3 text-sm text-gray-900">{r.welding}</td>
-              <td className="px-4 py-3 text-sm text-gray-900">{r.cutting}</td>
-              <td className="px-4 py-3 text-sm text-gray-900">{r.others}</td>
-              <td className="px-4 py-3 text-sm text-gray-900">{r.illumA1}</td>
-              <td className="px-4 py-3 text-sm text-gray-900">{r.illumA2}</td>
-              <td className="px-4 py-3 text-sm text-gray-900">{r.illumA3}</td>
-              <td className="px-4 py-3 text-sm text-gray-900">{r.illumA4}</td>
-              <td className="px-4 py-3 text-sm text-gray-900">{r.illumA5}</td>
-              <td className="px-4 py-3 text-sm">
-                <span className={`px-2 py-1 rounded text-xs font-medium ${r.fireStatus === 'OK' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
-                  {r.fireStatus}
-                </span>
-              </td>
-              <td className="px-4 py-3 text-sm text-gray-900 font-mono">{r.fireNextDue}</td>
-            </tr>
-          )}
-        />
+        {selectedTable === 'oilCellar' && (
+          <TableSection
+            title="Oil Cellar Report"
+            data={cellar}
+            headers={[
+              'SN',
+              'Date',
+              'Temp Deg.C',
+              'Humidity %',
+              'AQI Area#1',
+              'AQI Area#2',
+              'AQI Area#3',
+              'Access Control Status',
+              'Person Entered',
+              'No. of persons w/o ppe',
+              'Welding',
+              'Cutting',
+              'Others',
+              'Area#1',
+              'Area#2',
+              'Area#3',
+              'Area#4',
+              'Area#5',
+              'Inspection Status',
+              'Next Exp. Due'
+            ]}
+            renderRow={(r: OilCellarRow, idx, start) => (
+              <tr key={r.id} className="hover:bg-gray-50">
+                <td className="px-4 py-3 text-sm text-gray-900">{start + idx + 1}</td>
+                <td className="px-4 py-3 text-sm text-gray-900 font-mono">{r.date}</td>
+                <td className="px-4 py-3 text-sm text-gray-900">{r.tempC}</td>
+                <td className="px-4 py-3 text-sm text-gray-900">{r.humidity}</td>
+                <td className="px-4 py-3 text-sm text-gray-900">{r.aqiA1}</td>
+                <td className="px-4 py-3 text-sm text-gray-900">{r.aqiA2}</td>
+                <td className="px-4 py-3 text-sm text-gray-900">{r.aqiA3}</td>
+                <td className="px-4 py-3 text-sm text-gray-900">{r.accessControl}</td>
+                <td className="px-4 py-3 text-sm text-gray-900">{r.personsEntered}</td>
+                <td className="px-4 py-3 text-sm text-gray-900">{r.noPpe}</td>
+                <td className="px-4 py-3 text-sm text-gray-900">{r.welding}</td>
+                <td className="px-4 py-3 text-sm text-gray-900">{r.cutting}</td>
+                <td className="px-4 py-3 text-sm text-gray-900">{r.others}</td>
+                <td className="px-4 py-3 text-sm text-gray-900">{r.illumA1}</td>
+                <td className="px-4 py-3 text-sm text-gray-900">{r.illumA2}</td>
+                <td className="px-4 py-3 text-sm text-gray-900">{r.illumA3}</td>
+                <td className="px-4 py-3 text-sm text-gray-900">{r.illumA4}</td>
+                <td className="px-4 py-3 text-sm text-gray-900">{r.illumA5}</td>
+                <td className="px-4 py-3 text-sm">
+                  <span className={`px-2 py-1 rounded text-xs font-medium ${r.fireStatus === 'OK' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
+                    {r.fireStatus}
+                  </span>
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-900 font-mono">{r.fireNextDue}</td>
+              </tr>
+            )}
+          />
+        )}
 
         {/* Roll Coolant Pump Status */}
         <TableSection
