@@ -118,9 +118,9 @@ export const AlarmManagement = () => {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         <div className="lg:col-span-12">
           <DataCard title="Alarm Control Panel">
-            <div className="flex flex-wrap items-center gap-4 mb-4">
+            <div className="flex flex-wrap items-center justify-between w-full gap-y-4 mb-4">
               {/* Search */}
-              <div className="flex items-center space-x-2 w-64">
+              <div className="flex items-center space-x-2 w-64 shrink-0">
                 <Search className="h-4 w-4 text-muted-foreground" />
                 <Input
                   placeholder="Search alarms..."
@@ -131,8 +131,8 @@ export const AlarmManagement = () => {
               </div>
 
               {/* Filter Buttons */}
-              <div className="flex items-center space-x-2">
                 <Button
+                  className="shrink-0"
                   variant={filterLevel === 'all' ? 'default' : 'outline'}
                   size="sm"
                   onClick={() => setFilterLevel('all')}
@@ -140,6 +140,7 @@ export const AlarmManagement = () => {
                   All
                 </Button>
                 <Button
+                  className="shrink-0"
                   variant={filterLevel === 'active' ? 'default' : 'outline'}
                   size="sm"
                   onClick={() => setFilterLevel('active')}
@@ -147,6 +148,7 @@ export const AlarmManagement = () => {
                   Active
                 </Button>
                 <Button
+                  className="shrink-0"
                   variant={filterLevel === 'inactive' ? 'default' : 'outline'}
                   size="sm"
                   onClick={() => setFilterLevel('inactive')}
@@ -155,7 +157,7 @@ export const AlarmManagement = () => {
                 </Button>
 
                 {/* Alarm Level dropdown */}
-                <div className="w-40">
+                <div className="w-40 shrink-0">
                   <label className="text-xs text-muted-foreground mb-1 block">Alarm Level</label>
                   <Select value={alarmLevelFilter} onValueChange={(v) => setAlarmLevelFilter(v as any)}>
                     <SelectTrigger aria-label="Alarm Level" className="h-9" >
@@ -172,13 +174,13 @@ export const AlarmManagement = () => {
                 </div>
 
                 <Button
+                  className="shrink-0"
                   variant={filterLevel === 'acknowledged' ? 'default' : 'outline'}
                   size="sm"
                   onClick={() => setFilterLevel('acknowledged')}
                 >
                   Acknowledged
                 </Button>
-              </div>
             </div>
 
             <div className="flex items-center justify-between mb-4">
