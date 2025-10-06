@@ -5,8 +5,6 @@ import { Input } from '@/components/ui/input';
 import {
   AlertTriangle,
   Search,
-  Volume2,
-  VolumeX,
   CheckSquare,
   Download,
   X
@@ -27,7 +25,6 @@ interface Alarm {
 
 export const AlarmManagement = () => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [audioEnabled, setAudioEnabled] = useState(true);
   const [filterLevel, setFilterLevel] = useState<string>('all');
   const [alarmLevelFilter, setAlarmLevelFilter] = useState<'all' | 'low' | 'medium' | 'high' | 'critical'>('all');
   
@@ -121,6 +118,42 @@ export const AlarmManagement = () => {
   };
   const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 
+  const toCsv = (rows: (string | number | null | undefined)[][]) =>
+    rows
+      .map(r =>
+        r
+          .map(v => {
+            const s = v == null ? '' : String(v);
+            return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
+          })
+          .join(',')
+      )
+      .join('\n');
+
+  const handleExport = () => {
+    const headers = ['No.', 'Level', 'Alarm No.', 'Message', 'Device', 'Event Time', 'Recovered Time', 'Acknowledged'];
+    const rows = filteredAlarms.map((a, i) => [
+      i + 1,
+      a.level.toUpperCase(),
+      a.alarmNo,
+      a.message,
+      a.device,
+      a.eventTime,
+      a.recoveredTime || '',
+      a.acknowledged ? 'Yes' : 'No',
+    ]);
+    const csv = toCsv([headers, ...rows]);
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `alarms_${new Date().toISOString().slice(0, 10)}.csv`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  };
+
   return (
     <div className="space-y-6">
       {/* Control Panel */}
@@ -171,14 +204,20 @@ export const AlarmManagement = () => {
                   </Select>
                 </div>
 
-                <Button
-                  className="shrink-0"
-                  variant={filterLevel === 'acknowledged' ? 'default' : 'outline'}
-                  size="sm"
-                  onClick={() => setFilterLevel('acknowledged')}
-                >
-                  Acknowledged
-                </Button>
+                <div className="flex items-center gap-2 shrink-0">
+                  <Button
+                    className="shrink-0"
+                    variant={filterLevel === 'acknowledged' ? 'default' : 'outline'}
+                    size="sm"
+                    onClick={() => setFilterLevel('acknowledged')}
+                  >
+                    Acknowledged
+                  </Button>
+                  <Button variant="outline" size="sm" onClick={handleExport}>
+                    <Download className="h-4 w-4 mr-2" />
+                    Export
+                  </Button>
+                </div>
             </div>
 
             {hasActiveFilters && (
@@ -209,31 +248,6 @@ export const AlarmManagement = () => {
               </div>
             )}
 
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center space-x-4">
-                <Button variant="outline" size="sm">
-                  <CheckSquare className="h-4 w-4 mr-2" />
-                  Acknowledge Selected
-                </Button>
-                <Button variant="outline" size="sm">
-                  <Download className="h-4 w-4 mr-2" />
-                  Export
-                </Button>
-              </div>
-
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => setAudioEnabled(!audioEnabled)}
-              >
-                {audioEnabled ? (
-                  <Volume2 className="h-4 w-4 mr-2" />
-                ) : (
-                  <VolumeX className="h-4 w-4 mr-2" />
-                )}
-                Audio {audioEnabled ? 'On' : 'Off'}
-              </Button>
-            </div>
           </DataCard>
         </div>
       </div>
