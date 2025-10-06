@@ -124,7 +124,7 @@ export const OilCellarMonitor = () => {
         </div>
 
         <Table className="rounded-lg overflow-hidden">
-          <TableCaption className="pt-4 text-xs text-muted-foreground">Interactive table — switches represent the "xxx" marks.</TableCaption>
+          <TableCaption className="pt-4 text-xs text-muted-foreground">Interactive table �� switches represent the "xxx" marks.</TableCaption>
           <TableHeader>
             <TableRow className="bg-card/60 hover:bg-card/60">
               <TableHead className="w-16 sticky left-0 bg-card z-10">SN</TableHead>
@@ -141,20 +141,18 @@ export const OilCellarMonitor = () => {
                 <TableCell className="font-medium sticky left-16 bg-background/70 backdrop-blur z-10">{row.label}</TableCell>
                 {areas.map((_, cIdx) => (
                   <TableCell key={`${row.id}-${cIdx}`} className="text-center">
-                    <TooltipProvider>
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <Switch
-                            checked={matrix[row.id][cIdx]}
-                            onCheckedChange={(v) => toggleCell(row.id, cIdx, v)}
-                            aria-label={`${row.label} ${areas[cIdx]} toggle`}
-                          />
-                        </TooltipTrigger>
-                        <TooltipContent>
-                          <p>{matrix[row.id][cIdx] ? 'On' : 'Off'}</p>
-                        </TooltipContent>
-                      </Tooltip>
-                    </TooltipProvider>
+                    {row.id === 'lighting' ? (
+                      <div className="flex items-center justify-center space-x-2">
+                        <Button size="sm" variant={lighting[cIdx] ? 'default' : 'outline'} onClick={() => toggleCell('lighting', cIdx, true)}>
+                          ON
+                        </Button>
+                        <Button size="sm" variant={!lighting[cIdx] ? 'default' : 'outline'} onClick={() => toggleCell('lighting', cIdx, false)}>
+                          OFF
+                        </Button>
+                      </div>
+                    ) : row.id === 'aqi' ? (
+                      <div className="font-mono">{aqiValues[cIdx].toFixed(1)}</div>
+                    ) : null}
                   </TableCell>
                 ))}
               </TableRow>
