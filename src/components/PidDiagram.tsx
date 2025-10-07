@@ -16,11 +16,41 @@ const PidDiagram: React.FC = () => {
     L: '/svgs/L.svg',
     LL: '/svgs/LL.svg',
     PURPLE_DOT: '/svgs/purple-black-dot.svg',
+    ARROW_12: '/svgs/12pm_arrow.svg',
+    ARROW_2: '/svgs/2pm_arrow.svg',
+    ARROW_4: '/svgs/4pm_arrow.svg',
+    ARROW_6: '/svgs/6pm_arrrow.svg', // note: filename has triple r in repo
   } as const;
 
-  // Base canvas is designed at 1200x520 to roughly match the provided layout
   const W = 1200;
   const Ht = 520;
+
+  const Arrow = ({ x, y, dir }: { x: number; y: number; dir: 'up' | 'down' | 'right' | 'left' | 'ne' | 'se' | 'nw' | 'sw' }) => {
+    let href = ASSET.ARROW_12;
+    let rotation = 0;
+    switch (dir) {
+      case 'up':
+        href = ASSET.ARROW_12; rotation = 0; break;
+      case 'down':
+        href = ASSET.ARROW_6; rotation = 0; break;
+      case 'right':
+        href = ASSET.ARROW_12; rotation = 90; break;
+      case 'left':
+        href = ASSET.ARROW_12; rotation = -90; break;
+      case 'ne':
+        href = ASSET.ARROW_2; rotation = 0; break;
+      case 'se':
+        href = ASSET.ARROW_4; rotation = 0; break;
+      case 'nw':
+        href = ASSET.ARROW_2; rotation = 180; break;
+      case 'sw':
+        href = ASSET.ARROW_4; rotation = 180; break;
+    }
+    const w = 16; const h = 16;
+    return (
+      <image href={href} x={x - w / 2} y={y - h / 2} width={w} height={h} transform={`rotate(${rotation} ${x} ${y})`} />
+    );
+  };
 
   return (
     <div className="w-full h-full">
@@ -31,40 +61,30 @@ const PidDiagram: React.FC = () => {
         className="block w-full h-full"
         preserveAspectRatio="xMinYMin meet"
       >
-        <defs>
-          <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
-            <path d="M0,0 L0,6 L9,3 z" fill="#000" />
-          </marker>
-        </defs>
-
         {/* DM Water feed and FT#1 at top-left */}
         <text x={60} y={40} fontFamily="Arial" fontSize={16}>DM Water</text>
-        <line x1={95} y1={45} x2={95} y2={100} stroke="#000" strokeWidth={2} markerEnd="url(#arrow)" />
-        {/* FT#1 symbol (drawn) */}
+        <line x1={95} y1={45} x2={95} y2={100} stroke="#000" strokeWidth={2} />
+        <Arrow x={95} y={100} dir="down" />
+        {/* FT#1 */}
         <circle cx={95} cy={125} r={20} fill="none" stroke="#000" strokeWidth={2} />
         <text x={80} y={130} fontFamily="Arial" fontSize={12} fontWeight="bold">FT</text>
         <text x={120} y={126} fontFamily="Arial" fontSize={12}>#1</text>
 
-        {/* Legend at top-left */}
+        {/* Legend */}
         <text x={165} y={95} fontFamily="Arial" fontSize={12}>FT : Flow Transmitter</text>
         <text x={165} y={115} fontFamily="Arial" fontSize={12}>LT : Level Transmitter</text>
         <text x={165} y={135} fontFamily="Arial" fontSize={12}>TIC : Temp. indicator and controller</text>
         <text x={165} y={155} fontFamily="Arial" fontSize={12}>XT1: On-Line oil concentration measure</text>
 
         {/* Tanks baseline */}
-        <line x1={40} y1={430} x2={560} y2={430} stroke="#000" strokeWidth={2} />
-        <line x1={560} y1={430} x2={1120} y2={430} stroke="#000" strokeWidth={2} />
+        <line x1={40} y1={430} x2={1120} y2={430} stroke="#000" strokeWidth={2} />
 
         {/* OIL TANK */}
         <rect x={30} y={260} width={170} height={150} fill="none" stroke="#000" strokeWidth={2} />
         <text x={65} y={435} fontFamily="Arial" fontSize={16} fontWeight={600}>OIL TANK</text>
-        {/* Mixer motor */}
         <image href={ASSET.M_CIRC} x={55} y={270} width={36} height={36} />
-        {/* Pump motor */}
         <image href={ASSET.M_CIRC} x={120} y={270} width={36} height={36} />
-        {/* Outlet valve symbol using horizontal triangles */}
         <image href={ASSET.TRI_VERT} x={110} y={340} width={40} height={50} />
-        {/* Oil tank level marks */}
         <image href={ASSET.H} x={60} y={315} width={28} height={28} />
         <image href={ASSET.L} x={60} y={350} width={28} height={28} />
         <image href={ASSET.LL} x={60} y={385} width={28} height={28} />
@@ -72,7 +92,7 @@ const PidDiagram: React.FC = () => {
         {/* Outlet line from oil tank to manifold */}
         <line x1={115} y1={390} x2={210} y2={390} stroke="#000" strokeWidth={2} />
 
-        {/* Instrument manifold box with FT#2, LT, TIC */}
+        {/* Instrument manifold */}
         <rect x={200} y={220} width={280} height={95} fill="none" stroke="#000" strokeWidth={2} />
         <image href={ASSET.FT2} x={215} y={235} width={85} height={55} />
         <image href={ASSET.LT} x={315} y={235} width={70} height={55} />
@@ -87,39 +107,40 @@ const PidDiagram: React.FC = () => {
         <image href={ASSET.TRI_VERT} x={370} y={320} width={30} height={40} />
 
         {/* Drops to clean tank */}
-        <line x1={345} y1={360} x2={345} y2={390} stroke="#000" strokeWidth={2} markerEnd="url(#arrow)" />
-        <line x1={385} y1={360} x2={385} y2={390} stroke="#000" strokeWidth={2} markerEnd="url(#arrow)" />
+        <line x1={345} y1={360} x2={345} y2={390} stroke="#000" strokeWidth={2} />
+        <Arrow x={345} y={390} dir="down" />
+        <line x1={385} y1={360} x2={385} y2={390} stroke="#000" strokeWidth={2} />
+        <Arrow x={385} y={390} dir="down" />
 
         {/* CLEAN TANK */}
         <rect x={210} y={300} width={380} height={150} fill="none" stroke="#000" strokeWidth={2} />
         <text x={340} y={470} fontFamily="Arial" fontSize={16} fontWeight={600}>CLEAN TANK</text>
-        {/* Internal diversion and one motor */}
         <image href={ASSET.TRI_VERT} x={380} y={305} width={30} height={35} />
         <image href={ASSET.M_CIRC} x={430} y={305} width={30} height={30} />
         <image href={ASSET.M_CIRC} x={465} y={305} width={30} height={30} />
 
         {/* Outlet to XT#1 path */}
-        <line x1={485} y1={390} x2={485} y2={420} stroke="#000" strokeWidth={2} markerEnd="url(#arrow)" />
+        <line x1={485} y1={390} x2={485} y2={420} stroke="#000" strokeWidth={2} />
+        <Arrow x={485} y={420} dir="down" />
 
-        {/* XT#1 - purple sensor and label */}
+        {/* XT#1 */}
         <image href={ASSET.PURPLE_DOT} x={520} y={200} width={26} height={26} />
         <text x={555} y={214} fontFamily="Arial" fontSize={14} fontWeight={600}>XT#1</text>
-        {/* XT#1 branch box and ties */}
         <rect x={495} y={180} width={70} height={60} fill="none" stroke="#000" strokeWidth={2} />
-        <line x1={530} y1={160} x2={530} y2={180} stroke="#000" strokeWidth={2} markerEnd="url(#arrow)" />
+        <line x1={530} y1={160} x2={530} y2={180} stroke="#000" strokeWidth={2} />
+        <Arrow x={530} y={180} dir="down" />
         <line x1={530} y1={240} x2={530} y2={270} stroke="#000" strokeWidth={2} />
         <line x1={490} y1={270} x2={570} y2={270} stroke="#000" strokeWidth={2} />
         <line x1={490} y1={270} x2={490} y2={300} stroke="#000" strokeWidth={2} />
-        <line x1={570} y1={270} x2={570} y2={300} stroke="#000" strokeWidth={2} markerEnd="url(#arrow)" />
+        <line x1={570} y1={270} x2={570} y2={300} stroke="#000" strokeWidth={2} />
+        <Arrow x={570} y={300} dir="down" />
 
         {/* DIRTY TANK */}
         <rect x={610} y={300} width={150} height={150} fill="none" stroke="#000" strokeWidth={2} />
         <text x={630} y={470} fontFamily="Arial" fontSize={16} fontWeight={600}>DIRTY TANK</text>
-        {/* Level keys */}
         <image href={ASSET.H} x={690} y={320} width={28} height={28} />
         <image href={ASSET.L} x={690} y={355} width={28} height={28} />
         <image href={ASSET.LL} x={690} y={390} width={28} height={28} />
-        {/* Motors and valve */}
         <image href={ASSET.M_CIRC} x={630} y={305} width={30} height={30} />
         <image href={ASSET.M_CIRC} x={585} y={350} width={30} height={30} />
         <image href={ASSET.M_CIRC} x={585} y={385} width={30} height={30} />
@@ -131,20 +152,19 @@ const PidDiagram: React.FC = () => {
         <line x1={605} y1={380} x2={575} y2={380} stroke="#000" strokeWidth={2} />
         <line x1={575} y1={380} x2={575} y2={430} stroke="#000" strokeWidth={2} />
         <line x1={30} y1={430} x2={575} y2={430} stroke="#000" strokeWidth={2} />
-        <polyline points="30,430 30,360 95,360" fill="none" stroke="#000" strokeWidth={2} markerEnd="url(#arrow)" />
+        <polyline points="30,430 30,360 95,360" fill="none" stroke="#000" strokeWidth={2} />
+        <Arrow x={95} y={360} dir="right" />
 
-        {/* Heat Exchanger block on right with stacked circles and angled feeders */}
+        {/* Heat Exchanger */}
         <rect x={815} y={40} width={300} height={240} fill="none" stroke="#000" strokeWidth={2} />
-        {/* Stacked circles */}
         <circle cx={965} cy={60} r={26} fill="#fff" stroke="#000" strokeWidth={2} />
         <circle cx={965} cy={100} r={21} fill="#fff" stroke="#000" strokeWidth={2} />
         <circle cx={965} cy={135} r={15} fill="#fff" stroke="#000" strokeWidth={2} />
         <circle cx={965} cy={160} r={15} fill="#fff" stroke="#000" strokeWidth={2} />
         <circle cx={965} cy={195} r={21} fill="#fff" stroke="#000" strokeWidth={2} />
         <circle cx={965} cy={240} r={28} fill="#fff" stroke="#000" strokeWidth={2} />
-        {/* Horizontal dotted ref line through center */}
         <image href={ASSET.DOT_H} x={840} y={155} width={250} height={20} />
-        {/* Left angled inlets */}
+        {/* Left angled inlets with dots */}
         <polyline points="815,40 890,70" fill="none" stroke="#000" strokeWidth={2} />
         <circle cx={890} cy={70} r={3} fill="#000" />
         <polyline points="815,70 885,105" fill="none" stroke="#000" strokeWidth={2} />
@@ -160,18 +180,26 @@ const PidDiagram: React.FC = () => {
         <line x1={815} y1={280} x2={895} y2={280} stroke="#000" strokeWidth={2} />
         {/* Right outlets */}
         <line x1={990} y1={60} x2={1115} y2={40} stroke="#000" strokeWidth={2} />
+        <Arrow x={1115} y={40} dir="ne" />
         <line x1={990} y1={100} x2={1115} y2={70} stroke="#000" strokeWidth={2} />
+        <Arrow x={1115} y={70} dir="ne" />
         <line x1={990} y1={135} x2={1115} y2={110} stroke="#000" strokeWidth={2} />
+        <Arrow x={1115} y={110} dir="ne" />
         <line x1={990} y1={160} x2={1115} y2={130} stroke="#000" strokeWidth={2} />
+        <Arrow x={1115} y={130} dir="ne" />
         <line x1={990} y1={195} x2={1115} y2={165} stroke="#000" strokeWidth={2} />
+        <Arrow x={1115} y={165} dir="ne" />
         <line x1={990} y1={240} x2={1115} y2={205} stroke="#000" strokeWidth={2} />
+        <Arrow x={1115} y={205} dir="ne" />
         <line x1={1025} y1={280} x2={1115} y2={280} stroke="#000" strokeWidth={2} />
+        <Arrow x={1115} y={280} dir="right" />
 
         {/* Connections to/from exchanger */}
         <line x1={750} y1={380} x2={815} y2={380} stroke="#000" strokeWidth={2} />
         <line x1={815} y1={280} x2={815} y2={380} stroke="#000" strokeWidth={2} />
         <line x1={1115} y1={280} x2={1115} y2={380} stroke="#000" strokeWidth={2} />
-        <line x1={750} y1={380} x2={1115} y2={380} stroke="#000" strokeWidth={2} markerEnd="url(#arrow)" />
+        <line x1={750} y1={380} x2={1115} y2={380} stroke="#000" strokeWidth={2} />
+        <Arrow x={1115} y={380} dir="right" />
 
         {/* Tie exchanger to XT#1 rail */}
         <line x1={965} y1={280} x2={965} y2={295} stroke="#000" strokeWidth={2} />
