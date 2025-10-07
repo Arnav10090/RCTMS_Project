@@ -182,72 +182,104 @@ const PidDiagram: React.FC = () => {
         {/* HEAT EXCHANGER on right */}
         <rect x="800" y="20" width="270" height="240" fill="none" stroke="#000" strokeWidth="2" />
 
-        {/* Heat exchanger circles using U-shape container */}
-        <image href="/svgs/U-shape-container.svg" x="850" y="25" width="120" height="100" />
-        <image href="/svgs/U-shape-container.svg" x="850" y="75" width="120" height="80" />
-        <image href="/svgs/U-shape-container.svg" x="850" y="125" width="120" height="60" />
+        {/* Heat exchanger circles - 6 circles with proper sizing */}
+        {/* Top circle - largest */}
+        <circle cx="935" cy="45" r="22" fill="white" stroke="#000" strokeWidth="2" />
+        <line x1="913" y1="45" x2="957" y2="45" stroke="#000" strokeWidth="1" />
 
-        {/* Circles for heat exchanger stages */}
-        <image href="/svgs/circle.svg" x="890" y="20" width="50" height="50" />
-        <image href="/svgs/circle.svg" x="895" y="60" width="40" height="40" />
-        <image href="/svgs/circle.svg" x="900" y="95" width="30" height="30" />
-        <image href="/svgs/circle.svg" x="900" y="125" width="30" height="30" />
-        <image href="/svgs/circle.svg" x="895" y="155" width="40" height="40" />
-        <image href="/svgs/circle.svg" x="890" y="195" width="50" height="50" />
+        {/* Second circle */}
+        <circle cx="935" cy="85" r="18" fill="white" stroke="#000" strokeWidth="2" />
+        <line x1="917" y1="85" x2="953" y2="85" stroke="#000" strokeWidth="1" />
 
-        {/* Left inlet lines with dots */}
-        <line x1="800" y1="30" x2="860" y2="50" stroke="#000" strokeWidth="2" />
-        <image href="/svgs/filled_circle.svg" x="857" y="47" width="6" height="6" />
-        <line x1="860" y1="50" x2="890" y2="45" stroke="#000" strokeWidth="2" />
-        <image href="/svgs/2pm_arrow.svg" x="884" y="39" width="12" height="12" />
+        {/* Third circle - smallest */}
+        <circle cx="935" cy="120" r="13" fill="white" stroke="#000" strokeWidth="2" />
+        <line x1="922" y1="120" x2="948" y2="120" stroke="#000" strokeWidth="1" />
 
-        <line x1="800" y1="60" x2="865" y2="80" stroke="#000" strokeWidth="2" />
-        <image href="/svgs/filled_circle.svg" x="862" y="77" width="6" height="6" />
-        <line x1="865" y1="80" x2="895" y2="80" stroke="#000" strokeWidth="2" />
-        <image href="/svgs/2pm_arrow.svg" x="889" y="74" width="12" height="12" />
+        {/* Fourth circle - smallest (on dashed line) */}
+        <circle cx="935" cy="145" r="13" fill="white" stroke="#000" strokeWidth="2" />
+        <line x1="922" y1="145" x2="948" y2="145" stroke="#000" strokeWidth="1" />
 
-        <line x1="800" y1="95" x2="870" y2="110" stroke="#000" strokeWidth="2" />
-        <image href="/svgs/filled_circle.svg" x="867" y="107" width="6" height="6" />
-        <line x1="870" y1="110" x2="900" y2="110" stroke="#000" strokeWidth="2" />
-        <image href="/svgs/2pm_arrow.svg" x="894" y="104" width="12" height="12" />
+        {/* Fifth circle */}
+        <circle cx="935" cy="180" r="18" fill="white" stroke="#000" strokeWidth="2" />
+        <line x1="917" y1="180" x2="953" y2="180" stroke="#000" strokeWidth="1" />
 
-        <line x1="800" y1="125" x2="870" y2="135" stroke="#000" strokeWidth="2" />
-        <image href="/svgs/filled_circle.svg" x="867" y="132" width="6" height="6" />
-        <line x1="870" y1="135" x2="900" y2="137" stroke="#000" strokeWidth="2" />
-        <image href="/svgs/2pm_arrow.svg" x="894" y="131" width="12" height="12" />
+        {/* Bottom circle - largest */}
+        <circle cx="935" cy="220" r="22" fill="white" stroke="#000" strokeWidth="2" />
+        <line x1="913" y1="220" x2="957" y2="220" stroke="#000" strokeWidth="1" />
+
+        {/* Left inlet lines with dots and arrows */}
+        <line x1="800" y1="30" x2="875" y2="50" stroke="#000" strokeWidth="2" />
+        <image href="/svgs/filled_circle.svg" x="872" y="47" width="6" height="6" />
+        <line x1="875" y1="50" x2="903" y2="42" stroke="#000" strokeWidth="2" />
+        <image href="/svgs/2pm_arrow.svg" x="897" y="36" width="12" height="12" />
+        <line x1="903" y1="42" x2="913" y2="40" stroke="#000" strokeWidth="2" />
+
+        <line x1="800" y1="60" x2="870" y2="78" stroke="#000" strokeWidth="2" />
+        <image href="/svgs/filled_circle.svg" x="867" y="75" width="6" height="6" />
+        <line x1="870" y1="78" x2="900" y2="82" stroke="#000" strokeWidth="2" />
+        <image href="/svgs/2pm_arrow.svg" x="894" y="76" width="12" height="12" />
+        <line x1="900" y1="82" x2="917" y2="84" stroke="#000" strokeWidth="2" />
+
+        <line x1="800" y1="95" x2="865" y2="108" stroke="#000" strokeWidth="2" />
+        <image href="/svgs/filled_circle.svg" x="862" y="105" width="6" height="6" />
+        <line x1="865" y1="108" x2="895" y2="115" stroke="#000" strokeWidth="2" />
+        <image href="/svgs/2pm_arrow.svg" x="889" y="109" width="12" height="12" />
+        <line x1="895" y1="115" x2="922" y2="119" stroke="#000" strokeWidth="2" />
+
+        <line x1="800" y1="125" x2="865" y2="135" stroke="#000" strokeWidth="2" />
+        <image href="/svgs/filled_circle.svg" x="862" y="132" width="6" height="6" />
+        <line x1="865" y1="135" x2="895" y2="140" stroke="#000" strokeWidth="2" />
+        <image href="/svgs/2pm_arrow.svg" x="889" y="134" width="12" height="12" />
+        <line x1="895" y1="140" x2="922" y2="143" stroke="#000" strokeWidth="2" />
 
         {/* Dashed line across heat exchanger */}
-        <image href="/svgs/Horizontal-dotted_line.svg" x="800" y="138" width="270" height="5" />
+        <image href="/svgs/Horizontal-dotted_line.svg" x="800" y="130" width="270" height="5" />
 
-        <line x1="800" y1="150" x2="870" y2="145" stroke="#000" strokeWidth="2" />
-        <image href="/svgs/filled_circle.svg" x="867" y="142" width="6" height="6" />
-        <line x1="870" y1="145" x2="900" y2="143" stroke="#000" strokeWidth="2" />
-        <image href="/svgs/2pm_arrow.svg" x="894" y="137" width="12" height="12" />
+        <line x1="800" y1="145" x2="865" y2="145" stroke="#000" strokeWidth="2" />
+        <image href="/svgs/filled_circle.svg" x="862" y="142" width="6" height="6" />
+        <line x1="865" y1="145" x2="895" y2="145" stroke="#000" strokeWidth="2" />
+        <image href="/svgs/2pm_arrow.svg" x="889" y="139" width="12" height="12" />
+        <line x1="895" y1="145" x2="922" y2="145" stroke="#000" strokeWidth="2" />
 
-        <line x1="800" y1="160" x2="870" y2="152" stroke="#000" strokeWidth="2" />
-        <image href="/svgs/filled_circle.svg" x="867" y="149" width="6" height="6" />
-        <line x1="870" y1="152" x2="900" y2="150" stroke="#000" strokeWidth="2" />
-        <image href="/svgs/2pm_arrow.svg" x="894" y="144" width="12" height="12" />
+        <line x1="800" y1="155" x2="865" y2="155" stroke="#000" strokeWidth="2" />
+        <image href="/svgs/filled_circle.svg" x="862" y="152" width="6" height="6" />
+        <line x1="865" y1="155" x2="895" y2="152" stroke="#000" strokeWidth="2" />
+        <image href="/svgs/2pm_arrow.svg" x="889" y="146" width="12" height="12" />
+        <line x1="895" y1="152" x2="922" y2="150" stroke="#000" strokeWidth="2" />
 
-        <line x1="800" y1="175" x2="870" y2="170" stroke="#000" strokeWidth="2" />
-        <image href="/svgs/filled_circle.svg" x="867" y="167" width="6" height="6" />
-        <line x1="870" y1="170" x2="895" y2="170" stroke="#000" strokeWidth="2" />
-        <image href="/svgs/2pm_arrow.svg" x="889" y="164" width="12" height="12" />
+        <line x1="800" y1="170" x2="870" y2="175" stroke="#000" strokeWidth="2" />
+        <image href="/svgs/filled_circle.svg" x="867" y="172" width="6" height="6" />
+        <line x1="870" y1="175" x2="900" y2="178" stroke="#000" strokeWidth="2" />
+        <image href="/svgs/2pm_arrow.svg" x="894" y="172" width="12" height="12" />
+        <line x1="900" y1="178" x2="917" y2="180" stroke="#000" strokeWidth="2" />
 
-        <line x1="800" y1="215" x2="865" y2="220" stroke="#000" strokeWidth="2" />
-        <line x1="865" y1="220" x2="890" y2="220" stroke="#000" strokeWidth="2" />
-        <image href="/svgs/2pm_arrow.svg" x="884" y="214" width="12" height="12" />
+        <line x1="800" y1="210" x2="875" y2="218" stroke="#000" strokeWidth="2" />
+        <line x1="875" y1="218" x2="905" y2="222" stroke="#000" strokeWidth="2" />
+        <image href="/svgs/2pm_arrow.svg" x="899" y="216" width="12" height="12" />
+        <line x1="905" y1="222" x2="913" y2="223" stroke="#000" strokeWidth="2" />
 
         {/* Bottom line */}
         <line x1="800" y1="260" x2="870" y2="260" stroke="#000" strokeWidth="2" />
 
         {/* Right outlet lines */}
-        <line x1="940" y1="45" x2="1070" y2="30" stroke="#000" strokeWidth="2" />
-        <line x1="935" y1="80" x2="1070" y2="60" stroke="#000" strokeWidth="2" />
-        <line x1="930" y1="110" x2="1070" y2="95" stroke="#000" strokeWidth="2" />
-        <line x1="930" y1="140" x2="1070" y2="125" stroke="#000" strokeWidth="2" />
-        <line x1="935" y1="175" x2="1070" y2="160" stroke="#000" strokeWidth="2" />
-        <line x1="940" y1="220" x2="1070" y2="200" stroke="#000" strokeWidth="2" />
+        <line x1="957" y1="40" x2="965" y2="38" stroke="#000" strokeWidth="2" />
+        <line x1="965" y1="38" x2="1070" y2="30" stroke="#000" strokeWidth="2" />
+
+        <line x1="953" y1="84" x2="960" y2="82" stroke="#000" strokeWidth="2" />
+        <line x1="960" y1="82" x2="1070" y2="60" stroke="#000" strokeWidth="2" />
+
+        <line x1="948" y1="119" x2="955" y2="117" stroke="#000" strokeWidth="2" />
+        <line x1="955" y1="117" x2="1070" y2="95" stroke="#000" strokeWidth="2" />
+
+        <line x1="948" y1="143" x2="955" y2="142" stroke="#000" strokeWidth="2" />
+        <line x1="955" y1="142" x2="1070" y2="125" stroke="#000" strokeWidth="2" />
+
+        <line x1="953" y1="180" x2="960" y2="182" stroke="#000" strokeWidth="2" />
+        <line x1="960" y1="182" x2="1070" y2="200" stroke="#000" strokeWidth="2" />
+
+        <line x1="957" y1="223" x2="965" y2="225" stroke="#000" strokeWidth="2" />
+        <line x1="965" y1="225" x2="1070" y2="235" stroke="#000" strokeWidth="2" />
+
         <line x1="995" y1="260" x2="1070" y2="260" stroke="#000" strokeWidth="2" />
 
         {/* Connection from clean tank to heat exchanger */}
