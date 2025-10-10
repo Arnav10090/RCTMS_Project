@@ -334,7 +334,13 @@ export const CoolantChargeControl: React.FC<CoolantChargeControlProps> = ({
               <div className="p-2">
                 {/* Interactive, responsive tank */}
                 <div className="w-full">
-                  <TankViz />
+                  <RollCoolantTank
+                    targetVolume={targetVolume}
+                    currentVolume={currentVolume}
+                    currentConcentration={currentConcentration}
+                    oilToAdd={oilToAdd}
+                    waterToAdd={waterToAdd}
+                  />
                 </div>
               </div>
             </DataCard>
