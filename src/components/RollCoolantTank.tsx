@@ -30,7 +30,7 @@ export const RollCoolantTank: React.FC<RollCoolantTankProps> = ({
   } = useMemo(() => {
     const total = Math.max(targetVolume, 0);
     const vact_o = Math.max(currentVolume * (currentConcentration / 100), 0);
-    const vact_w = Math.max(currentVolume - vact_o, 0);
+    const vact_w = Math.max((currentVolume - vact_o) * 0.6, 0); // Reduce Vact_w to 60%
     const vsup_o = Math.max(oilToAdd, 0);
     const vsup_w = Math.max(waterToAdd, 0);
     return { vact_o, vact_w, vsup_o, vsup_w, total };
@@ -79,8 +79,12 @@ export const RollCoolantTank: React.FC<RollCoolantTankProps> = ({
     return marks;
   }, [targetVolume]);
 
-  const currentPct = pct(currentVolume);
+  const currentPct = pct(vact_o + vact_w);
   const currentY = 2 + (98 - 2) * (1 - currentPct / 100);
+
+  const totalLayersHeight = layers.reduce((s, l) => s + pct(l.value), 0);
+  const containerBottom = 2;
+  const containerTop = 98;
 
   return (
     <TooltipProvider>
@@ -99,9 +103,9 @@ export const RollCoolantTank: React.FC<RollCoolantTankProps> = ({
                     <path d="M0,0 L6,3 L0,6 z" fill="currentColor" />
                   </marker>
                 </defs>
-                <line x1="8" y1="98" x2="8" y2="2" stroke="currentColor" strokeWidth="1.5" markerStart="url(#arrow)" markerEnd="url(#arrow)" />
+                <line x1="8" y1={containerTop} x2="8" y2={containerBottom} stroke="currentColor" strokeWidth="1.5" markerStart="url(#arrow)" markerEnd="url(#arrow)" />
                 {/* Current (Vact) indicator */}
-                <line x1="16" y1="98" x2="16" y2={currentY} stroke="currentColor" strokeWidth="1.5" markerStart="url(#arrow)" markerEnd="url(#arrow)" />
+                <line x1="16" y1={containerTop} x2="16" y2={currentY} stroke="currentColor" strokeWidth="1.5" markerStart="url(#arrow)" markerEnd="url(#arrow)" />
               </svg>
 
               {/* Labels */}
@@ -122,43 +126,46 @@ export const RollCoolantTank: React.FC<RollCoolantTankProps> = ({
             </div>
           </div>
 
-          {/* Tank body */}
+          {/* Tank body - U-shaped container */}
           <div className="col-span-10">
-            <div className="relative h-64 w-full overflow-hidden rounded-xl border border-foreground/30 bg-gradient-to-b from-muted/40 to-background">
-              {/* Inner shine */}
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-white/10 via-transparent to-white/5" />
-              {/* Layers */}
-              {layers.reduce<JSX.Element[]>((acc, layer, idx) => {
-                const heightPct = pct(layer.value);
-                const bottomPct = layers
-                  .slice(0, idx)
-                  .reduce((s, l) => s + pct(l.value), 0);
-                const content = (
-                  <Tooltip key={layer.key}>
-                    <TooltipTrigger asChild>
-                      <div
-                        className={cn(
-                          'absolute left-0 w-full bg-gradient-to-r',
-                          layer.color,
-                          'border-t border-white/20'
-                        )}
-                        style={{ height: `${heightPct}%`, bottom: `${bottomPct}%` }}
-                      >
-                        <div className={cn('flex h-full items-center justify-center px-2 text-xs font-semibold', layer.text)}>
-                          <span className="hidden sm:block drop-shadow-[0_1px_1px_rgba(0,0,0,0.5)]">{layer.label}</span>
+            <div className="relative h-64 w-full">
+              {/* U-shaped container using borders */}
+              <div className="absolute inset-0 border-b-4 border-l-4 border-r-4 border-foreground/30 rounded-b-xl bg-gradient-to-b from-muted/40 to-background">
+                {/* Inner shine */}
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-white/10 via-transparent to-white/5 rounded-b-xl" />
+                {/* Layers */}
+                {layers.reduce<JSX.Element[]>((acc, layer, idx) => {
+                  const heightPct = pct(layer.value);
+                  const bottomPct = layers
+                    .slice(0, idx)
+                    .reduce((s, l) => s + pct(l.value), 0);
+                  const content = (
+                    <Tooltip key={layer.key}>
+                      <TooltipTrigger asChild>
+                        <div
+                          className={cn(
+                            'absolute left-0 w-full bg-gradient-to-r',
+                            layer.color,
+                            'border-t border-white/20'
+                          )}
+                          style={{ height: `${heightPct}%`, bottom: `${bottomPct}%` }}
+                        >
+                          <div className={cn('flex h-full items-center justify-center px-2 text-xs font-semibold', layer.text)}>
+                            <span className="hidden sm:block drop-shadow-[0_1px_1px_rgba(0,0,0,0.5)]">{layer.label}</span>
+                          </div>
                         </div>
-                      </div>
-                    </TooltipTrigger>
-                    <TooltipContent>{layer.label} – {layer.value.toFixed(2)} m³ ({pct(layer.value).toFixed(0)}%)</TooltipContent>
-                  </Tooltip>
-                );
-                acc.push(content);
-                return acc;
-              }, [])}
+                      </TooltipTrigger>
+                      <TooltipContent>{layer.label} – {layer.value.toFixed(2)} m³ ({pct(layer.value).toFixed(0)}%)</TooltipContent>
+                    </Tooltip>
+                  );
+                  acc.push(content);
+                  return acc;
+                }, [])}
 
-              {/* Frame accents */}
-              <div className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-inset ring-foreground/20" />
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-2 bg-black/20" />
+                {/* Frame accents */}
+                <div className="pointer-events-none absolute inset-0 rounded-b-xl ring-1 ring-inset ring-foreground/20" />
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 h-2 bg-black/20" />
+              </div>
             </div>
 
             {/* Legend */}
