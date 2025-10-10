@@ -9,6 +9,7 @@ const PidDiagram: React.FC = () => {
             <path d="M0,0 L0,6 L9,3 z" fill="#000" />
           </marker>
         </defs>
+        <g transform="translate(0, 40)">
 
         {/* DM Water label and vertical line with arrow */}
         <text x="70" y="25" fontSize="14" fontFamily="Arial">DM Water</text>
@@ -280,6 +281,7 @@ const PidDiagram: React.FC = () => {
 
         {/* Connection from heat exchanger to XT#1 */}
         <line x1="935" y1="230" x2="935" y2="280" stroke="#000" strokeWidth="2" />
+        </g>
       </svg>
     </div>
   );
