@@ -8,7 +8,6 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Progress } from '@/components/ui/progress';
 import { Slider } from '@/components/ui/slider';
-import { Switch } from '@/components/ui/switch';
 
 interface CoolantChargeControlProps {
   defaultSettings?: {
@@ -68,7 +67,6 @@ export const CoolantChargeControl: React.FC<CoolantChargeControlProps> = ({
   const [currentConcentration, setCurrentConcentration] = useState(initialSettings.currentConcentration);
   const [currentVolume, setCurrentVolume] = useState(initialSettings.currentVolume);
   const [targetVolume, setTargetVolume] = useState(initialSettings.targetVolume);
-  const [isOnlineSensor, setIsOnlineSensor] = useState(true);
   const [chargeState, setChargeState] = useState<ChargeState>('idle');
   const [chargeProgress, setChargeProgress] = useState(0);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -246,21 +244,6 @@ export const CoolantChargeControl: React.FC<CoolantChargeControlProps> = ({
       <div className="xl:col-span-7">
         <DataCard title="Set Points & Sensor Inputs" icon={Gauge} className="h-full bg-gradient-to-br from-foreground/5 via-background to-background">
           <div className="flex h-full flex-col gap-6">
-            <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-border/60 bg-muted/40 p-4 backdrop-blur">
-              <div>
-                <p className="text-xs uppercase tracking-wide text-muted-foreground">Sensor Mode</p>
-                <p className="mt-1 text-sm font-semibold">
-                  {isOnlineSensor ? 'Online sensor linked' : 'Manual measurement input'}
-                </p>
-                <p className="text-xs text-muted-foreground">Toggle based on whether live instrumentation is available.</p>
-              </div>
-              <div className="flex items-center gap-2">
-                <Switch id="sensor-mode" checked={isOnlineSensor} onCheckedChange={setIsOnlineSensor} />
-                <Label htmlFor="sensor-mode" className="text-xs uppercase tracking-wide text-muted-foreground">
-                  {isOnlineSensor ? 'On-line' : 'Manual'}
-                </Label>
-              </div>
-            </div>
 
             <div className="grid gap-6 md:grid-cols-2">
               <div className="rounded-2xl border border-border/80 p-4">
@@ -366,20 +349,6 @@ export const CoolantChargeControl: React.FC<CoolantChargeControlProps> = ({
               </div>
             </div>
 
-            <div className="rounded-2xl border border-border/60 bg-background/70 p-4">
-              <div className="flex flex-wrap items-center justify-between gap-3">
-                <div className="flex flex-col">
-                  <span className="text-xs uppercase tracking-wide text-muted-foreground">Deviation</span>
-                  <span className="mt-2 text-xl font-semibold text-foreground">
-                    {concentrationDelta >= 0 ? '+' : ''}
-                    {concentrationDelta.toFixed(2)}%
-                  </span>
-                </div>
-                <div className="text-xs text-muted-foreground">
-                  {concentrationDelta >= 0 ? 'Additional concentrate required to hit target.' : 'Current concentration exceeds set point; reduce oil dosing.'}
-                </div>
-              </div>
-            </div>
           </div>
         </DataCard>
       </div>
