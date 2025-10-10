@@ -9,7 +9,7 @@ const PidDiagram: React.FC = () => {
             <path d="M0,0 L0,6 L9,3 z" fill="#000" />
           </marker>
         </defs>
-        <g transform="translate(0, 80)">
+        <g transform="translate(0, 120)">
 
         {/* DM Water label and vertical line with arrow */}
         <text x="70" y="25" fontSize="14" fontFamily="Arial">DM Water</text>
