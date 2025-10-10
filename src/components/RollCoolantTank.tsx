@@ -80,6 +80,7 @@ export const RollCoolantTank: React.FC<RollCoolantTankProps> = ({
   }, [targetVolume]);
 
   const currentPct = pct(currentVolume);
+  const currentY = 2 + (98 - 2) * (1 - currentPct / 100);
 
   return (
     <TooltipProvider>
@@ -100,7 +101,7 @@ export const RollCoolantTank: React.FC<RollCoolantTankProps> = ({
                 </defs>
                 <line x1="8" y1="98" x2="8" y2="2" stroke="currentColor" strokeWidth="1.5" markerStart="url(#arrow)" markerEnd="url(#arrow)" />
                 {/* Current (Vact) indicator */}
-                <line x1="16" y1="98" x2="16" y2="{2 + (98-2)*(1 - currentPct/100)}" stroke="currentColor" strokeWidth="1.5" markerStart="url(#arrow)" markerEnd="url(#arrow)" />
+                <line x1="16" y1="98" x2="16" y2={currentY} stroke="currentColor" strokeWidth="1.5" markerStart="url(#arrow)" markerEnd="url(#arrow)" />
               </svg>
 
               {/* Labels */}
