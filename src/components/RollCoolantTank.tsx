@@ -79,14 +79,39 @@ export const RollCoolantTank: React.FC<RollCoolantTankProps> = ({
     return marks;
   }, [targetVolume]);
 
+  const currentPct = pct(currentVolume);
+
   return (
     <TooltipProvider>
       <div className={cn('relative w-full rounded-2xl border border-border/70 bg-gradient-to-br from-background/60 to-background/20 p-4', className)}>
         <div className="grid grid-cols-12 gap-4">
-          {/* Y axis with ticks */}
+          {/* Y axis with ticks + indicators */}
           <div className="col-span-2 flex items-end">
             <div className="relative h-64 w-full">
+              {/* Axis line */}
               <div className="absolute inset-y-0 right-1 w-px bg-border" />
+
+              {/* Target (Vset) full-height indicator */}
+              <svg className="absolute left-0 top-0 h-full w-6 text-muted-foreground" viewBox="0 0 24 100" preserveAspectRatio="none">
+                <defs>
+                  <marker id="arrow" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto-start-reverse">
+                    <path d="M0,0 L6,3 L0,6 z" fill="currentColor" />
+                  </marker>
+                </defs>
+                <line x1="8" y1="98" x2="8" y2="2" stroke="currentColor" strokeWidth="1.5" markerStart="url(#arrow)" markerEnd="url(#arrow)" />
+                {/* Current (Vact) indicator */}
+                <line x1="16" y1="98" x2="16" y2="{2 + (98-2)*(1 - currentPct/100)}" stroke="currentColor" strokeWidth="1.5" markerStart="url(#arrow)" markerEnd="url(#arrow)" />
+              </svg>
+
+              {/* Labels */}
+              <div className="absolute left-5 top-1/2 -translate-y-1/2 w-24 pr-2 text-[10px] leading-tight text-muted-foreground">
+                Volume after charging
+                <span className="block opacity-70">(HMI Set Value)</span>
+              </div>
+              <div className="absolute left-5" style={{ bottom: `${currentPct / 2}%` }}>
+                <div className="w-24 pr-2 text-[10px] leading-tight text-muted-foreground">Volume before charging</div>
+              </div>
+
               {scaleMarks.map((m) => (
                 <div key={m.pct} className="absolute right-1 -translate-y-1/2" style={{ bottom: `${m.pct}%` }}>
                   <div className="h-px w-3 bg-border" />
