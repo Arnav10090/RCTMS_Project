@@ -202,7 +202,7 @@ export const CoolantChargeControl: React.FC<CoolantChargeControlProps> = ({
             <div className="grid gap-4 sm:grid-cols-2">
               <div className="rounded-2xl border border-success/40 bg-success/10 p-4">
                 <p className="text-xs uppercase tracking-wide text-muted-foreground">Oil Volume to Supply</p>
-                <p className="mt-2 text-2xl font-semibold text-success-foreground">
+                <p className="mt-2 text-2xl font-semibold text-black dark:text-success-foreground">
                   {oilToAdd.toFixed(2)} m³
                 </p>
               </div>
