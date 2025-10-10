@@ -215,60 +215,60 @@ const PidDiagram: React.FC = () => {
           <image href="/svgs/vertical-dotted_line.svg" x="565" y="275" width="100" height="100" />
 
           {/* Vertical line for Heat Exchanger */}
-          <line x1="800" y1="230" x2="800" y2="-125" stroke="#000" strokeWidth="2" />
+          <line x1="800" y1="230" x2="800" y2="-105" stroke="#000" strokeWidth="2" />
 
           {/* Heat exchanger circles - 6 circles with proper sizing */}
           {/* Top circle - largest */}
-          <circle cx="935" cy="-130" r="22" fill="white" stroke="#000" strokeWidth="2" />
+          <circle cx="935" cy="-110" r="22" fill="white" stroke="#000" strokeWidth="2" />
 
           {/* Second circle */}
-          <circle cx="935" cy="-86" r="18" fill="white" stroke="#000" strokeWidth="2" />
+          <circle cx="935" cy="-66" r="18" fill="white" stroke="#000" strokeWidth="2" />
 
           {/* Third circle - smallest */}
-          <circle cx="935" cy="-53" r="13" fill="white" stroke="#000" strokeWidth="2" />
+          <circle cx="935" cy="-33" r="13" fill="white" stroke="#000" strokeWidth="2" />
 
           {/* Fourth circle - smallest (on dashed line) */}
-          <circle cx="935" cy="-24" r="13" fill="white" stroke="#000" strokeWidth="2" />
+          <circle cx="935" cy="-4" r="13" fill="white" stroke="#000" strokeWidth="2" />
 
           {/* Fifth circle */}
-          <circle cx="935" cy="10" r="18" fill="white" stroke="#000" strokeWidth="2" />
+          <circle cx="935" cy="30" r="18" fill="white" stroke="#000" strokeWidth="2" />
 
           {/* Bottom circle - largest */}
-          <circle cx="935" cy="53" r="22" fill="white" stroke="#000" strokeWidth="2" />
+          <circle cx="935" cy="73" r="22" fill="white" stroke="#000" strokeWidth="2" />
 
           {/* Bottom circle - largest */}
-          <image href="/svgs/trapezoid.svg" x="860" y="45" width="150" height="100" />
+          <image href="/svgs/trapezoid.svg" x="860" y="65" width="150" height="100" />
 
           {/* Left inlet lines with dots and arrows */}
-          <line x1="800" y1="-125" x2="875" y2="-125" stroke="#000" strokeWidth="2" />
-          <image href="/svgs/filled_circle.svg" x="900" y="-118" width="6" height="6" />
-          <line x1="875" y1="-125" x2="903" y2="-115" stroke="#000" strokeWidth="2" />
-          <image href="/svgs/4pm_arrow.svg" x="900" y="-118" width="20" height="20" />
+          <line x1="800" y1="-105" x2="875" y2="-105" stroke="#000" strokeWidth="2" />
+          <image href="/svgs/filled_circle.svg" x="900" y="-98" width="6" height="6" />
+          <line x1="875" y1="-105" x2="903" y2="-95" stroke="#000" strokeWidth="2" />
+          <image href="/svgs/4pm_arrow.svg" x="900" y="-98" width="20" height="20" />
 
-          <line x1="800" y1="-97" x2="875" y2="-97" stroke="#000" strokeWidth="2" />
-          <image href="/svgs/filled_circle.svg" x="897" y="-78" width="6" height="6" />
-          <line x1="874.5" y1="-97" x2="900" y2="-75" stroke="#000" strokeWidth="2" />
-          <image href="/svgs/4pm_arrow.svg" x="894" y="-80" width="20" height="20" />
+          <line x1="800" y1="-77" x2="875" y2="-77" stroke="#000" strokeWidth="2" />
+          <image href="/svgs/filled_circle.svg" x="897" y="-58" width="6" height="6" />
+          <line x1="874.5" y1="-77" x2="900" y2="-55" stroke="#000" strokeWidth="2" />
+          <image href="/svgs/4pm_arrow.svg" x="894" y="-60" width="20" height="20" />
 
-          <line x1="800" y1="-67" x2="865" y2="-67" stroke="#000" strokeWidth="2" />
-          <image href="/svgs/filled_circle.svg" x="891" y="-55" width="6" height="6" />
-          <line x1="865" y1="-67" x2="895" y2="-52" stroke="#000" strokeWidth="2" />
-          <image href="/svgs/4pm_arrow.svg" x="890" y="-55" width="20" height="20" />
+          <line x1="800" y1="-47" x2="865" y2="-47" stroke="#000" strokeWidth="2" />
+          <image href="/svgs/filled_circle.svg" x="891" y="-35" width="6" height="6" />
+          <line x1="865" y1="-47" x2="895" y2="-32" stroke="#000" strokeWidth="2" />
+          <image href="/svgs/4pm_arrow.svg" x="890" y="-35" width="20" height="20" />
 
           {/* Dashed line across heat exchanger */}
-          <image href="/svgs/Horizontal-dotted_line.svg" x="800" y="-46" width="270" height="15" />
+          <image href="/svgs/Horizontal-dotted_line.svg" x="800" y="-26" width="270" height="15" />
 
-          <line x1="800" y1="-5" x2="865" y2="-5" stroke="#000" strokeWidth="2" />
-          <line x1="865" y1="-5" x2="895" y2="-23" stroke="#000" strokeWidth="2" />
-          <image href="/svgs/2pm_arrow.svg" x="893" y="-34.5" width="20" height="20" />
+          <line x1="800" y1="15" x2="865" y2="15" stroke="#000" strokeWidth="2" />
+          <line x1="865" y1="15" x2="895" y2="-3" stroke="#000" strokeWidth="2" />
+          <image href="/svgs/2pm_arrow.svg" x="893" y="-14.5" width="20" height="20" />
 
-          <line x1="800" y1="23" x2="870" y2="23" stroke="#000" strokeWidth="2" />
-          <line x1="870" y1="23" x2="900" y2="3" stroke="#000" strokeWidth="2" />
-          <image href="/svgs/2pm_arrow.svg" x="898" y="-9" width="20" height="20" />
+          <line x1="800" y1="43" x2="870" y2="43" stroke="#000" strokeWidth="2" />
+          <line x1="870" y1="43" x2="900" y2="23" stroke="#000" strokeWidth="2" />
+          <image href="/svgs/2pm_arrow.svg" x="898" y="11" width="20" height="20" />
 
-          <line x1="800" y1="51" x2="875" y2="51" stroke="#000" strokeWidth="2" />
-          <line x1="875" y1="51" x2="905" y2="40" stroke="#000" strokeWidth="2" />
-          <image href="/svgs/2pm_arrow.svg" x="903" y="28" width="20" height="20" />
+          <line x1="800" y1="71" x2="875" y2="71" stroke="#000" strokeWidth="2" />
+          <line x1="875" y1="71" x2="905" y2="60" stroke="#000" strokeWidth="2" />
+          <image href="/svgs/2pm_arrow.svg" x="903" y="48" width="20" height="20" />
 
           {/* Connection from clean tank to heat exchanger */}
           <line x1="760" y1="323" x2="800" y2="323" stroke="#000" strokeWidth="2" />
@@ -280,7 +280,7 @@ const PidDiagram: React.FC = () => {
           <image href="/svgs/2pm_arrow.svg" x="1064" y="317" width="12" height="12" />
 
           {/* Connection from heat exchanger to XT#1 */}
-          <line x1="935" y1="85" x2="935" y2="280" stroke="#000" strokeWidth="2" />
+          <line x1="935" y1="105" x2="935" y2="280" stroke="#000" strokeWidth="2" />
         </g>
       </svg>
     </div>
