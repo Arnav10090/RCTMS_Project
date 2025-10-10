@@ -3,7 +3,7 @@ import React from 'react';
 const PidDiagram: React.FC = () => {
   return (
     <div className="w-full h-full p-4 overflow-hidden bg-white">
-      <svg width="100%" height="100%" viewBox="0 0 1100 500" preserveAspectRatio="xMinYMid meet" className="block w-full h-full">
+      <svg width="100%" height="100%" viewBox="0 0 1100 800" preserveAspectRatio="xMinYMid meet" className="block w-full h-full">
         <defs>
           <marker id="arrowblack" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
             <path d="M0,0 L0,6 L9,3 z" fill="#000" />
@@ -28,27 +28,37 @@ const PidDiagram: React.FC = () => {
         {/* Vertical line from FT#1 down */}
         <line x1="85" y1="185" x2="85" y2="240" stroke="#000" strokeWidth="2" />
 
-        {/* OIL TANK - using rectangle */}
-        <image href="/svgs/rectangle.svg" x="30" y="240" width="140" height="140" />
+        {/* OIL TANK */}
+        <image href="/svgs/U-shape-container.svg" x="-10" y="297" width="160" height="90" />
         <text x="60" y="395" fontSize="14" fontFamily="Arial" fontWeight="bold">OIL TANK</text>
 
         {/* Oil tank level indicators using H, L, LL svgs */}
-        <image href="/svgs/H.svg" x="32" y="250" width="25" height="25" />
-        <image href="/svgs/Horizontal-dotted_line.svg" x="58" y="260" width="40" height="5" />
+        <image href="/svgs/H.svg" x="113" y="280" width="70" height="70" />
 
-        <image href="/svgs/L.svg" x="32" y="285" width="25" height="25" />
-        <image href="/svgs/Horizontal-dotted_line.svg" x="58" y="295" width="40" height="5" />
+        <image href="/svgs/L.svg" x="113" y="302" width="70" height="70" />
 
-        <image href="/svgs/LL.svg" x="32" y="320" width="25" height="25" />
-        <image href="/svgs/Horizontal-dotted_line.svg" x="58" y="330" width="40" height="5" />
+        <image href="/svgs/LL.svg" x="113" y="323" width="70" height="70" />
 
         {/* Motor symbols on oil tank */}
-        <image href="/svgs/M_in_circle.svg" x="35" y="365" width="25" height="25" />
-        <image href="/svgs/infinity.svg" x="57" y="372" width="20" height="10" />
+        <image href="/svgs/M_in_circle.svg" x="270" y="279" width="30" height="30" />
+        <image href="/svgs/infinity.svg" x="16" y="300" width="25" height="25" />
 
         {/* Pump symbols */}
-        <image href="/svgs/M_in_circle.svg" x="108" y="250" width="25" height="25" />
-        <image href="/svgs/M_in_circle.svg" x="125" y="270" width="25" height="25" />
+        <image href="/svgs/M_in_circle.svg" x="15" y="260" width="30" height="30" />
+
+        {/* 2nd and 3rd M symbols in Oil tank */}
+        <image href="/svgs/M_in_circle.svg" x="65" y="270" width="30" height="30" />
+        <image href="/svgs/M_in_circle.svg" x="105" y="270" width="30" height="30" />
+
+        {/* Vertical lines to make rectangle around M symbols */}
+        <line x1="80" y1="250" x2="80" y2="280" stroke="#000" strokeWidth="1" />
+        <line x1="80" y1="291" x2="80" y2="320" stroke="#000" strokeWidth="1" />
+        <line x1="120" y1="250" x2="120" y2="280" stroke="#000" strokeWidth="1" />
+        <line x1="120" y1="291" x2="120" y2="320" stroke="#000" strokeWidth="1" />
+
+        {/* Horizontal lines to make rectangle around M symbols */}
+        <line x1="80" y1="250" x2="120" y2="250" stroke="#000" strokeWidth="1" />
+        <line x1="80" y1="320" x2="120" y2="320" stroke="#000" strokeWidth="1" />
 
         {/* Vertical line and valve from oil tank */}
         <line x1="105" y1="310" x2="105" y2="330" stroke="#000" strokeWidth="2" />
@@ -58,243 +68,218 @@ const PidDiagram: React.FC = () => {
         {/* Horizontal pipe to instruments box */}
         <line x1="105" y1="350" x2="220" y2="350" stroke="#000" strokeWidth="2" />
 
-        {/* Instruments box - FT#2, LT, TIC */}
-        <rect x="120" y="220" width="280" height="95" fill="none" stroke="#000" strokeWidth="2" />
-
         {/* FT#2 */}
         <image href="/svgs/circle.svg" x="125" y="230" width="40" height="40" />
         <text x="137" y="254" fontSize="10" fontFamily="Arial" fontWeight="bold">FT</text>
         <image href="/svgs/FT#2.svg" x="168" y="238" width="40" height="22" />
 
         {/* LT */}
-        <image href="/svgs/LT.svg" x="245" y="238" width="35" height="22" />
+        <image href="/svgs/LT.svg" x="225" y="228" width="70" height="50" />
 
         {/* TIC with thermometer */}
         <image href="/svgs/TIC.svg" x="300" y="238" width="40" height="22" />
         <image href="/svgs/TEMP.svg" x="260" y="265" width="35" height="40" />
 
+        {/* Rectangle */}
+        <line x1="285" y1="300" x2="285" y2="330" stroke="#000" strokeWidth="1" />
+        <image href="/svgs/rectangle.svg" x="260" y="290" width="50" height="50" />
+
+        {/* Vertical triangles for TIC */}
+        <image href="/svgs/vertical-triangles.svg" x="325" y="265" width="35" height="40" />
+        <image href="/svgs/vertical-triangles.svg" x="365" y="265" width="35" height="40" />
+
         {/* Motor M3 in instruments */}
-        <image href="/svgs/M_in_circle.svg" x="145" y="275" width="25" height="25" />
-        <image href="/svgs/M_in_circle.svg" x="360" y="275" width="25" height="25" />
 
         {/* Valves below instrument box */}
         <line x1="220" y1="315" x2="220" y2="330" stroke="#000" strokeWidth="2" />
-        <image href="/svgs/infinity.svg" x="210" y="328" width="20" height="10" />
+        <image href="/svgs/infinity.svg" x="272.5" y="321" width="25" height="20" />
         <line x1="220" y1="338" x2="220" y2="350" stroke="#000" strokeWidth="2" />
 
         {/* Control valves - using filled triangles */}
-        <line x1="315" y1="315" x2="315" y2="330" stroke="#000" strokeWidth="2" />
-        <image href="/svgs/12pm_arrow.svg" x="309" y="328" width="12" height="12" />
-        <line x1="315" y1="340" x2="315" y2="350" stroke="#000" strokeWidth="2" />
+        <line x1="342" y1="295" x2="342" y2="330" stroke="#000" strokeWidth="2" />
+        <image href="/svgs/6pm_arrow.svg" x="329" y="305" width="25" height="25" />
 
-        <line x1="350" y1="315" x2="350" y2="330" stroke="#000" strokeWidth="2" />
-        <image href="/svgs/12pm_arrow.svg" x="344" y="328" width="12" height="12" />
-        <line x1="350" y1="340" x2="350" y2="350" stroke="#000" strokeWidth="2" />
+        {/* Vertcal line with 6pm triangles to 2 triangles */}
+        <line x1="382" y1="295" x2="382" y2="330" stroke="#000" strokeWidth="2" />
+        <image href="/svgs/6pm_arrow.svg" x="369.5" y="305" width="25" height="25" />
 
-        {/* Lines to clean tank from instruments */}
-        <line x1="395" y1="315" x2="395" y2="350" stroke="#000" strokeWidth="2" />
-        <image href="/svgs/12pm_arrow.svg" x="389" y="345" width="12" height="12" />
+        {/* Lines to clean tank from instruments with 12pm arrow in middle below the rectangle */}
+        <line x1="450" y1="303" x2="450" y2="350" stroke="#000" strokeWidth="1" />
+        <image href="/svgs/12pm_arrow.svg" x="438" y="310" width="25" height="25" />
+        <image href="/svgs/filled_circle.svg" x="445" y="295" width="10" height="10" />
 
-        <line x1="430" y1="315" x2="430" y2="350" stroke="#000" strokeWidth="2" />
-        <image href="/svgs/12pm_arrow.svg" x="424" y="345" width="12" height="12" />
+        {/* Lines to clean tank from instruments with 12pm arrow in middle above the rectangle */}
+        <line x1="450" y1="150" x2="450" y2="225" stroke="#000" strokeWidth="1" />
+        <image href="/svgs/12pm_arrow.svg" x="438" y="165" width="25" height="25" />
+        <image href="/svgs/filled_circle.svg" x="445" y="221" width="10" height="10" />
+
+        {/* Vertical lines to make rectangle around M symbols */}
+        <line x1="430" y1="226" x2="430" y2="259" stroke="#000" strokeWidth="1" />
+        <line x1="468" y1="270" x2="468" y2="300" stroke="#000" strokeWidth="1" />
+        <line x1="468" y1="226" x2="468" y2="259" stroke="#000" strokeWidth="1" />
+        <line x1="430" y1="270" x2="430" y2="300" stroke="#000" strokeWidth="1" />
+
+        {/* Horizontal lines to make rectangle around M symbols */}
+        <line x1="430" y1="226" x2="468" y2="226" stroke="#000" strokeWidth="1" />
+        <line x1="430" y1="300" x2="468" y2="300" stroke="#000" strokeWidth="1" />
+
+        {/* Vertical line and arrow above trapezoid */}
+        <line x1="555" y1="228" x2="555" y2="248" stroke="#000" strokeWidth="2" />
+        <image href="/svgs/6pm_arrow.svg" x="543" y="238" width="25" height="25" />
+
+        {/* Horizontal line above trapezoid */}
+        <line x1="554" y1="227" x2="660" y2="227" stroke="#000" strokeWidth="2" />
+        
+        {/* Vertical line till M synbol above the infinity symbol */}
+        <line x1="660" y1="226" x2="660" y2="258" stroke="#000" strokeWidth="2" />
 
         {/* CLEAN TANK */}
-        <rect x="220" y="240" width="380" height="140" fill="none" stroke="#000" strokeWidth="2" />
         <text x="360" y="395" fontSize="14" fontFamily="Arial" fontWeight="bold">CLEAN TANK</text>
 
         {/* Elements inside clean tank */}
-        <image href="/svgs/trapezoid.svg" x="370" y="245" width="50" height="25" />
+        <image href="/svgs/trapezoid.svg" x="505" y="228" width="100" height="50" />
         <line x1="395" y1="270" x2="395" y2="290" stroke="#000" strokeWidth="2" />
 
-        {/* Motors in clean tank */}
-        <image href="/svgs/M_in_circle.svg" x="455" y="250" width="25" height="25" />
-        <image href="/svgs/M_in_circle.svg" x="490" y="250" width="25" height="25" />
-        <image href="/svgs/M_in_circle.svg" x="520" y="285" width="25" height="25" />
-        <image href="/svgs/M_in_circle.svg" x="555" y="285" width="25" height="25" />
+        {/* U shape Extended container of Clean and Dirty tanks */}
+        <image href="/svgs/U-shape-ext-container.svg" x="220" y="290" width="550" height="100" />
 
-        {/* Dashed line in clean tank */}
-        <image href="/svgs/Horizontal-dotted_line.svg" x="240" y="320" width="340" height="5" />
+        {/* Motors in clean tank */}
+        <image href="/svgs/M_in_circle.svg" x="453" y="250" width="30" height="30" />
+        <image href="/svgs/M_in_circle.svg" x="415.5" y="250" width="30" height="30" />
 
         {/* Outlet from clean tank */}
-        <line x1="495" y1="350" x2="495" y2="365" stroke="#000" strokeWidth="2" />
-        <image href="/svgs/12pm_arrow.svg" x="489" y="360" width="12" height="12" />
+        <line x1="555" y1="260" x2="555" y2="342" stroke="#000" strokeWidth="2" />
+        <image href="/svgs/6pm_arrow.svg" x="542.5" y="320" width="25" height="25" />
 
-        {/* XT#1 box with circle and X */}
-        <rect x="520" y="125" width="70" height="70" fill="none" stroke="#000" strokeWidth="2" />
-        <image href="/svgs/P_in_circle.svg" x="535" y="140" width="40" height="40" />
-        <line x1="545" y1="150" x2="565" y2="170" stroke="#000" strokeWidth="2" />
-        <line x1="545" y1="170" x2="565" y2="150" stroke="#000" strokeWidth="2" />
-        <text x="595" y="165" fontSize="12" fontFamily="Arial" fontWeight="bold">XT#1</text>
+        {/* XT#1 text */}
+        <text x="540" y="100" fontSize="12" fontFamily="Arial" fontWeight="bold">XT#1</text>
 
-        {/* Lines from XT#1 */}
-        <line x1="555" y1="105" x2="555" y2="125" stroke="#000" strokeWidth="2" />
-        <image href="/svgs/12pm_arrow.svg" x="549" y="120" width="12" height="12" />
+        {/* Circle with filled circle inside it  */}
+        <image href="/svgs/circle.svg" x="543" y="123" width="25" height="25" />
+        <image href="/svgs/filled_circle.svg" x="551" y="130" width="10" height="10" />
+        
+        {/* Vertical pink lines below XT#1 text */}
+        <image href="/svgs/pink-vertical-line.svg" x="507" y="130" width="30" height="60" />
+        <image href="/svgs/pink-vertical-line.svg" x="575" y="130" width="30" height="60" />
 
-        <line x1="555" y1="195" x2="555" y2="215" stroke="#000" strokeWidth="2" />
-        <line x1="495" y1="215" x2="615" y2="215" stroke="#000" strokeWidth="2" />
+        {/* Horizontal pink lines below XT#1 text */}
+        <image href="/svgs/pink-horizontal-line.svg" x="520" y="120" width="25" height="25" />
+        <image href="/svgs/pink-horizontal-line.svg" x="565" y="120" width="25" height="25" />
 
-        {/* Pink highlight box around connection */}
-        <rect x="540" y="195" width="30" height="30" fill="rgba(255,192,203,0.3)" stroke="#ff69b4" strokeWidth="1.5" />
+        {/* Pink dots below XT#1 text */}
+        <image href="/svgs/pink-black-dot.svg" x="517" y="188" width="10" height="10" />
+        <image href="/svgs/pink-black-dot.svg" x="585" y="188" width="10" height="10" />
 
-        <line x1="615" y1="215" x2="615" y2="240" stroke="#000" strokeWidth="2" />
-        <image href="/svgs/12pm_arrow.svg" x="609" y="235" width="12" height="12" />
+        {/* Vertical Lines below XT#1 */}
+        <line x1="555" y1="105" x2="555" y2="125" stroke="#000" strokeWidth="1" />
+        <line x1="555" y1="145" x2="555" y2="170" stroke="#000" strokeWidth="1" />
 
-        <line x1="495" y1="215" x2="495" y2="240" stroke="#000" strokeWidth="2" />
+        {/* Horizontal line connecting pink dots below XT#1 and dot at end */}
+        <line x1="450" y1="192.5" x2="1095" y2="192.5" stroke="#000" strokeWidth="1" />
+        <image href="/svgs/filled_circle.svg" x="1090" y="187" width="10" height="10" />
 
         {/* DIRTY TANK */}
-        <rect x="620" y="240" width="140" height="140" fill="none" stroke="#000" strokeWidth="2" />
         <text x="645" y="395" fontSize="14" fontFamily="Arial" fontWeight="bold">DIRTY TANK</text>
 
         {/* Dirty tank level indicators */}
-        <image href="/svgs/H.svg" x="685" y="250" width="25" height="25" />
-        <image href="/svgs/Horizontal-dotted_line.svg" x="710" y="260" width="40" height="5" />
+        <image href="/svgs/H.svg" x="740" y="280" width="70" height="70" />
 
-        <image href="/svgs/L.svg" x="685" y="285" width="25" height="25" />
-        <image href="/svgs/Horizontal-dotted_line.svg" x="710" y="295" width="40" height="5" />
+        <image href="/svgs/L.svg" x="740" y="300" width="70" height="70" />
 
-        <image href="/svgs/LL.svg" x="685" y="320" width="25" height="25" />
-        <image href="/svgs/Horizontal-dotted_line.svg" x="710" y="330" width="40" height="5" />
+        <image href="/svgs/LL.svg" x="740" y="320" width="70" height="70" />
 
         {/* Motor at dirty tank top */}
-        <image href="/svgs/M_in_circle.svg" x="637" y="250" width="25" height="25" />
+        <image href="/svgs/M_in_circle.svg" x="645" y="249" width="30" height="30" />
 
         {/* Pump elements */}
-        <image href="/svgs/rectangle.svg" x="665" y="300" width="25" height="45" />
-        <line x1="670" y1="310" x2="685" y2="310" stroke="#000" strokeWidth="1" />
-        <line x1="670" y1="335" x2="685" y2="335" stroke="#000" strokeWidth="1" />
-        <image href="/svgs/infinity.svg" x="680" y="318" width="20" height="10" />
+        <image href="/svgs/rectangle.svg" x="616" y="265" width="50" height="50" />
+        <line x1="750" y1="230" x2="800" y2="230" stroke="#000" strokeWidth="2" />
+        <image href="/svgs/infinity.svg" x="629" y="300" width="25" height="25" />
+        <line x1="641" y1="270" x2="641" y2="312" stroke="#000" strokeWidth="1" />
+        <line x1="660" y1="270" x2="660" y2="312" stroke="#000" strokeWidth="1" />
+        <image href="/svgs/12pm_arrow.svg" x="648" y="278" width="25" height="25" />
+
+        {/* Vertical line andd arrow at right end of dirty tank */}
+        <line x1="693" y1="226" x2="693" y2="286" stroke="#000" strokeWidth="1" />
+        <image href="/svgs/6pm_arrow.svg" x="680" y="278" width="25" height="25" />
+        <line x1="693" y1="225" x2="910" y2="225" stroke="#000" strokeWidth="2" />
 
         {/* Motors at dirty tank */}
-        <image href="/svgs/M_in_circle.svg" x="622" y="285" width="25" height="25" />
-        <image href="/svgs/M_in_circle.svg" x="622" y="320" width="25" height="25" />
+        <image href="/svgs/M_in_circle.svg" x="625" y="249" width="30" height="30" />
+        <image href="/svgs/slanting-line-2pm.svg" x="733" y="184" width="50" height="50" />
+        <image href="/svgs/moving-roll.svg" x="710" y="217" width="90" height="80" />
+        <image href="/svgs/M_in_circle.svg" x="758" y="185" width="30" height="30" />
 
-        {/* Dashed line in dirty tank */}
-        <image href="/svgs/Horizontal-dotted_line.svg" x="630" y="320" width="120" height="5" />
+        {/* Vertical Dashed line in dirty tank */}
+        <image href="/svgs/vertical-dotted_line.svg" x="565" y="275" width="100" height="100" />
 
-        {/* Return line from dirty tank to oil tank */}
-        <line x1="620" y1="323" x2="590" y2="323" stroke="#000" strokeWidth="2" />
-        <line x1="590" y1="323" x2="590" y2="410" stroke="#000" strokeWidth="2" />
-        <line x1="30" y1="410" x2="590" y2="410" stroke="#000" strokeWidth="2" />
-        <line x1="30" y1="310" x2="30" y2="410" stroke="#000" strokeWidth="2" />
-        <line x1="30" y1="310" x2="85" y2="310" stroke="#000" strokeWidth="2" />
-        <image href="/svgs/2pm_arrow.svg" x="79" y="304" width="12" height="12" />
-
-        {/* HEAT EXCHANGER on right */}
-        <rect x="800" y="20" width="270" height="240" fill="none" stroke="#000" strokeWidth="2" />
-
+        {/* Vertical line for Heat Exchanger */}
+        <line x1="800" y1="230" x2="800" y2="20" stroke="#000" strokeWidth="2" />
+        
         {/* Heat exchanger circles - 6 circles with proper sizing */}
         {/* Top circle - largest */}
-        <circle cx="935" cy="45" r="22" fill="white" stroke="#000" strokeWidth="2" />
-        <line x1="913" y1="45" x2="957" y2="45" stroke="#000" strokeWidth="1" />
+        <circle cx="935" cy="15" r="22" fill="white" stroke="#000" strokeWidth="2" />
 
         {/* Second circle */}
-        <circle cx="935" cy="85" r="18" fill="white" stroke="#000" strokeWidth="2" />
-        <line x1="917" y1="85" x2="953" y2="85" stroke="#000" strokeWidth="1" />
+        <circle cx="935" cy="59" r="18" fill="white" stroke="#000" strokeWidth="2" />
 
         {/* Third circle - smallest */}
-        <circle cx="935" cy="120" r="13" fill="white" stroke="#000" strokeWidth="2" />
-        <line x1="922" y1="120" x2="948" y2="120" stroke="#000" strokeWidth="1" />
+        <circle cx="935" cy="92" r="13" fill="white" stroke="#000" strokeWidth="2" />
 
         {/* Fourth circle - smallest (on dashed line) */}
-        <circle cx="935" cy="145" r="13" fill="white" stroke="#000" strokeWidth="2" />
-        <line x1="922" y1="145" x2="948" y2="145" stroke="#000" strokeWidth="1" />
+        <circle cx="935" cy="121" r="13" fill="white" stroke="#000" strokeWidth="2" />
 
         {/* Fifth circle */}
-        <circle cx="935" cy="180" r="18" fill="white" stroke="#000" strokeWidth="2" />
-        <line x1="917" y1="180" x2="953" y2="180" stroke="#000" strokeWidth="1" />
+        <circle cx="935" cy="155" r="18" fill="white" stroke="#000" strokeWidth="2" />
 
         {/* Bottom circle - largest */}
-        <circle cx="935" cy="220" r="22" fill="white" stroke="#000" strokeWidth="2" />
-        <line x1="913" y1="220" x2="957" y2="220" stroke="#000" strokeWidth="1" />
+        <circle cx="935" cy="198" r="22" fill="white" stroke="#000" strokeWidth="2" />
+
+         {/* Bottom circle - largest */}
+        <image href="/svgs/trapezoid.svg" x="860" y="190" width="150" height="100" />
 
         {/* Left inlet lines with dots and arrows */}
-        <line x1="800" y1="30" x2="875" y2="50" stroke="#000" strokeWidth="2" />
-        <image href="/svgs/filled_circle.svg" x="872" y="47" width="6" height="6" />
-        <line x1="875" y1="50" x2="903" y2="42" stroke="#000" strokeWidth="2" />
-        <image href="/svgs/2pm_arrow.svg" x="897" y="36" width="12" height="12" />
-        <line x1="903" y1="42" x2="913" y2="40" stroke="#000" strokeWidth="2" />
+        <line x1="800" y1="20" x2="875" y2="20" stroke="#000" strokeWidth="2" />
+        <image href="/svgs/filled_circle.svg" x="900" y="27" width="6" height="6" />
+        <line x1="875" y1="20" x2="903" y2="30" stroke="#000" strokeWidth="2" />
+        <image href="/svgs/4pm_arrow.svg" x="900" y="27" width="20" height="20" />
 
-        <line x1="800" y1="60" x2="870" y2="78" stroke="#000" strokeWidth="2" />
-        <image href="/svgs/filled_circle.svg" x="867" y="75" width="6" height="6" />
-        <line x1="870" y1="78" x2="900" y2="82" stroke="#000" strokeWidth="2" />
-        <image href="/svgs/2pm_arrow.svg" x="894" y="76" width="12" height="12" />
-        <line x1="900" y1="82" x2="917" y2="84" stroke="#000" strokeWidth="2" />
+        <line x1="800" y1="48" x2="875" y2="48" stroke="#000" strokeWidth="2" />
+        <image href="/svgs/filled_circle.svg" x="897" y="67" width="6" height="6" />
+        <line x1="874.5" y1="48" x2="900" y2="70" stroke="#000" strokeWidth="2" />
+        <image href="/svgs/4pm_arrow.svg" x="894" y="65" width="20" height="20" />
 
-        <line x1="800" y1="95" x2="865" y2="108" stroke="#000" strokeWidth="2" />
-        <image href="/svgs/filled_circle.svg" x="862" y="105" width="6" height="6" />
-        <line x1="865" y1="108" x2="895" y2="115" stroke="#000" strokeWidth="2" />
-        <image href="/svgs/2pm_arrow.svg" x="889" y="109" width="12" height="12" />
-        <line x1="895" y1="115" x2="922" y2="119" stroke="#000" strokeWidth="2" />
-
-        <line x1="800" y1="125" x2="865" y2="135" stroke="#000" strokeWidth="2" />
-        <image href="/svgs/filled_circle.svg" x="862" y="132" width="6" height="6" />
-        <line x1="865" y1="135" x2="895" y2="140" stroke="#000" strokeWidth="2" />
-        <image href="/svgs/2pm_arrow.svg" x="889" y="134" width="12" height="12" />
-        <line x1="895" y1="140" x2="922" y2="143" stroke="#000" strokeWidth="2" />
+        <line x1="800" y1="78" x2="865" y2="78" stroke="#000" strokeWidth="2" />
+        <image href="/svgs/filled_circle.svg" x="891" y="90" width="6" height="6" />
+        <line x1="865" y1="78" x2="895" y2="93" stroke="#000" strokeWidth="2" />
+        <image href="/svgs/4pm_arrow.svg" x="890" y="90" width="20" height="20" />
 
         {/* Dashed line across heat exchanger */}
-        <image href="/svgs/Horizontal-dotted_line.svg" x="800" y="130" width="270" height="5" />
+        <image href="/svgs/Horizontal-dotted_line.svg" x="800" y="99" width="270" height="15" />
 
-        <line x1="800" y1="145" x2="865" y2="145" stroke="#000" strokeWidth="2" />
-        <image href="/svgs/filled_circle.svg" x="862" y="142" width="6" height="6" />
-        <line x1="865" y1="145" x2="895" y2="145" stroke="#000" strokeWidth="2" />
-        <image href="/svgs/2pm_arrow.svg" x="889" y="139" width="12" height="12" />
-        <line x1="895" y1="145" x2="922" y2="145" stroke="#000" strokeWidth="2" />
+        <line x1="800" y1="140" x2="865" y2="140" stroke="#000" strokeWidth="2" />
+        <line x1="865" y1="140" x2="895" y2="122" stroke="#000" strokeWidth="2" />
+        <image href="/svgs/2pm_arrow.svg" x="893" y="110.5" width="20" height="20" />
 
-        <line x1="800" y1="155" x2="865" y2="155" stroke="#000" strokeWidth="2" />
-        <image href="/svgs/filled_circle.svg" x="862" y="152" width="6" height="6" />
-        <line x1="865" y1="155" x2="895" y2="152" stroke="#000" strokeWidth="2" />
-        <image href="/svgs/2pm_arrow.svg" x="889" y="146" width="12" height="12" />
-        <line x1="895" y1="152" x2="922" y2="150" stroke="#000" strokeWidth="2" />
+        <line x1="800" y1="168" x2="870" y2="168" stroke="#000" strokeWidth="2" />
+        <line x1="870" y1="168" x2="900" y2="148" stroke="#000" strokeWidth="2" />
+        <image href="/svgs/2pm_arrow.svg" x="898" y="136" width="20" height="20" />
 
-        <line x1="800" y1="170" x2="870" y2="175" stroke="#000" strokeWidth="2" />
-        <image href="/svgs/filled_circle.svg" x="867" y="172" width="6" height="6" />
-        <line x1="870" y1="175" x2="900" y2="178" stroke="#000" strokeWidth="2" />
-        <image href="/svgs/2pm_arrow.svg" x="894" y="172" width="12" height="12" />
-        <line x1="900" y1="178" x2="917" y2="180" stroke="#000" strokeWidth="2" />
-
-        <line x1="800" y1="210" x2="875" y2="218" stroke="#000" strokeWidth="2" />
-        <line x1="875" y1="218" x2="905" y2="222" stroke="#000" strokeWidth="2" />
-        <image href="/svgs/2pm_arrow.svg" x="899" y="216" width="12" height="12" />
-        <line x1="905" y1="222" x2="913" y2="223" stroke="#000" strokeWidth="2" />
-
-        {/* Bottom line */}
-        <line x1="800" y1="260" x2="870" y2="260" stroke="#000" strokeWidth="2" />
-
-        {/* Right outlet lines */}
-        <line x1="957" y1="40" x2="965" y2="38" stroke="#000" strokeWidth="2" />
-        <line x1="965" y1="38" x2="1070" y2="30" stroke="#000" strokeWidth="2" />
-
-        <line x1="953" y1="84" x2="960" y2="82" stroke="#000" strokeWidth="2" />
-        <line x1="960" y1="82" x2="1070" y2="60" stroke="#000" strokeWidth="2" />
-
-        <line x1="948" y1="119" x2="955" y2="117" stroke="#000" strokeWidth="2" />
-        <line x1="955" y1="117" x2="1070" y2="95" stroke="#000" strokeWidth="2" />
-
-        <line x1="948" y1="143" x2="955" y2="142" stroke="#000" strokeWidth="2" />
-        <line x1="955" y1="142" x2="1070" y2="125" stroke="#000" strokeWidth="2" />
-
-        <line x1="953" y1="180" x2="960" y2="182" stroke="#000" strokeWidth="2" />
-        <line x1="960" y1="182" x2="1070" y2="200" stroke="#000" strokeWidth="2" />
-
-        <line x1="957" y1="223" x2="965" y2="225" stroke="#000" strokeWidth="2" />
-        <line x1="965" y1="225" x2="1070" y2="235" stroke="#000" strokeWidth="2" />
-
-        <line x1="995" y1="260" x2="1070" y2="260" stroke="#000" strokeWidth="2" />
+        <line x1="800" y1="196" x2="875" y2="196" stroke="#000" strokeWidth="2" />
+        <line x1="875" y1="196" x2="905" y2="185" stroke="#000" strokeWidth="2" />
+        <image href="/svgs/2pm_arrow.svg" x="903" y="173" width="20" height="20" />
 
         {/* Connection from clean tank to heat exchanger */}
         <line x1="760" y1="323" x2="800" y2="323" stroke="#000" strokeWidth="2" />
-        <line x1="800" y1="260" x2="800" y2="323" stroke="#000" strokeWidth="2" />
+        <line x1="800" y1="230" x2="800" y2="323" stroke="#000" strokeWidth="2" />
 
         {/* Connection from heat exchanger back down */}
-        <line x1="1070" y1="260" x2="1070" y2="323" stroke="#000" strokeWidth="2" />
+        <line x1="1070" y1="230" x2="1070" y2="323" stroke="#000" strokeWidth="2" />
         <line x1="760" y1="323" x2="1070" y2="323" stroke="#000" strokeWidth="2" />
         <image href="/svgs/2pm_arrow.svg" x="1064" y="317" width="12" height="12" />
 
         {/* Connection from heat exchanger to XT#1 */}
-        <line x1="935" y1="260" x2="935" y2="280" stroke="#000" strokeWidth="2" />
-        <line x1="555" y1="280" x2="935" y2="280" stroke="#000" strokeWidth="2" />
-        <line x1="555" y1="105" x2="555" y2="280" stroke="#000" strokeWidth="2" />
+        <line x1="935" y1="230" x2="935" y2="280" stroke="#000" strokeWidth="2" />
       </svg>
     </div>
   );

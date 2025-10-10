@@ -3,13 +3,23 @@ import { useAlarmContext } from './AlarmContext';
 import { ChevronDown, ChevronUp, X } from 'lucide-react';
 
 export const AlarmFooter: React.FC = () => {
-  const { acknowledged, removeAcknowledged, collapsed, setCollapsed } = useAlarmContext();
+  const { acknowledged, removeAcknowledged, collapsed, setCollapsed, pauseNotifications, setPauseNotifications } = useAlarmContext();
 
   return (
     <div className="fixed bottom-0 inset-x-0 z-40">
       <div className="mx-0 mb-0 rounded-none shadow-industrial border-t border-border bg-card overflow-hidden">
         <div className="flex items-center justify-between px-4 py-2">
           <div className="text-sm font-medium">Acknowledged Alarms ({acknowledged.length})</div>
+          <div className="flex items-center gap-2">
+            <button
+              className={`text-xs px-2 py-1 rounded border ${pauseNotifications ? 'bg-muted text-foreground' : 'hover:bg-muted'}`}
+              onClick={() => setPauseNotifications(!pauseNotifications)}
+              aria-pressed={pauseNotifications}
+              aria-label={pauseNotifications ? 'Resume alerts' : 'Pause alerts'}
+            >
+              {pauseNotifications ? 'Alerts paused' : 'Pause alerts'}
+            </button>
+          </div>
           <button
             className="text-sm text-muted-foreground hover:text-foreground inline-flex items-center"
             onClick={() => setCollapsed(!collapsed)}

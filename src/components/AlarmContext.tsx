@@ -23,6 +23,8 @@ interface AlarmContextValue {
   removeAcknowledged: (id: string) => void;
   collapsed: boolean;
   setCollapsed: (v: boolean) => void;
+  pauseNotifications: boolean;
+  setPauseNotifications: (v: boolean) => void;
 }
 
 const AlarmContext = createContext<AlarmContextValue | undefined>(undefined);
@@ -68,7 +70,21 @@ export const AlarmProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     removeAcknowledged: (id: string) => setAcknowledged(prev => prev.filter(x => x.id !== id)),
     collapsed,
     setCollapsed,
+    pauseNotifications: false,
+    setPauseNotifications: (_v: boolean) => {
+      // placeholder - replaced below with real state
+    },
   }), [acknowledged, collapsed]);
 
-  return <AlarmContext.Provider value={value}>{children}</AlarmContext.Provider>;
+  // real pause state separate so it can be controlled and persisted if desired
+  const [pauseNotifications, setPauseNotifications] = useState<boolean>(true);
+
+  // recreate value to include the real pause state
+  const finalValue = useMemo<AlarmContextValue>(() => ({
+    ...value,
+    pauseNotifications,
+    setPauseNotifications,
+  }), [value, pauseNotifications]);
+
+  return <AlarmContext.Provider value={finalValue}>{children}</AlarmContext.Provider>;
 };

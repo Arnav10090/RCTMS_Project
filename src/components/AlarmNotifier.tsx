@@ -26,11 +26,12 @@ function randomItem<T>(arr: readonly T[]) {
 }
 
 export const AlarmNotifier: React.FC = () => {
-  const { addAcknowledged } = useAlarmContext();
+  const { addAcknowledged, pauseNotifications } = useAlarmContext();
   const [alarm, setAlarm] = React.useState<null | { id: string; level: typeof LEVELS[number]; message: string; time: string }>(null);
 
   React.useEffect(() => {
     const showModal = () => {
+      if (pauseNotifications) return; // do not show while paused
       setAlarm((prev) => prev ?? {
         id: Math.random().toString(36).slice(2),
         level: randomItem(LEVELS),
@@ -42,18 +43,13 @@ export const AlarmNotifier: React.FC = () => {
     return () => {
       clearInterval(id);
     };
-  }, []);
+  }, [pauseNotifications]);
 
   const open = !!alarm;
 
   return (
     <AlertDialog open={open} onOpenChange={() => { /* block close until acknowledge */ }}>
-      <AlertDialogContent
-        onEscapeKeyDown={(e) => e.preventDefault()}
-        onPointerDownOutside={(e) => e.preventDefault()}
-        onInteractOutside={(e) => e.preventDefault()}
-        className="sm:rounded-xl"
-      >
+      <AlertDialogContent className="sm:rounded-xl">
         <AlertDialogHeader>
           <AlertDialogTitle>New {alarm?.level.toUpperCase()} Alarm</AlertDialogTitle>
           <AlertDialogDescription>
