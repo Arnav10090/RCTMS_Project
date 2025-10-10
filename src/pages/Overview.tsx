@@ -184,9 +184,7 @@ export const Overview = () => {
           <DataCard className="h-[85vh] overflow-hidden">
             <div className="h-full w-full">
               {/* Interactive, editable SVG diagram component */}
-              <div className="p-6 h-full">
                 <PidDiagram />
-              </div>
             </div>
           </DataCard>
         </div>
