@@ -20,12 +20,6 @@ const PidDiagram: React.FC = () => {
           <image href="/svgs/circle.svg" x="55" y="125" width="60" height="60" />
           <text x="72" y="160" fontSize="12" fontFamily="Arial" fontWeight="bold">FT#1</text>
 
-          {/* Legend */}
-          <text x="150" y="145" fontSize="10" fontFamily="Arial">FT : Flow Transmitter</text>
-          <text x="150" y="160" fontSize="10" fontFamily="Arial">LT : Level Transmitter</text>
-          <text x="150" y="175" fontSize="10" fontFamily="Arial">TIC : Temp. indicator and controller</text>
-          <text x="150" y="190" fontSize="10" fontFamily="Arial">XT1: On-Line oil concentration measure</text>
-
           {/* Vertical line from FT#1 down */}
           <line x1="85" y1="185" x2="85" y2="240" stroke="#000" strokeWidth="2" />
 
