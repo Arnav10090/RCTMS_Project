@@ -326,6 +326,18 @@ export const CoolantChargeControl: React.FC<CoolantChargeControlProps> = ({
             </div>
 
           </div>
+
+          {/* Roll Coolant Tank Visualization */}
+          <div className="mt-6">
+            <DataCard title="Roll Coolant Tank" icon={Gauge}>
+              <div className="p-2">
+                {/* Interactive, responsive tank */}
+                <div className="w-full">
+                  <TankViz />
+                </div>
+              </div>
+            </DataCard>
+          </div>
         </DataCard>
       </div>
     </section>
