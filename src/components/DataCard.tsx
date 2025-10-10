@@ -4,7 +4,7 @@ import { cn } from '@/lib/utils';
 import { LucideIcon } from 'lucide-react';
 
 interface DataCardProps {
-  title: string;
+  title?: string;
   icon?: LucideIcon;
   children: React.ReactNode;
   className?: string;
@@ -26,18 +26,22 @@ export const DataCard: React.FC<DataCardProps> = ({
     danger: 'border-danger bg-gradient-to-br from-danger/5 to-danger/10'
   };
 
+  const hasHeaderContent = Boolean(title) || Boolean(Icon);
+
   return (
     <Card className={cn(
       'shadow-industrial hover:shadow-elevated transition-all duration-300',
       variantStyles[variant],
       className
     )}>
-      <CardHeader className="pb-3">
-        <CardTitle className="flex items-center space-x-2 text-sm font-semibold text-foreground">
-          {Icon && <Icon className="h-4 w-4" />}
-          <span>{title}</span>
-        </CardTitle>
-      </CardHeader>
+      {hasHeaderContent && (
+        <CardHeader className="pb-3">
+          <CardTitle className="flex items-center space-x-2 text-sm font-semibold text-foreground">
+            {Icon && <Icon className="h-4 w-4" />}
+            {title && <span>{title}</span>}
+          </CardTitle>
+        </CardHeader>
+      )}
       <CardContent>
         {children}
       </CardContent>

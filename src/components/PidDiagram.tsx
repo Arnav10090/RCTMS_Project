@@ -2,13 +2,14 @@ import React from 'react';
 
 const PidDiagram: React.FC = () => {
   return (
-    <div className="w-full h-full p-4 overflow-hidden bg-white">
-      <svg width="100%" height="100%" viewBox="0 0 1100 800" preserveAspectRatio="xMinYMid meet" className="block w-full h-full">
+    <div className="w-full h-full p-4 bg-white flex items-center justify-center overflow-auto">
+      <svg width="1100" height="800" viewBox="0 0 1100 800" preserveAspectRatio="xMidYMid meet" className="block h-auto max-w-full">
         <defs>
           <marker id="arrowblack" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
             <path d="M0,0 L0,6 L9,3 z" fill="#000" />
           </marker>
         </defs>
+        <g transform="translate(0, 120)">
 
         {/* DM Water label and vertical line with arrow */}
         <text x="70" y="25" fontSize="14" fontFamily="Arial">DM Water</text>
@@ -280,6 +281,7 @@ const PidDiagram: React.FC = () => {
 
         {/* Connection from heat exchanger to XT#1 */}
         <line x1="935" y1="230" x2="935" y2="280" stroke="#000" strokeWidth="2" />
+        </g>
       </svg>
     </div>
   );

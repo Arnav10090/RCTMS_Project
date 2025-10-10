@@ -181,12 +181,10 @@ export const Overview = () => {
       <div className="grid grid-cols-1 xl:grid-cols-12 gap-6">
         {/* P&ID Diagram */}
         <div className="xl:col-span-12">
-          <DataCard title="System P&ID Diagram" className="h-[85vh] overflow-hidden">
+          <DataCard className="h-[85vh] overflow-hidden">
             <div className="h-full w-full">
               {/* Interactive, editable SVG diagram component */}
-              <div className="p-6 h-full">
                 <PidDiagram />
-              </div>
             </div>
           </DataCard>
         </div>
