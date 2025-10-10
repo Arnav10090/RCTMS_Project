@@ -128,16 +128,7 @@ export const CoolantChargeControl: React.FC<CoolantChargeControlProps> = ({
     return Math.max(projected, 0);
   }, [currentVolume, oilToAdd, targetVolume]);
 
-  const projectedTotalVolume = useMemo(() => currentVolume + oilToAdd + waterToAdd, [currentVolume, oilToAdd, waterToAdd]);
 
-  const resultingConcentration = useMemo(() => {
-    const totalVolume = projectedTotalVolume;
-    if (totalVolume <= 0) {
-      return 0;
-    }
-    const totalOil = currentVolume * (currentConcentration / 100) + oilToAdd;
-    return (totalOil / totalVolume) * 100;
-  }, [currentConcentration, currentVolume, oilToAdd, projectedTotalVolume]);
 
   const concentrationDelta = desiredConcentration - currentConcentration;
 
@@ -222,21 +213,6 @@ export const CoolantChargeControl: React.FC<CoolantChargeControlProps> = ({
               </div>
             </div>
 
-            <div className="mt-auto rounded-2xl border border-dashed border-foreground/20 p-4">
-              <div className="flex flex-wrap items-center justify-between gap-3">
-                <div>
-                  <p className="text-xs uppercase tracking-wide text-muted-foreground">Projected Total Volume</p>
-                  <p className="mt-2 text-xl font-semibold text-foreground">{projectedTotalVolume.toFixed(2)} m³</p>
-                </div>
-                <div className="flex flex-col items-end text-right">
-                  <span className="text-xs uppercase tracking-wide text-muted-foreground">Resulting Concentration</span>
-                  <span className="mt-2 text-xl font-semibold text-foreground">{resultingConcentration.toFixed(2)}%</span>
-                </div>
-              </div>
-              <p className="mt-3 text-xs text-muted-foreground">
-                Calculated using dynamic balance: oil addition adjusts to target concentration, remaining volume is filled with treated water.
-              </p>
-            </div>
           </div>
         </DataCard>
       </div>
