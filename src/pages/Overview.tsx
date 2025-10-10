@@ -2,16 +2,8 @@ import React from 'react';
 import { DataCard } from '@/components/DataCard';
 import { StatusIndicator } from '@/components/StatusIndicator';
 import { GaugeDisplay } from '@/components/GaugeDisplay';
-import {
-  Activity,
-  Droplet,
-  Thermometer,
-  Gauge,
-  Wrench,
-  AlertCircle,
-  TrendingUp,
-  RotateCcw
-} from 'lucide-react';
+import { CoolantChargeControl } from '@/components/CoolantChargeControl';
+import { Activity, Droplet, Gauge, Wrench } from 'lucide-react';
 import PidDiagram from '@/components/PidDiagram';
 
 export const Overview = () => {
@@ -176,6 +168,8 @@ export const Overview = () => {
           </div>
         </DataCard>
       </div>
+
+      <CoolantChargeControl />
 
       {/* Central System Visualization */}
       <div className="grid grid-cols-1 xl:grid-cols-12 gap-6">
