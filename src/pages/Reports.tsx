@@ -233,20 +233,20 @@ const TableSection = ({
   const pager = usePager(filtered, 10);
 
   return (
-    <div className="bg-white rounded-lg border border-gray-200 shadow-sm">
+    <div className="bg-card rounded-lg border border-border shadow-sm">
       {/* Header */}
-      <div className="px-6 py-4 border-b border-gray-200">
-        <h2 className="text-xl font-bold text-gray-900">{title}</h2>
+      <div className="px-6 py-4 border-b border-border">
+        <h2 className="text-xl font-bold text-foreground">{title}</h2>
       </div>
 
       {/* Filters */}
-      <div className="px-6 py-4 bg-gray-50 border-b border-gray-200">
+      <div className="px-6 py-4 bg-muted/50 border-b border-border">
         <div className="flex flex-wrap items-end gap-4">
           {/* Search */}
           <div className="flex-1 min-w-[240px]">
-            <label className="block text-sm font-medium text-gray-700 mb-1">Search</label>
+            <label className="block text-sm font-medium text-muted-foreground mb-1">Search</label>
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <Input
                 placeholder="Search in all columns..."
                 value={search}
@@ -258,7 +258,7 @@ const TableSection = ({
 
           {/* Date From */}
           <div className="w-40">
-            <label className="block text-sm font-medium text-gray-700 mb-1">From Date</label>
+            <label className="block text-sm font-medium text-muted-foreground mb-1">From Date</label>
             <Input
               type="date"
               value={from}
@@ -268,7 +268,7 @@ const TableSection = ({
 
           {/* Date To */}
           <div className="w-40">
-            <label className="block text-sm font-medium text-gray-700 mb-1">To Date</label>
+            <label className="block text-sm font-medium text-muted-foreground mb-1">To Date</label>
             <Input
               type="date"
               value={to}
@@ -278,7 +278,7 @@ const TableSection = ({
 
           {/* Rows per page */}
           <div className="w-32">
-            <label className="block text-sm font-medium text-gray-700 mb-1">Show</label>
+            <label className="block text-sm font-medium text-muted-foreground mb-1">Show</label>
             <Select value={String(pager.size)} onValueChange={(v) => pager.setSize(Number(v))}>
               <SelectTrigger>
                 <SelectValue />
@@ -304,7 +304,7 @@ const TableSection = ({
         </div>
 
         {/* Results count */}
-        <div className="mt-3 text-sm text-gray-600">
+        <div className="mt-3 text-sm text-muted-foreground">
           Showing {filtered.length === 0 ? 0 : (pager.page - 1) * pager.size + 1} to {Math.min(pager.page * pager.size, filtered.length)} of {filtered.length} results
         </div>
       </div>
@@ -312,23 +312,23 @@ const TableSection = ({
       {/* Table */}
       <div className="overflow-x-auto">
         <table className="w-full">
-          <thead className="bg-gray-50 border-b border-gray-200">
+          <thead className="bg-muted/50 border-b border-border">
             {renderHeader ? (
               renderHeader(headers)
             ) : (
               <tr>
                 {headers.map((header, idx) => (
-                  <th key={idx} className="px-4 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider whitespace-nowrap">
+                  <th key={idx} className="px-4 py-3 text-left text-xs font-semibold text-muted-foreground uppercase tracking-wider whitespace-nowrap">
                     {header}
                   </th>
                 ))}
               </tr>
             )}
           </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
+          <tbody className="bg-card divide-y divide-border">
             {pager.slice.length === 0 ? (
               <tr>
-                <td colSpan={headers.length} className="px-4 py-8 text-center text-gray-500">
+                <td colSpan={headers.length} className="px-4 py-8 text-center text-muted-foreground">
                   No data found
                 </td>
               </tr>
@@ -341,8 +341,8 @@ const TableSection = ({
 
       {/* Pagination */}
       {filtered.length > 0 && (
-        <div className="px-6 py-4 border-t border-gray-200 flex items-center justify-between">
-          <div className="text-sm text-gray-600">
+        <div className="px-6 py-4 border-t border-border flex items-center justify-between">
+          <div className="text-sm text-muted-foreground">
             Page {pager.page} of {pager.pages}
           </div>
           <div className="flex gap-2">
@@ -410,12 +410,12 @@ export const Reports = () => {
   const [selectedTable, setSelectedTable] = React.useState<TableKey>('coolant');
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
+    <div className="min-h-screen bg-background p-6">
       <div className="max-w-[1600px] mx-auto space-y-6">
-        <div className="bg-white border border-gray-200 rounded-lg shadow-sm px-6 py-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div className="bg-card border border-border rounded-lg shadow-sm px-6 py-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <h1 className="text-lg font-semibold text-gray-900">Reports</h1>
-            <p className="text-sm text-gray-500">Select a report table to display.</p>
+            <h1 className="text-lg font-semibold text-foreground">Reports</h1>
+            <p className="text-sm text-muted-foreground">Select a report table to display.</p>
           </div>
           <Select value={selectedTable} onValueChange={(value) => setSelectedTable(value as TableKey)}>
             <SelectTrigger className="w-full sm:w-64">
@@ -448,17 +448,17 @@ export const Reports = () => {
               'Tank Lvl kL'
             ]}
             renderRow={(r: CoolantRow, idx, start) => (
-              <tr key={r.id} className="hover:bg-gray-50">
-                <td className="px-4 py-3 text-sm text-gray-900">{start + idx + 1}</td>
-                <td className="px-4 py-3 text-sm text-gray-900 font-mono">{r.date}</td>
-                <td className="px-4 py-3 text-sm text-gray-900">{r.oilConc}</td>
-                <td className="px-4 py-3 text-sm text-gray-900">{r.conductivity}</td>
-                <td className="px-4 py-3 text-sm text-gray-900">{r.pH}</td>
-                <td className="px-4 py-3 text-sm text-gray-900">{r.tempC}</td>
-                <td className="px-4 py-3 text-sm text-gray-900">{r.esi}</td>
-                <td className="px-4 py-3 text-sm text-gray-900">{r.tramp}</td>
-                <td className="px-4 py-3 text-sm text-gray-900">{r.saponification}</td>
-                <td className="px-4 py-3 text-sm text-gray-900">{r.tankLvl}</td>
+              <tr key={r.id} className="hover:bg-muted/50">
+                <td className="px-4 py-3 text-sm text-foreground">{start + idx + 1}</td>
+                <td className="px-4 py-3 text-sm text-foreground font-mono">{r.date}</td>
+                <td className="px-4 py-3 text-sm text-foreground">{r.oilConc}</td>
+                <td className="px-4 py-3 text-sm text-foreground">{r.conductivity}</td>
+                <td className="px-4 py-3 text-sm text-foreground">{r.pH}</td>
+                <td className="px-4 py-3 text-sm text-foreground">{r.tempC}</td>
+                <td className="px-4 py-3 text-sm text-foreground">{r.esi}</td>
+                <td className="px-4 py-3 text-sm text-foreground">{r.tramp}</td>
+                <td className="px-4 py-3 text-sm text-foreground">{r.saponification}</td>
+                <td className="px-4 py-3 text-sm text-foreground">{r.tankLvl}</td>
               </tr>
             )}
           />
@@ -491,8 +491,8 @@ export const Reports = () => {
               'Next Insp. Due'
             ]}
             renderHeader={() => {
-              const topCellClass = "border border-gray-200 px-3 py-2 text-xs font-semibold text-gray-700 text-center whitespace-nowrap align-middle";
-              const subCellClass = "border border-gray-200 px-3 py-1.5 text-xs font-medium text-gray-600 text-center whitespace-nowrap";
+              const topCellClass = "border border-border px-3 py-2 text-xs font-semibold text-muted-foreground text-center whitespace-nowrap align-middle";
+              const subCellClass = "border border-border px-3 py-1.5 text-xs font-medium text-muted-foreground text-center whitespace-nowrap";
               return (
                 <>
                   <tr>
@@ -530,31 +530,31 @@ export const Reports = () => {
               );
             }}
             renderRow={(r: OilCellarRow, idx, start) => (
-              <tr key={r.id} className="hover:bg-gray-50">
-                <td className="px-4 py-3 text-sm text-gray-900">{start + idx + 1}</td>
-                <td className="px-4 py-3 text-sm text-gray-900 font-mono">{r.date}</td>
-                <td className="px-4 py-3 text-sm text-gray-900">{r.tempC}</td>
-                <td className="px-4 py-3 text-sm text-gray-900">{r.humidity}</td>
-                <td className="px-4 py-3 text-sm text-gray-900">{r.aqiA1}</td>
-                <td className="px-4 py-3 text-sm text-gray-900">{r.aqiA2}</td>
-                <td className="px-4 py-3 text-sm text-gray-900">{r.aqiA3}</td>
-                <td className="px-4 py-3 text-sm text-gray-900">{r.accessControl}</td>
-                <td className="px-4 py-3 text-sm text-gray-900">{r.personsEntered}</td>
-                <td className="px-4 py-3 text-sm text-gray-900">{r.noPpe}</td>
-                <td className="px-4 py-3 text-sm text-gray-900">{r.welding}</td>
-                <td className="px-4 py-3 text-sm text-gray-900">{r.cutting}</td>
-                <td className="px-4 py-3 text-sm text-gray-900">{r.others}</td>
-                <td className="px-4 py-3 text-sm text-gray-900">{r.illumA1}</td>
-                <td className="px-4 py-3 text-sm text-gray-900">{r.illumA2}</td>
-                <td className="px-4 py-3 text-sm text-gray-900">{r.illumA3}</td>
-                <td className="px-4 py-3 text-sm text-gray-900">{r.illumA4}</td>
-                <td className="px-4 py-3 text-sm text-gray-900">{r.illumA5}</td>
+              <tr key={r.id} className="hover:bg-muted/50">
+                <td className="px-4 py-3 text-sm text-foreground">{start + idx + 1}</td>
+                <td className="px-4 py-3 text-sm text-foreground font-mono">{r.date}</td>
+                <td className="px-4 py-3 text-sm text-foreground">{r.tempC}</td>
+                <td className="px-4 py-3 text-sm text-foreground">{r.humidity}</td>
+                <td className="px-4 py-3 text-sm text-foreground">{r.aqiA1}</td>
+                <td className="px-4 py-3 text-sm text-foreground">{r.aqiA2}</td>
+                <td className="px-4 py-3 text-sm text-foreground">{r.aqiA3}</td>
+                <td className="px-4 py-3 text-sm text-foreground">{r.accessControl}</td>
+                <td className="px-4 py-3 text-sm text-foreground">{r.personsEntered}</td>
+                <td className="px-4 py-3 text-sm text-foreground">{r.noPpe}</td>
+                <td className="px-4 py-3 text-sm text-foreground">{r.welding}</td>
+                <td className="px-4 py-3 text-sm text-foreground">{r.cutting}</td>
+                <td className="px-4 py-3 text-sm text-foreground">{r.others}</td>
+                <td className="px-4 py-3 text-sm text-foreground">{r.illumA1}</td>
+                <td className="px-4 py-3 text-sm text-foreground">{r.illumA2}</td>
+                <td className="px-4 py-3 text-sm text-foreground">{r.illumA3}</td>
+                <td className="px-4 py-3 text-sm text-foreground">{r.illumA4}</td>
+                <td className="px-4 py-3 text-sm text-foreground">{r.illumA5}</td>
                 <td className="px-4 py-3 text-sm">
-                  <span className={`px-2 py-1 rounded text-xs font-medium ${r.fireStatus === 'OK' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
+                  <span className={`px-2 py-1 rounded text-xs font-medium ${r.fireStatus === 'OK' ? 'bg-success/20 text-success-foreground' : 'bg-danger/20 text-danger-foreground'}`}>
                     {r.fireStatus}
                   </span>
                 </td>
-                <td className="px-4 py-3 text-sm text-gray-900 font-mono">{r.fireNextDue}</td>
+                <td className="px-4 py-3 text-sm text-foreground font-mono">{r.fireNextDue}</td>
               </tr>
             )}
           />
@@ -574,18 +574,18 @@ export const Reports = () => {
               'Avg Pressure'
             ]}
             renderRow={(r: PumpRow, idx, start) => (
-              <tr key={r.id} className="hover:bg-gray-50">
-                <td className="px-4 py-3 text-sm text-gray-900">{start + idx + 1}</td>
-                <td className="px-4 py-3 text-sm text-gray-900 font-mono">{r.date}</td>
-                <td className="px-4 py-3 text-sm text-gray-900 font-semibold">{r.pumpNo}</td>
+              <tr key={r.id} className="hover:bg-muted/50">
+                <td className="px-4 py-3 text-sm text-foreground">{start + idx + 1}</td>
+                <td className="px-4 py-3 text-sm text-foreground font-mono">{r.date}</td>
+                <td className="px-4 py-3 text-sm text-foreground font-semibold">{r.pumpNo}</td>
                 <td className="px-4 py-3 text-sm">
-                  <span className={`px-3 py-1 rounded-full text-xs font-medium ${r.status === 'Run' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'}`}>
+                  <span className={`px-3 py-1 rounded-full text-xs font-medium ${r.status === 'Run' ? 'bg-success/20 text-success-foreground' : 'bg-muted text-foreground'}`}>
                     {r.status}
                   </span>
                 </td>
-                <td className="px-4 py-3 text-sm text-gray-900">{r.runHrs}</td>
-                <td className="px-4 py-3 text-sm text-gray-900">{r.avgLoad}</td>
-                <td className="px-4 py-3 text-sm text-gray-900">{r.avgPressure}</td>
+                <td className="px-4 py-3 text-sm text-foreground">{r.runHrs}</td>
+                <td className="px-4 py-3 text-sm text-foreground">{r.avgLoad}</td>
+                <td className="px-4 py-3 text-sm text-foreground">{r.avgPressure}</td>
               </tr>
             )}
           />
@@ -609,22 +609,22 @@ export const Reports = () => {
               'Water Saturation'
             ]}
             renderRow={(r: HpPumpRow, idx, start) => (
-              <tr key={r.id} className="hover:bg-gray-50">
-                <td className="px-4 py-3 text-sm text-gray-900">{start + idx + 1}</td>
-                <td className="px-4 py-3 text-sm text-gray-900 font-mono">{r.date}</td>
-                <td className="px-4 py-3 text-sm text-gray-900 font-semibold">{r.pumpNo}</td>
+              <tr key={r.id} className="hover:bg-muted/50">
+                <td className="px-4 py-3 text-sm text-foreground">{start + idx + 1}</td>
+                <td className="px-4 py-3 text-sm text-foreground font-mono">{r.date}</td>
+                <td className="px-4 py-3 text-sm text-foreground font-semibold">{r.pumpNo}</td>
                 <td className="px-4 py-3 text-sm">
-                  <span className={`px-3 py-1 rounded-full text-xs font-medium ${r.status === 'Run' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'}`}>
+                  <span className={`px-3 py-1 rounded-full text-xs font-medium ${r.status === 'Run' ? 'bg-success/20 text-success-foreground' : 'bg-muted text-foreground'}`}>
                     {r.status}
                   </span>
                 </td>
-                <td className="px-4 py-3 text-sm text-gray-900">{r.runHrs}</td>
-                <td className="px-4 py-3 text-sm text-gray-900">{r.avgLoad}</td>
-                <td className="px-4 py-3 text-sm text-gray-900">{r.avgSystemPressure}</td>
-                <td className="px-4 py-3 text-sm text-gray-900">{r.avgTankLevel}</td>
-                <td className="px-4 py-3 text-sm text-gray-900">{r.avgOilTemp}</td>
-                <td className="px-4 py-3 text-sm text-gray-900 font-mono">{r.oilCleanliness}</td>
-                <td className="px-4 py-3 text-sm text-gray-900">{r.waterSaturation}</td>
+                <td className="px-4 py-3 text-sm text-foreground">{r.runHrs}</td>
+                <td className="px-4 py-3 text-sm text-foreground">{r.avgLoad}</td>
+                <td className="px-4 py-3 text-sm text-foreground">{r.avgSystemPressure}</td>
+                <td className="px-4 py-3 text-sm text-foreground">{r.avgTankLevel}</td>
+                <td className="px-4 py-3 text-sm text-foreground">{r.avgOilTemp}</td>
+                <td className="px-4 py-3 text-sm text-foreground font-mono">{r.oilCleanliness}</td>
+                <td className="px-4 py-3 text-sm text-foreground">{r.waterSaturation}</td>
               </tr>
             )}
           />
