@@ -10,8 +10,7 @@ export const HydraulicSystem = () => {
         {/* System Schematic */}
         <div className="xl:col-span-3">
           <DataCard title="HMI-02: Hydraulic System Schematic" className="h-[700px]">
-            <div className="relative h-full rounded-lg border border-border/50 bg-background">
-              {/* SVG-built schematic using public svgs */}
+            <div className="relative h-[640px] rounded-lg border border-border/50 bg-background">
               <HydraulicSchematic className="absolute inset-0" />
             </div>
           </DataCard>
