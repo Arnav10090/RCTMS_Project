@@ -1,17 +1,6 @@
 import React from 'react';
 import { DataCard } from '@/components/DataCard';
-import { StatusIndicator } from '@/components/StatusIndicator';
-import { GaugeDisplay } from '@/components/GaugeDisplay';
-import { Button } from '@/components/ui/button';
-import { 
-  Settings, 
-  Play, 
-  Square, 
-  RotateCcw,
-  Droplets,
-  Thermometer,
-  Filter
-} from 'lucide-react';
+import { HydraulicSchematic } from '@/components/HydraulicSchematic';
 
 export const HydraulicSystem = () => {
   const systemData = {
