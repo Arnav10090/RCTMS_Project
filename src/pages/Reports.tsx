@@ -318,7 +318,7 @@ const TableSection = ({
             ) : (
               <tr>
                 {headers.map((header, idx) => (
-                  <th key={idx} className="px-4 py-3 text-left text-xs font-semibold text-muted-foreground uppercase tracking-wider whitespace-nowrap">
+                  <th key={idx} className="px-4 py-3 text-center text-xs font-semibold text-muted-foreground uppercase tracking-wider whitespace-nowrap">
                     {header}
                   </th>
                 ))}
@@ -449,16 +449,16 @@ export const Reports = () => {
             ]}
             renderRow={(r: CoolantRow, idx, start) => (
               <tr key={r.id} className="hover:bg-muted/50">
-                <td className="px-4 py-3 text-sm text-foreground">{start + idx + 1}</td>
-                <td className="px-4 py-3 text-sm text-foreground font-mono">{r.date}</td>
-                <td className="px-4 py-3 text-sm text-foreground">{r.oilConc}</td>
-                <td className="px-4 py-3 text-sm text-foreground">{r.conductivity}</td>
-                <td className="px-4 py-3 text-sm text-foreground">{r.pH}</td>
-                <td className="px-4 py-3 text-sm text-foreground">{r.tempC}</td>
-                <td className="px-4 py-3 text-sm text-foreground">{r.esi}</td>
-                <td className="px-4 py-3 text-sm text-foreground">{r.tramp}</td>
-                <td className="px-4 py-3 text-sm text-foreground">{r.saponification}</td>
-                <td className="px-4 py-3 text-sm text-foreground">{r.tankLvl}</td>
+                <td className="px-4 py-3 text-sm text-foreground text-center">{start + idx + 1}</td>
+                <td className="px-4 py-3 text-sm text-foreground text-center font-mono">{r.date}</td>
+                <td className="px-4 py-3 text-sm text-foreground text-center">{r.oilConc}</td>
+                <td className="px-4 py-3 text-sm text-foreground text-center">{r.conductivity}</td>
+                <td className="px-4 py-3 text-sm text-foreground text-center">{r.pH}</td>
+                <td className="px-4 py-3 text-sm text-foreground text-center">{r.tempC}</td>
+                <td className="px-4 py-3 text-sm text-foreground text-center">{r.esi}</td>
+                <td className="px-4 py-3 text-sm text-foreground text-center">{r.tramp}</td>
+                <td className="px-4 py-3 text-sm text-foreground text-center">{r.saponification}</td>
+                <td className="px-4 py-3 text-sm text-foreground text-center">{r.tankLvl}</td>
               </tr>
             )}
           />
@@ -531,30 +531,30 @@ export const Reports = () => {
             }}
             renderRow={(r: OilCellarRow, idx, start) => (
               <tr key={r.id} className="hover:bg-muted/50">
-                <td className="px-4 py-3 text-sm text-foreground">{start + idx + 1}</td>
-                <td className="px-4 py-3 text-sm text-foreground font-mono">{r.date}</td>
-                <td className="px-4 py-3 text-sm text-foreground">{r.tempC}</td>
-                <td className="px-4 py-3 text-sm text-foreground">{r.humidity}</td>
-                <td className="px-4 py-3 text-sm text-foreground">{r.aqiA1}</td>
-                <td className="px-4 py-3 text-sm text-foreground">{r.aqiA2}</td>
-                <td className="px-4 py-3 text-sm text-foreground">{r.aqiA3}</td>
-                <td className="px-4 py-3 text-sm text-foreground">{r.accessControl}</td>
-                <td className="px-4 py-3 text-sm text-foreground">{r.personsEntered}</td>
-                <td className="px-4 py-3 text-sm text-foreground">{r.noPpe}</td>
-                <td className="px-4 py-3 text-sm text-foreground">{r.welding}</td>
-                <td className="px-4 py-3 text-sm text-foreground">{r.cutting}</td>
-                <td className="px-4 py-3 text-sm text-foreground">{r.others}</td>
-                <td className="px-4 py-3 text-sm text-foreground">{r.illumA1}</td>
-                <td className="px-4 py-3 text-sm text-foreground">{r.illumA2}</td>
-                <td className="px-4 py-3 text-sm text-foreground">{r.illumA3}</td>
-                <td className="px-4 py-3 text-sm text-foreground">{r.illumA4}</td>
-                <td className="px-4 py-3 text-sm text-foreground">{r.illumA5}</td>
-                <td className="px-4 py-3 text-sm">
+                <td className="px-4 py-3 text-sm text-foreground text-center">{start + idx + 1}</td>
+                <td className="px-4 py-3 text-sm text-foreground text-center font-mono">{r.date}</td>
+                <td className="px-4 py-3 text-sm text-foreground text-center">{r.tempC}</td>
+                <td className="px-4 py-3 text-sm text-foreground text-center">{r.humidity}</td>
+                <td className="px-4 py-3 text-sm text-foreground text-center">{r.aqiA1}</td>
+                <td className="px-4 py-3 text-sm text-foreground text-center">{r.aqiA2}</td>
+                <td className="px-4 py-3 text-sm text-foreground text-center">{r.aqiA3}</td>
+                <td className="px-4 py-3 text-sm text-foreground text-center">{r.accessControl}</td>
+                <td className="px-4 py-3 text-sm text-foreground text-center">{r.personsEntered}</td>
+                <td className="px-4 py-3 text-sm text-foreground text-center">{r.noPpe}</td>
+                <td className="px-4 py-3 text-sm text-foreground text-center">{r.welding}</td>
+                <td className="px-4 py-3 text-sm text-foreground text-center">{r.cutting}</td>
+                <td className="px-4 py-3 text-sm text-foreground text-center">{r.others}</td>
+                <td className="px-4 py-3 text-sm text-foreground text-center">{r.illumA1}</td>
+                <td className="px-4 py-3 text-sm text-foreground text-center">{r.illumA2}</td>
+                <td className="px-4 py-3 text-sm text-foreground text-center">{r.illumA3}</td>
+                <td className="px-4 py-3 text-sm text-foreground text-center">{r.illumA4}</td>
+                <td className="px-4 py-3 text-sm text-foreground text-center">{r.illumA5}</td>
+                <td className="px-4 py-3 text-sm text-center">
                   <span className={`px-2 py-1 rounded text-xs font-medium ${r.fireStatus === 'OK' ? 'bg-success/20 text-success-foreground' : 'bg-danger/20 text-danger-foreground'}`}>
                     {r.fireStatus}
                   </span>
                 </td>
-                <td className="px-4 py-3 text-sm text-foreground font-mono">{r.fireNextDue}</td>
+                <td className="px-4 py-3 text-sm text-foreground text-center font-mono">{r.fireNextDue}</td>
               </tr>
             )}
           />
@@ -575,17 +575,17 @@ export const Reports = () => {
             ]}
             renderRow={(r: PumpRow, idx, start) => (
               <tr key={r.id} className="hover:bg-muted/50">
-                <td className="px-4 py-3 text-sm text-foreground">{start + idx + 1}</td>
-                <td className="px-4 py-3 text-sm text-foreground font-mono">{r.date}</td>
-                <td className="px-4 py-3 text-sm text-foreground font-semibold">{r.pumpNo}</td>
-                <td className="px-4 py-3 text-sm">
+                <td className="px-4 py-3 text-sm text-foreground text-center">{start + idx + 1}</td>
+                <td className="px-4 py-3 text-sm text-foreground text-center font-mono">{r.date}</td>
+                <td className="px-4 py-3 text-sm text-foreground text-center font-semibold">{r.pumpNo}</td>
+                <td className="px-4 py-3 text-sm text-center">
                   <span className={`px-3 py-1 rounded-full text-xs font-medium ${r.status === 'Run' ? 'bg-success/20 text-success-foreground' : 'bg-muted text-foreground'}`}>
                     {r.status}
                   </span>
                 </td>
-                <td className="px-4 py-3 text-sm text-foreground">{r.runHrs}</td>
-                <td className="px-4 py-3 text-sm text-foreground">{r.avgLoad}</td>
-                <td className="px-4 py-3 text-sm text-foreground">{r.avgPressure}</td>
+                <td className="px-4 py-3 text-sm text-foreground text-center">{r.runHrs}</td>
+                <td className="px-4 py-3 text-sm text-foreground text-center">{r.avgLoad}</td>
+                <td className="px-4 py-3 text-sm text-foreground text-center">{r.avgPressure}</td>
               </tr>
             )}
           />
@@ -610,21 +610,21 @@ export const Reports = () => {
             ]}
             renderRow={(r: HpPumpRow, idx, start) => (
               <tr key={r.id} className="hover:bg-muted/50">
-                <td className="px-4 py-3 text-sm text-foreground">{start + idx + 1}</td>
-                <td className="px-4 py-3 text-sm text-foreground font-mono">{r.date}</td>
-                <td className="px-4 py-3 text-sm text-foreground font-semibold">{r.pumpNo}</td>
-                <td className="px-4 py-3 text-sm">
+                <td className="px-4 py-3 text-sm text-foreground text-center">{start + idx + 1}</td>
+                <td className="px-4 py-3 text-sm text-foreground text-center font-mono">{r.date}</td>
+                <td className="px-4 py-3 text-sm text-foreground text-center font-semibold">{r.pumpNo}</td>
+                <td className="px-4 py-3 text-sm text-center">
                   <span className={`px-3 py-1 rounded-full text-xs font-medium ${r.status === 'Run' ? 'bg-success/20 text-success-foreground' : 'bg-muted text-foreground'}`}>
                     {r.status}
                   </span>
                 </td>
-                <td className="px-4 py-3 text-sm text-foreground">{r.runHrs}</td>
-                <td className="px-4 py-3 text-sm text-foreground">{r.avgLoad}</td>
-                <td className="px-4 py-3 text-sm text-foreground">{r.avgSystemPressure}</td>
-                <td className="px-4 py-3 text-sm text-foreground">{r.avgTankLevel}</td>
-                <td className="px-4 py-3 text-sm text-foreground">{r.avgOilTemp}</td>
-                <td className="px-4 py-3 text-sm text-foreground font-mono">{r.oilCleanliness}</td>
-                <td className="px-4 py-3 text-sm text-foreground">{r.waterSaturation}</td>
+                <td className="px-4 py-3 text-sm text-foreground text-center">{r.runHrs}</td>
+                <td className="px-4 py-3 text-sm text-foreground text-center">{r.avgLoad}</td>
+                <td className="px-4 py-3 text-sm text-foreground text-center">{r.avgSystemPressure}</td>
+                <td className="px-4 py-3 text-sm text-foreground text-center">{r.avgTankLevel}</td>
+                <td className="px-4 py-3 text-sm text-foreground text-center">{r.avgOilTemp}</td>
+                <td className="px-4 py-3 text-sm text-foreground text-center font-mono">{r.oilCleanliness}</td>
+                <td className="px-4 py-3 text-sm text-foreground text-center">{r.waterSaturation}</td>
               </tr>
             )}
           />
