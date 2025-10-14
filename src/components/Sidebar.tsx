@@ -56,8 +56,8 @@ interface SidebarProps {
 
 export const Sidebar = ({ isCollapsed }: SidebarProps) => {
   return (
-    <div className={`${isCollapsed ? 'w-16' : 'w-64'} bg-primary shadow-elevated flex flex-col transition-all duration-300`}>
-      <div className={`${isCollapsed ? 'p-3' : 'p-6'} border-b border-primary-hover`}>
+    <div className={`${isCollapsed ? 'w-16' : 'w-64'} fixed top-0 left-0 h-screen z-40 bg-primary shadow-elevated flex flex-col overflow-y-auto transition-all duration-300`}>
+      <div className={`${isCollapsed ? 'p-3' : 'p-6'} border-b border-primary-hover sticky top-0 bg-primary/95 backdrop-blur supports-[backdrop-filter]:bg-primary/75`}>
         <div className="flex items-center space-x-3">
           <Gauge className="h-8 w-8 text-secondary shrink-0" />
           {!isCollapsed && (
@@ -72,7 +72,7 @@ export const Sidebar = ({ isCollapsed }: SidebarProps) => {
           )}
         </div>
       </div>
-      
+
       <nav className="flex-1 p-4 space-y-2">
         {navigationItems.map((item) => {
           const Icon = item.icon;
@@ -100,7 +100,7 @@ export const Sidebar = ({ isCollapsed }: SidebarProps) => {
           );
         })}
       </nav>
-      
+
       {!isCollapsed && (
         <div className="p-4 border-t border-primary-hover">
           <div className="text-xs text-primary-foreground/60 text-center">
