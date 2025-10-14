@@ -12,39 +12,39 @@ import {
 } from 'lucide-react';
 
 const navigationItems = [
-  { 
-    path: '/', 
-    name: 'Overview', 
+  {
+    path: '/',
+    name: 'Overview',
     icon: Monitor,
     description: 'HMI-01'
   },
-  { 
-    path: '/hydraulic', 
-    name: 'Hydraulic System', 
-    icon: Droplets,
-    description: 'HMI-02'
+  {
+    path: '/overview-new',
+    name: 'Overview (New)',
+    icon: Monitor,
+    description: 'HMI-01B'
   },
-  { 
-    path: '/pumps', 
-    name: 'Pump Operations', 
+  {
+    path: '/pumps',
+    name: 'Pump Operations',
     icon: Cog,
     description: 'HMI-03'
   },
-  { 
-    path: '/oil-cellar', 
-    name: 'Oil Cellar Monitor', 
+  {
+    path: '/oil-cellar',
+    name: 'Oil Cellar Monitor',
     icon: ShieldAlert,
     description: 'HMI-04'
   },
-  { 
-    path: '/alarms', 
-    name: 'Alarm Management', 
+  {
+    path: '/alarms',
+    name: 'Alarm Management',
     icon: AlertTriangle,
     description: 'HMI-05'
   },
-  { 
-    path: '/reports', 
-    name: 'Reports', 
+  {
+    path: '/reports',
+    name: 'Reports',
     icon: FileText,
     description: 'HMI-06'
   },
