@@ -57,7 +57,7 @@ export const Sidebar = ({ isCollapsed }: SidebarProps) => {
           {!isCollapsed && (
             <div>
               <h1 className="text-lg font-semibold text-primary-foreground">
-                Roll Coolant
+                Roll Coolant Tank
               </h1>
               <p className="text-sm text-primary-foreground/70">
                 Monitoring System
