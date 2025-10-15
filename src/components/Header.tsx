@@ -20,7 +20,11 @@ export const Header = ({ onToggleSidebar, isSidebarCollapsed }: HeaderProps) => 
   const [now, setNow] = useState<Date>(new Date());
   const { theme, setTheme } = useTheme();
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   const [showTooltip, setShowTooltip] = useState(false);
+
+  const pageItem = navigationItems.find((i) => i.path === pathname);
+  const pageTitle = pageItem?.name ?? 'System Overview';
 
   useEffect(() => {
     const t = setInterval(() => setNow(new Date()), 1000);
