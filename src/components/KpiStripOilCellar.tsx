@@ -108,7 +108,7 @@ export const KpiStripOilCellar: React.FC = () => {
         {/* Access Control */}
         <DataCard title="Access Control" icon={Shield} variant="success">
           <div className="space-y-3">
-            <div className="space-y-3">
+            <div className="space-y-6">
               <div>
                 <div className="text-xs text-muted-foreground">Fire Ext. system</div>
                 <div className="mt-1">
