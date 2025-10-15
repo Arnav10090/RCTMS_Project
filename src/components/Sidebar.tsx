@@ -75,7 +75,7 @@ export const Sidebar = ({ isCollapsed }: SidebarProps) => {
               key={item.path}
               to={item.path}
               className={({ isActive }) =>
-                `flex items-center ${isCollapsed ? 'justify-center px-3' : 'space-x-3 px-4'} py-3 rounded-lg text-sm font-medium transition-colors ${
+                `flex items-center ${isCollapsed ? 'justify-center px-3' : 'space-x-4 px-6'} py-4 rounded-lg text-base font-semibold transition-colors ${
                   isActive
                     ? 'bg-secondary text-secondary-foreground shadow-glow'
                     : 'text-primary-foreground/80 hover:bg-primary-hover hover:text-primary-foreground'
