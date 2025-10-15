@@ -304,7 +304,7 @@ export const AlarmManagement = () => {
               <div className="col-span-3">
                 <div className="space-y-1">
                   <div className="flex items-center space-x-2">
-                    <span className={`px-2 py-1 rounded text-xs font-medium border ${getLevelColor(alarm.level)} }`}>
+                    <span className={`px-2 py-1 rounded text-xs font-medium border ${getLevelColor(alarm.level)}`}>
                       {alarm.level.toUpperCase()}
                     </span>
                     <span className="font-mono text-xs">{alarm.alarmNo}</span>
