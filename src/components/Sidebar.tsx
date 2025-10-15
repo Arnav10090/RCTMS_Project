@@ -83,7 +83,7 @@ export const Sidebar = ({ isCollapsed }: SidebarProps) => {
               }
               title={isCollapsed ? item.name : ''}
             >
-              <Icon className="h-5 w-5 shrink-0" />
+              <Icon className="h-6 w-6 shrink-0" />
               {!isCollapsed && (
                 <div className="flex-1">
                   <div className="font-medium">{item.name}</div>
