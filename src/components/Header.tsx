@@ -50,7 +50,7 @@ export const Header = ({ onToggleSidebar, isSidebarCollapsed }: HeaderProps) => 
 
           <div>
             <h2 className="text-xl font-semibold text-foreground">
-              System Overview
+              {pageTitle}
             </h2>
             <p className="text-sm text-muted-foreground">
               Real-time monitoring and control
