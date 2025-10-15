@@ -4,9 +4,9 @@ import { StatusIndicator } from '@/components/StatusIndicator';
 import { GaugeDisplay } from '@/components/GaugeDisplay';
 import { Activity, Droplet, Gauge, Wrench } from 'lucide-react';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
-import { Overview as ClassicOverview } from './Overview';
+import { OverviewOld } from './Overview';
 
-export const OverviewNew = () => {
+export const Overview = () => {
   const systemData = {
     coilData: {
       id: 'RC-2024-001',
@@ -173,7 +173,7 @@ export const OverviewNew = () => {
           </TabsList>
           <TabsContent value="pickling">
             <div className="space-y-6 py-6">
-              <ClassicOverview hideKpiCards />
+              <OverviewOld hideKpiCards />
             </div>
           </TabsContent>
           <TabsContent value="mill-hydraulic">
@@ -191,4 +191,4 @@ export const OverviewNew = () => {
   );
 };
 
-export default OverviewNew;
+export default Overview;
