@@ -6,12 +6,20 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { OverviewOld } from './Overview';
 
 export const Overview = () => {
+  const randomGrade = useMemo(() => {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    const len = 8;
+    let s = '';
+    for (let i = 0; i < len; i++) s += chars.charAt(Math.floor(Math.random() * chars.length));
+    return `G-${s}`;
+  }, []);
+
   const systemData = {
     coilData: {
       id: 'RC-2024-001',
       width: 1250.5,
       thickness: 2.85,
-      grade: 'AISI 304L-01'
+      grade: randomGrade
     },
     coolantSystem: {
       tankLevel: 87.3,
