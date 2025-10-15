@@ -49,14 +49,10 @@ const createAlarm = (): ActiveAlarm => ({
 });
 
 export const AlarmNotifier: React.FC = () => {
-  const { addAcknowledged, pauseNotifications } = useAlarmContext();
+  const { addAcknowledged } = useAlarmContext();
   const [alarm, setAlarm] = useState<ActiveAlarm | null>(null);
 
   useEffect(() => {
-    if (pauseNotifications) {
-      return;
-    }
-
     const showModal = () => {
       setAlarm((prev) => prev ?? createAlarm());
     };
@@ -67,7 +63,7 @@ export const AlarmNotifier: React.FC = () => {
     return () => {
       window.clearInterval(id);
     };
-  }, [pauseNotifications]);
+  }, []);
 
   const open = Boolean(alarm);
 
