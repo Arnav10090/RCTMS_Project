@@ -1,16 +1,23 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { DataCard } from '@/components/DataCard';
-import { StatusIndicator } from '@/components/StatusIndicator';
 import { GaugeDisplay } from '@/components/GaugeDisplay';
 import { Activity, Droplet, CheckCircle, Shield } from 'lucide-react';
 
 export const KpiStripOilCellar: React.FC = () => {
+  const randomGrade = useMemo(() => {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    const len = 8;
+    let s = '';
+    for (let i = 0; i < len; i++) s += chars.charAt(Math.floor(Math.random() * chars.length));
+    return `G-${s}`;
+  }, []);
+
   const systemData = {
     coilData: {
       id: 'RC-2024-001',
       width: 1250.5,
       thickness: 2.85,
-      grade: 'AISI 304'
+      grade: randomGrade
     },
     coolantSystem: {
       tankLevel: 87.3,
@@ -40,21 +47,21 @@ export const KpiStripOilCellar: React.FC = () => {
           <div className="space-y-3">
             <div>
               <div className="text-xs text-muted-foreground">Coil ID</div>
-              <div className="text-lg font-mono font-bold text-primary">{systemData.coilData.id}</div>
+              <div className="text-lg font-mono font-bold text-black dark:text-white">{systemData.coilData.id}</div>
             </div>
             <div className="grid grid-cols-2 gap-3 text-sm">
               <div>
                 <div className="text-xs text-muted-foreground">Width</div>
-                <div className="font-mono font-semibold">{systemData.coilData.width} mm</div>
+                <div className="font-mono font-semibold text-black dark:text-white">{systemData.coilData.width} mm</div>
               </div>
               <div>
                 <div className="text-xs text-muted-foreground">Thickness</div>
-                <div className="font-mono font-semibold">{systemData.coilData.thickness} mm</div>
+                <div className="font-mono font-semibold text-black dark:text-white">{systemData.coilData.thickness} mm</div>
               </div>
             </div>
             <div>
               <div className="text-xs text-muted-foreground">Grade</div>
-              <div className="text-sm font-semibold text-secondary">{systemData.coilData.grade}</div>
+              <div className="text-sm font-semibold text-secondary dark:text-white">{systemData.coilData.grade}</div>
             </div>
           </div>
         </DataCard>
@@ -65,18 +72,18 @@ export const KpiStripOilCellar: React.FC = () => {
             <GaugeDisplay label="Tank Level" value={systemData.coolantSystem.tankLevel} unit="%" thresholds={{ warning: 30, danger: 15 }} />
             <div className="grid grid-cols-2 gap-3 text-sm">
               <div>
-                <div className="text-xs text-muted-foreground">Temperature</div>
-                <div className="font-mono font-semibold text-success">{systemData.coolantSystem.temperature}°C</div>
+                <div className="text-xs text-muted-foreground">Coolant Temperature</div>
+                <div className="font-mono font-semibold text-black dark:text-white">{systemData.coolantSystem.temperature}°C</div>
               </div>
               <div>
-                <div className="text-xs text-muted-foreground">Concentration</div>
-                <div className="font-mono font-semibold text-success">{systemData.coolantSystem.concentration}%</div>
+                <div className="text-xs text-muted-foreground">Coolant Concentration</div>
+                <div className="font-mono font-semibold text-black dark:text-white">{systemData.coolantSystem.concentration}%</div>
               </div>
             </div>
           </div>
         </DataCard>
 
-        {/* Safety Snapshot (replaces Main Hydraulic) */}
+        {/* Oil Cellar Status */}
         <DataCard title="Oil Cellar Status" icon={CheckCircle} variant="primary">
           <div className="space-y-2">
             <div className="grid grid-cols-2 gap-2 text-sm mt-2">
@@ -98,14 +105,21 @@ export const KpiStripOilCellar: React.FC = () => {
           </div>
         </DataCard>
 
-        {/* Access Control (replaces Auxiliary Hydraulic) */}
+        {/* Access Control */}
         <DataCard title="Access Control" icon={Shield} variant="success">
           <div className="space-y-3">
-            <StatusIndicator status="active" label="Access Status" value={systemData.accessControl.status} />
-            <StatusIndicator status="active" label="Fire Ext. System" value={systemData.accessControl.fireExtSystem} />
-            <div className="flex justify-between items-center">
-              <span className="text-sm">Unsafe Acts Today</span>
-              <span className={`font-mono font-bold ${systemData.accessControl.unsafeActs === 0 ? 'text-success' : 'text-warning'}`}>{systemData.accessControl.unsafeActs}</span>
+            <div className="space-y-6">
+              <div>
+                <div className="text-xs text-muted-foreground">Fire Ext. system</div>
+                <div className="mt-1">
+                  <div className="h-5 w-12 rounded bg-success"></div>
+                </div>
+              </div>
+
+              <div>
+                <div className="text-xs text-muted-foreground">Unsafe Acts Today</div>
+                <div className="font-mono font-semibold">{systemData.accessControl.unsafeActs}</div>
+              </div>
             </div>
           </div>
         </DataCard>

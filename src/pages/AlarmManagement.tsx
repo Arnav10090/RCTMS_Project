@@ -279,7 +279,7 @@ export const AlarmManagement = () => {
       </div>
 
       {/* Alarm Table */}
-      <DataCard title={`Alarm List (${filteredAlarms.length} items)`} className="overflow-x-auto">
+      <DataCard title={`Alarms & Alerts`} className="overflow-x-auto">
         <div className="min-w-full">
           <div className="grid grid-cols-11 gap-2 pb-3 mb-4 border-b border-border text-xs font-semibold text-muted-foreground">
             <div className="col-span-1">NO.</div>

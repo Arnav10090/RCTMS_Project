@@ -11,7 +11,7 @@ import {
   Gauge
 } from 'lucide-react';
 
-const navigationItems = [
+export const navigationItems = [
   {
     path: '/overview-new',
     name: 'Overview',
@@ -57,7 +57,7 @@ export const Sidebar = ({ isCollapsed }: SidebarProps) => {
           {!isCollapsed && (
             <div>
               <h1 className="text-lg font-semibold text-primary-foreground">
-                Roll Coolant
+                Roll Coolant Tank
               </h1>
               <p className="text-sm text-primary-foreground/70">
                 Monitoring System
@@ -75,7 +75,7 @@ export const Sidebar = ({ isCollapsed }: SidebarProps) => {
               key={item.path}
               to={item.path}
               className={({ isActive }) =>
-                `flex items-center ${isCollapsed ? 'justify-center px-3' : 'space-x-3 px-4'} py-3 rounded-lg text-sm font-medium transition-colors ${
+                `flex items-center ${isCollapsed ? 'justify-center px-3' : 'space-x-4 px-6'} py-4 rounded-lg text-base font-semibold transition-colors ${
                   isActive
                     ? 'bg-secondary text-secondary-foreground shadow-glow'
                     : 'text-primary-foreground/80 hover:bg-primary-hover hover:text-primary-foreground'
@@ -83,11 +83,10 @@ export const Sidebar = ({ isCollapsed }: SidebarProps) => {
               }
               title={isCollapsed ? item.name : ''}
             >
-              <Icon className="h-5 w-5 shrink-0" />
+              <Icon className="h-6 w-6 shrink-0" />
               {!isCollapsed && (
                 <div className="flex-1">
                   <div className="font-medium">{item.name}</div>
-                  <div className="text-xs opacity-70">{item.description}</div>
                 </div>
               )}
             </NavLink>

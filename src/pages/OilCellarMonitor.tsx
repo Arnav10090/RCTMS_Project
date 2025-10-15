@@ -112,7 +112,7 @@ export const OilCellarMonitor = () => {
     <div className="space-y-6">
       <div className="h-1" />
 
-      <DataCard title="HMI-04: Oil Cellar Matrix" className="overflow-x-auto" variant="primary">
+      <DataCard title="Oil Cellar Matrix" className="overflow-x-auto" variant="primary">
         <div className="mb-3">
           <div className="text-sm text-muted-foreground">Toggle cells to mark availability/status for each area.</div>
         </div>
