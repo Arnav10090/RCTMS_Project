@@ -1,4 +1,3 @@
-import React from 'react';
 import React, { useMemo } from 'react';
 import { DataCard } from '@/components/DataCard';
 import { GaugeDisplay } from '@/components/GaugeDisplay';
