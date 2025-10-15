@@ -79,13 +79,13 @@ export const Overview = () => {
             />
             <div className="grid grid-cols-2 gap-3 text-sm">
               <div>
-                <div className="text-xs text-muted-foreground">Temperature</div>
+                <div className="text-xs text-muted-foreground">Coolant Temperature</div>
                 <div className="font-mono font-semibold text-success">
                   {systemData.coolantSystem.temperature}°C
                 </div>
               </div>
               <div>
-                <div className="text-xs text-muted-foreground">Concentration</div>
+                <div className="text-xs text-muted-foreground">Coolant Concentration</div>
                 <div className="font-mono font-semibold text-success">
                   {systemData.coolantSystem.concentration}%
                 </div>
