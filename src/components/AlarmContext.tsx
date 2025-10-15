@@ -23,8 +23,6 @@ interface AlarmContextValue {
   removeAcknowledged: (id: string) => void;
   collapsed: boolean;
   setCollapsed: (v: boolean) => void;
-  pauseNotifications: boolean;
-  setPauseNotifications: (v: boolean) => void;
 }
 
 const AlarmContext = createContext<AlarmContextValue | undefined>(undefined);
@@ -45,8 +43,6 @@ export const AlarmProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       return false;
     }
   });
-  const [pauseNotifications, setPauseNotifications] = useState<boolean>(false);
-
   useEffect(() => {
     try {
       localStorage.setItem('alarmFooterCollapsed', collapsed ? '1' : '0');
@@ -76,9 +72,7 @@ export const AlarmProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     removeAcknowledged,
     collapsed,
     setCollapsed,
-    pauseNotifications,
-    setPauseNotifications,
-  }), [acknowledged, addAcknowledged, removeAcknowledged, collapsed, pauseNotifications, setCollapsed, setPauseNotifications]);
+  }), [acknowledged, addAcknowledged, removeAcknowledged, collapsed, setCollapsed]);
 
   return <AlarmContext.Provider value={value}>{children}</AlarmContext.Provider>;
 };
