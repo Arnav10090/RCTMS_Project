@@ -9,6 +9,7 @@ import {
   AlertDialogDescription,
   AlertDialogAction,
 } from '@/components/ui/alert-dialog';
+import { cn } from '@/lib/utils';
 
 const SAMPLE_MESSAGES = [
   'Hydraulic pressure spike detected',
@@ -20,44 +21,88 @@ const SAMPLE_MESSAGES = [
 ];
 
 const LEVELS = ['low', 'medium', 'high', 'critical'] as const;
+const LEVEL_STYLES: Record<typeof LEVELS[number], string> = {
+  critical: 'border border-danger bg-danger/10 text-danger',
+  high: 'border border-warning bg-warning/10 text-warning',
+  medium: 'border border-primary bg-primary/10 text-primary',
+  low: 'border border-border bg-muted text-muted-foreground',
+};
+
+const ALARM_INTERVAL_MS = 60_000;
 
 function randomItem<T>(arr: readonly T[]) {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
+type ActiveAlarm = {
+  id: string;
+  level: typeof LEVELS[number];
+  message: string;
+  time: string;
+};
+
+const createAlarm = (): ActiveAlarm => ({
+  id: Math.random().toString(36).slice(2),
+  level: randomItem(LEVELS),
+  message: randomItem(SAMPLE_MESSAGES),
+  time: new Date().toLocaleString(),
+});
+
 export const AlarmNotifier: React.FC = () => {
   const { addAcknowledged, pauseNotifications } = useAlarmContext();
-  const [alarm, setAlarm] = React.useState<null | { id: string; level: typeof LEVELS[number]; message: string; time: string }>(null);
+  const [alarm, setAlarm] = React.useState<ActiveAlarm | null>(null);
 
   React.useEffect(() => {
+    if (pauseNotifications) {
+      return;
+    }
+
     const showModal = () => {
-      if (pauseNotifications) return; // do not show while paused
-      setAlarm((prev) => prev ?? {
-        id: Math.random().toString(36).slice(2),
-        level: randomItem(LEVELS),
-        message: randomItem(SAMPLE_MESSAGES),
-        time: new Date().toLocaleString(),
-      });
+      setAlarm((prev) => prev ?? createAlarm());
     };
-    const id = setInterval(showModal, 60_000);
+
+    showModal();
+    const id = window.setInterval(showModal, ALARM_INTERVAL_MS);
+
     return () => {
-      clearInterval(id);
+      window.clearInterval(id);
     };
   }, [pauseNotifications]);
 
-  const open = !!alarm;
+  const open = Boolean(alarm);
 
   return (
-    <AlertDialog open={open} onOpenChange={() => { /* block close until acknowledge */ }}>
+    <AlertDialog
+      open={open}
+      onOpenChange={(next) => {
+        if (!next) {
+          setAlarm((current) => current);
+        }
+      }}
+    >
       <AlertDialogContent className="sm:rounded-xl">
-        <AlertDialogHeader>
-          <AlertDialogTitle>New {alarm?.level.toUpperCase()} Alarm</AlertDialogTitle>
-          <AlertDialogDescription>
-            {alarm?.message} — {alarm?.time}
+        <AlertDialogHeader className="space-y-4">
+          <div className="flex justify-center">
+            <span
+              className={cn(
+                'rounded-full px-4 py-1 text-sm font-semibold uppercase',
+                alarm ? LEVEL_STYLES[alarm.level] : 'border border-border'
+              )}
+            >
+              {alarm?.level ?? ''}
+            </span>
+          </div>
+          <AlertDialogTitle className="text-center text-2xl font-bold">
+            Alarm Notification
+          </AlertDialogTitle>
+          <AlertDialogDescription className="text-base text-center">
+            {alarm?.message}
+            <span className="block text-sm text-muted-foreground mt-2">{alarm?.time}</span>
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogAction
+            className="w-full"
             onClick={() => {
               if (alarm) {
                 addAcknowledged(alarm);
