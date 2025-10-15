@@ -93,7 +93,7 @@ export const AlarmNotifier: React.FC = () => {
             </span>
           </div>
           <AlertDialogTitle className="text-center text-2xl font-bold">
-            {alarm ? `New ${alarm.level.toUpperCase()} Alarm` : 'Alarm Notification'}
+            Alarm Notification
           </AlertDialogTitle>
           <AlertDialogDescription className="text-base text-center">
             {alarm?.message}
