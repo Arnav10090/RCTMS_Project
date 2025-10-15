@@ -195,7 +195,13 @@ export const Overview = () => {
             </div>
           </TabsContent>
           <TabsContent value="gear-lube">
-            <div className="min-h-[400px]" />
+            <div className="py-6 flex items-center justify-center">
+              <img
+                src="https://cdn.builder.io/api/v1/image/assets%2F8aaafd4b37d74bc7b32792409b6f68c2%2F521536ed759d4f4ca4e90ade701858e8?format=webp&width=800"
+                alt="Gear Lubrication System schematic"
+                className="max-w-full h-auto rounded-md border border-border/50 shadow-sm"
+              />
+            </div>
           </TabsContent>
         </Tabs>
       </DataCard>
