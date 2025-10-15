@@ -93,11 +93,10 @@ export const AlarmNotifier: React.FC = () => {
             </span>
           </div>
           <AlertDialogTitle className="text-center text-2xl font-bold">
-            Alarm Notification
+            {alarm?.message}
           </AlertDialogTitle>
           <AlertDialogDescription className="text-base text-center">
-            {alarm?.message}
-            <span className="block text-sm text-muted-foreground mt-2">{alarm?.time}</span>
+            <span className="block text-sm text-muted-foreground">{alarm?.time}</span>
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
