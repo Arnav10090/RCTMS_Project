@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Bell, ChevronLeft, ChevronRight, Sun, Moon } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import { Button } from './ui/button';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { navigationItems } from '@/components/Sidebar';
 
 interface HeaderProps {
   onToggleSidebar: () => void;
