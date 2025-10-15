@@ -133,29 +133,36 @@ export const Overview = () => {
 
         <DataCard title="Auxiliary Hydraulic System" icon={Wrench}>
           <div className="space-y-3">
-            <StatusIndicator 
-              status="warning" 
-              label="System Status" 
-              value={systemData.auxiliaryHydraulic.status}
+            <GaugeDisplay
+              label="Tank Level"
+              value={systemData.coolantSystem.tankLevel}
+              unit="%"
+              thresholds={{ warning: 30, danger: 15 }}
             />
             <div className="grid grid-cols-2 gap-3 text-sm">
               <div>
-                <div className="text-xs text-muted-foreground">Pressure</div>
+                <div className="text-xs text-muted-foreground">Oil Temperature</div>
+                <div className="font-mono font-semibold">
+                  {systemData.auxiliaryHydraulic.temperature}°C
+                </div>
+              </div>
+              <div>
+                <div className="text-xs text-muted-foreground">System Pressure</div>
                 <div className="font-mono font-semibold">
                   {systemData.auxiliaryHydraulic.pressure} bar
                 </div>
               </div>
               <div>
-                <div className="text-xs text-muted-foreground">Temperature</div>
+                <div className="text-xs text-muted-foreground">Solid Contamination</div>
                 <div className="font-mono font-semibold">
-                  {systemData.auxiliaryHydraulic.temperature}°C
+                  {systemData.auxiliaryHydraulic.contamination} mg/L
                 </div>
               </div>
-            </div>
-            <div>
-              <div className="text-xs text-muted-foreground">Sync Status</div>
-              <div className="text-sm font-semibold text-success">
-                {systemData.auxiliaryHydraulic.syncStatus}
+              <div>
+                <div className="text-xs text-muted-foreground">Water Saturation</div>
+                <div className="font-mono font-semibold">
+                  {systemData.auxiliaryHydraulic.waterSaturation}%
+                </div>
               </div>
             </div>
           </div>
