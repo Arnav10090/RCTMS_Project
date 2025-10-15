@@ -89,11 +89,11 @@ export const AlarmNotifier: React.FC = () => {
                 alarm ? LEVEL_STYLES[alarm.level] : 'border border-border'
               )}
             >
-              {alarm?.level ?? ''}
+              {alarm ? alarm.level.toUpperCase() : ''}
             </span>
           </div>
           <AlertDialogTitle className="text-center text-2xl font-bold">
-            Alarm Notification
+            {alarm ? `New ${alarm.level.toUpperCase()} Alarm` : 'Alarm Notification'}
           </AlertDialogTitle>
           <AlertDialogDescription className="text-base text-center">
             {alarm?.message}
