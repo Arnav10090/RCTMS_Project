@@ -67,7 +67,7 @@ export const Overview = () => {
             </div>
             <div>
               <div className="text-xs text-muted-foreground">Grade</div>
-              <div className="text-sm font-semibold text-secondary">
+              <div className="text-sm font-semibold text-secondary dark:text-white">
                 {systemData.coilData.grade}
               </div>
             </div>
