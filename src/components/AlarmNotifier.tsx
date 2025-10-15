@@ -51,9 +51,9 @@ const createAlarm = (): ActiveAlarm => ({
 
 export const AlarmNotifier: React.FC = () => {
   const { addAcknowledged, pauseNotifications } = useAlarmContext();
-  const [alarm, setAlarm] = React.useState<ActiveAlarm | null>(null);
+  const [alarm, setAlarm] = useState<ActiveAlarm | null>(null);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (pauseNotifications) {
       return;
     }
