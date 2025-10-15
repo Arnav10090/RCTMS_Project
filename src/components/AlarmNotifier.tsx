@@ -45,7 +45,7 @@ const createAlarm = (): ActiveAlarm => ({
   id: Math.random().toString(36).slice(2),
   level: randomItem(LEVELS),
   message: randomItem(SAMPLE_MESSAGES),
-  time: new Date().toLocaleString(),
+  time: formatDateTime(new Date()),
 });
 
 export const AlarmNotifier: React.FC = () => {
