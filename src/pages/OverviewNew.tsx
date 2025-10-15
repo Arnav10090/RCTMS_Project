@@ -177,7 +177,13 @@ export const Overview = () => {
             </div>
           </TabsContent>
           <TabsContent value="mill-hydraulic">
-            <div className="min-h-[400px]" />
+            <div className="py-6 flex items-center justify-center">
+              <img
+                src="https://cdn.builder.io/api/v1/image/assets%2F8aaafd4b37d74bc7b32792409b6f68c2%2F7d1759f7773d4bcaa1be021d3028f561?format=webp&width=800"
+                alt="Mill Hydraulic System schematic"
+                className="max-w-full h-auto rounded-md border border-border/50 shadow-sm"
+              />
+            </div>
           </TabsContent>
           <TabsContent value="aux-hydraulic">
             <div className="min-h-[400px]" />
