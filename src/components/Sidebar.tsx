@@ -11,7 +11,7 @@ import {
   Gauge
 } from 'lucide-react';
 
-const navigationItems = [
+export const navigationItems = [
   {
     path: '/overview-new',
     name: 'Overview',
