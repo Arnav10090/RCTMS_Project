@@ -1,6 +1,5 @@
 import React from 'react';
 import { DataCard } from '@/components/DataCard';
-import { StatusIndicator } from '@/components/StatusIndicator';
 import { GaugeDisplay } from '@/components/GaugeDisplay';
 import { Activity, Droplet, Gauge, Wrench } from 'lucide-react';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
