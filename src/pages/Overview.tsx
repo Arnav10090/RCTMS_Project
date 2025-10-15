@@ -10,7 +10,7 @@ interface OverviewProps {
   hideKpiCards?: boolean;
 }
 
-export const Overview = ({ hideKpiCards = false }: OverviewProps) => {
+export const OverviewOld = ({ hideKpiCards = false }: OverviewProps) => {
   // Mock real-time data - in production this would come from your API
   const systemData = {
     coilData: {
@@ -193,3 +193,5 @@ export const Overview = ({ hideKpiCards = false }: OverviewProps) => {
     </div>
   );
 };
+
+export default OverviewOld;
