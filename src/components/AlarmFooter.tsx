@@ -30,7 +30,7 @@ export const AlarmFooter: React.FC = () => {
                     <span className={`px-2 py-0.5 rounded border text-xs font-medium ${
                       a.level === 'critical' ? 'border-danger text-danger' :
                       a.level === 'high' ? 'border-warning text-warning' :
-                      a.level === 'medium' ? 'border-secondary text-secondary dark:border-secondary-foreground dark:text-secondary-foreground' :
+                      a.level === 'medium' ? 'border-secondary text-secondary dark:border-secondary dark:text-secondary dark:bg-secondary/20' :
                       'border-muted text-muted-foreground'
                     }`}>{a.level.toUpperCase()}</span>
                     <span className="flex-1 min-w-0 truncate">{a.message}</span>
