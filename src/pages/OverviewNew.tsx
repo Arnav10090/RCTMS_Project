@@ -11,7 +11,7 @@ export const Overview = () => {
       id: 'RC-2024-001',
       width: 1250.5,
       thickness: 2.85,
-      grade: 'AISI 304'
+      grade: 'AISI 304L-01'
     },
     coolantSystem: {
       tankLevel: 87.3,
@@ -21,15 +21,14 @@ export const Overview = () => {
     mainHydraulic: {
       pressure: 145.8,
       temperature: 42.1,
-      status: 'Running',
       contamination: 0.85,
       waterSaturation: 2.1
     },
     auxiliaryHydraulic: {
       pressure: 142.3,
       temperature: 39.8,
-      status: 'Standby',
-      syncStatus: 'Synchronized'
+      contamination: 0.92,
+      waterSaturation: 1.8
     }
   };
 
