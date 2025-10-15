@@ -47,20 +47,20 @@ export const Overview = () => {
           <div className="space-y-3">
             <div>
               <div className="text-xs text-muted-foreground">Coil ID</div>
-              <div className="text-lg font-mono font-bold text-primary">
+              <div className="text-lg font-mono font-bold text-black dark:text-white">
                 {systemData.coilData.id}
               </div>
             </div>
             <div className="grid grid-cols-2 gap-3 text-sm">
               <div>
                 <div className="text-xs text-muted-foreground">Width</div>
-                <div className="font-mono font-semibold">
+                <div className="font-mono font-semibold text-black dark:text-white">
                   {systemData.coilData.width} mm
                 </div>
               </div>
               <div>
                 <div className="text-xs text-muted-foreground">Thickness</div>
-                <div className="font-mono font-semibold">
+                <div className="font-mono font-semibold text-black dark:text-white">
                   {systemData.coilData.thickness} mm
                 </div>
               </div>
@@ -88,13 +88,13 @@ export const Overview = () => {
             <div className="grid grid-cols-2 gap-3 text-sm">
               <div>
                 <div className="text-xs text-muted-foreground">Coolant Temperature</div>
-                <div className="font-mono font-semibold text-success">
+                <div className="font-mono font-semibold text-black dark:text-white">
                   {systemData.coolantSystem.temperature}°C
                 </div>
               </div>
               <div>
                 <div className="text-xs text-muted-foreground">Coolant Concentration</div>
-                <div className="font-mono font-semibold text-success">
+                <div className="font-mono font-semibold text-black dark:text-white">
                   {systemData.coolantSystem.concentration}%
                 </div>
               </div>
@@ -113,25 +113,25 @@ export const Overview = () => {
             <div className="grid grid-cols-2 gap-3 text-sm">
               <div>
                 <div className="text-xs text-muted-foreground">Oil Temperature</div>
-                <div className="font-mono font-semibold">
+                <div className="font-mono font-semibold text-black dark:text-white">
                   {systemData.mainHydraulic.temperature}°C
                 </div>
               </div>
               <div>
                 <div className="text-xs text-muted-foreground">System Pressure</div>
-                <div className="font-mono font-semibold">
+                <div className="font-mono font-semibold text-black dark:text-white">
                   {systemData.mainHydraulic.pressure} bar
                 </div>
               </div>
               <div>
                 <div className="text-xs text-muted-foreground">Solid Contamination</div>
-                <div className="font-mono font-semibold">
+                <div className="font-mono font-semibold text-black dark:text-white">
                   {systemData.mainHydraulic.contamination} mg/L
                 </div>
               </div>
               <div>
                 <div className="text-xs text-muted-foreground">Water Saturation</div>
-                <div className="font-mono font-semibold">
+                <div className="font-mono font-semibold text-black dark:text-white">
                   {systemData.mainHydraulic.waterSaturation}%
                 </div>
               </div>
@@ -150,25 +150,25 @@ export const Overview = () => {
             <div className="grid grid-cols-2 gap-3 text-sm">
               <div>
                 <div className="text-xs text-muted-foreground">Oil Temperature</div>
-                <div className="font-mono font-semibold">
+                <div className="font-mono font-semibold text-black dark:text-white">
                   {systemData.auxiliaryHydraulic.temperature}°C
                 </div>
               </div>
               <div>
                 <div className="text-xs text-muted-foreground">System Pressure</div>
-                <div className="font-mono font-semibold">
+                <div className="font-mono font-semibold text-black dark:text-white">
                   {systemData.auxiliaryHydraulic.pressure} bar
                 </div>
               </div>
               <div>
                 <div className="text-xs text-muted-foreground">Solid Contamination</div>
-                <div className="font-mono font-semibold">
+                <div className="font-mono font-semibold text-black dark:text-white">
                   {systemData.auxiliaryHydraulic.contamination} mg/L
                 </div>
               </div>
               <div>
                 <div className="text-xs text-muted-foreground">Water Saturation</div>
-                <div className="font-mono font-semibold">
+                <div className="font-mono font-semibold text-black dark:text-white">
                   {systemData.auxiliaryHydraulic.waterSaturation}%
                 </div>
               </div>
