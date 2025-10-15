@@ -1,9 +1,9 @@
 import React from 'react';
 import { useAlarmContext } from './AlarmContext';
-import { ChevronDown, ChevronUp, X } from 'lucide-react';
+import { ChevronDown, ChevronUp } from 'lucide-react';
 
 export const AlarmFooter: React.FC = () => {
-  const { acknowledged, removeAcknowledged, collapsed, setCollapsed } = useAlarmContext();
+  const { acknowledged, collapsed, setCollapsed } = useAlarmContext();
 
   return (
     <div className="fixed bottom-0 inset-x-0 z-40">
@@ -30,18 +30,11 @@ export const AlarmFooter: React.FC = () => {
                     <span className={`px-2 py-0.5 rounded border text-xs font-medium ${
                       a.level === 'critical' ? 'border-danger text-danger' :
                       a.level === 'high' ? 'border-warning text-warning' :
-                      a.level === 'medium' ? 'border-secondary text-secondary' :
+                      a.level === 'medium' ? 'border-primary text-primary bg-primary/10 dark:bg-primary/20' :
                       'border-muted text-muted-foreground'
                     }`}>{a.level.toUpperCase()}</span>
                     <span className="flex-1 min-w-0 truncate">{a.message}</span>
                     <span className="text-xs text-muted-foreground">{a.time}</span>
-                    <button
-                      className="ml-2 rounded border px-2 py-1 text-xs hover:bg-muted"
-                      onClick={() => removeAcknowledged(a.id)}
-                      aria-label="Remove"
-                    >
-                      <X className="h-3 w-3" />
-                    </button>
                   </li>
                 ))}
               </ul>

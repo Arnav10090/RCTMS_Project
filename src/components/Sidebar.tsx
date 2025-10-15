@@ -13,14 +13,8 @@ import {
 
 const navigationItems = [
   {
-    path: '/',
-    name: 'Overview',
-    icon: Monitor,
-    description: 'HMI-01'
-  },
-  {
     path: '/overview-new',
-    name: 'Overview (New)',
+    name: 'Overview',
     icon: Monitor,
     description: 'HMI-01B'
   },

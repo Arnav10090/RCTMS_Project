@@ -7,8 +7,8 @@ import { AlarmProvider } from "./components/AlarmContext";
 import { AlarmNotifier } from "./components/AlarmNotifier";
 import { AlarmFooter } from "./components/AlarmFooter";
 import { Layout } from "./components/Layout";
-import { Overview } from "./pages/Overview";
-import OverviewNew from "./pages/OverviewNew";
+import { OverviewOld } from "./pages/Overview";
+import Overview from "./pages/OverviewNew";
 import { HydraulicSystem } from "./pages/HydraulicSystem";
 import { PumpOperations } from "./pages/PumpOperations";
 import { OilCellarMonitor } from "./pages/OilCellarMonitor";
@@ -28,8 +28,8 @@ const App = () => (
         <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout />}>
-            <Route index element={<Overview />} />
-            <Route path="overview-new" element={<OverviewNew />} />
+            <Route index element={<OverviewOld />} />
+            <Route path="overview-new" element={<Overview />} />
             <Route path="hydraulic" element={<HydraulicSystem />} />
             <Route path="pumps" element={<PumpOperations />} />
             <Route path="oil-cellar" element={<OilCellarMonitor />} />
