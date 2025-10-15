@@ -4,6 +4,7 @@ import { StatusIndicator } from '@/components/StatusIndicator';
 import { GaugeDisplay } from '@/components/GaugeDisplay';
 import { Activity, Droplet, Gauge, Wrench } from 'lucide-react';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
+import { Overview as ClassicOverview } from './Overview';
 
 export const OverviewNew = () => {
   const systemData = {
@@ -171,7 +172,9 @@ export const OverviewNew = () => {
             <TabsTrigger value="gear-lube">Gear Lubrication System</TabsTrigger>
           </TabsList>
           <TabsContent value="pickling">
-            <div className="min-h-[400px]" />
+            <div className="space-y-6 py-6">
+              <ClassicOverview />
+            </div>
           </TabsContent>
           <TabsContent value="mill-hydraulic">
             <div className="min-h-[400px]" />
