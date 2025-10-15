@@ -47,16 +47,16 @@ export const KpiStripOilCellar: React.FC = () => {
           <div className="space-y-3">
             <div>
               <div className="text-xs text-muted-foreground">Coil ID</div>
-              <div className="text-lg font-mono font-bold text-primary">{systemData.coilData.id}</div>
+              <div className="text-lg font-mono font-bold text-black dark:text-white">{systemData.coilData.id}</div>
             </div>
             <div className="grid grid-cols-2 gap-3 text-sm">
               <div>
                 <div className="text-xs text-muted-foreground">Width</div>
-                <div className="font-mono font-semibold">{systemData.coilData.width} mm</div>
+                <div className="font-mono font-semibold text-black dark:text-white">{systemData.coilData.width} mm</div>
               </div>
               <div>
                 <div className="text-xs text-muted-foreground">Thickness</div>
-                <div className="font-mono font-semibold">{systemData.coilData.thickness} mm</div>
+                <div className="font-mono font-semibold text-black dark:text-white">{systemData.coilData.thickness} mm</div>
               </div>
             </div>
             <div>
@@ -73,11 +73,11 @@ export const KpiStripOilCellar: React.FC = () => {
             <div className="grid grid-cols-2 gap-3 text-sm">
               <div>
                 <div className="text-xs text-muted-foreground">Coolant Temperature</div>
-                <div className="font-mono font-semibold text-success">{systemData.coolantSystem.temperature}°C</div>
+                <div className="font-mono font-semibold text-black dark:text-white">{systemData.coolantSystem.temperature}°C</div>
               </div>
               <div>
                 <div className="text-xs text-muted-foreground">Coolant Concentration</div>
-                <div className="font-mono font-semibold text-success">{systemData.coolantSystem.concentration}%</div>
+                <div className="font-mono font-semibold text-black dark:text-white">{systemData.coolantSystem.concentration}%</div>
               </div>
             </div>
           </div>
