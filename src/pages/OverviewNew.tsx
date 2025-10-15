@@ -165,11 +165,12 @@ export const Overview = () => {
 
       <DataCard>
         <Tabs defaultValue="pickling" className="w-full">
-          <TabsList className="grid w-full grid-cols-4">
+          <TabsList className="grid w-full grid-cols-5">
             <TabsTrigger value="pickling">Pickling Tank</TabsTrigger>
             <TabsTrigger value="mill-hydraulic">Mill Hydraulic System</TabsTrigger>
             <TabsTrigger value="aux-hydraulic">Auxiliary Hydraulic System</TabsTrigger>
             <TabsTrigger value="gear-lube">Gear Lubrication System</TabsTrigger>
+            <TabsTrigger value="legend">Legend</TabsTrigger>
           </TabsList>
           <TabsContent value="pickling">
             <div className="space-y-6 py-6">
@@ -199,6 +200,15 @@ export const Overview = () => {
               <img
                 src="https://cdn.builder.io/api/v1/image/assets%2F8aaafd4b37d74bc7b32792409b6f68c2%2F521536ed759d4f4ca4e90ade701858e8?format=webp&width=800"
                 alt="Gear Lubrication System schematic"
+                className="max-w-full h-auto rounded-md border border-border/50 shadow-sm"
+              />
+            </div>
+          </TabsContent>
+          <TabsContent value="legend">
+            <div className="py-6 flex items-center justify-center">
+              <img
+                src="https://cdn.builder.io/api/v1/image/assets%2F8aaafd4b37d74bc7b32792409b6f68c2%2F01eeeeb78c5a42398acaf1a7a4797d6f?format=webp&width=800"
+                alt="Schematic Legend"
                 className="max-w-full h-auto rounded-md border border-border/50 shadow-sm"
               />
             </div>
