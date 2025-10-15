@@ -173,7 +173,7 @@ export const OverviewNew = () => {
           </TabsList>
           <TabsContent value="pickling">
             <div className="space-y-6 py-6">
-              <ClassicOverview />
+              <ClassicOverview hideKpiCards />
             </div>
           </TabsContent>
           <TabsContent value="mill-hydraulic">
