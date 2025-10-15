@@ -19,9 +19,9 @@ export const Layout = () => {
         />
         {location.pathname === '/oil-cellar' ? (
           <KpiStripOilCellar />
-        ) : (
-          location.pathname !== '/' ? <KpiStrip /> : null
-        )}
+        ) : location.pathname !== '/' && location.pathname !== '/overview-new' ? (
+          <KpiStrip />
+        ) : null}
         <main className="flex-1 p-6 overflow-auto">
           <Outlet />
         </main>
