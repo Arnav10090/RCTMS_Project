@@ -9,7 +9,7 @@ import {
   AlertDialogDescription,
   AlertDialogAction,
 } from '@/components/ui/alert-dialog';
-import { cn } from '@/lib/utils';
+import { cn, formatDateTime } from '@/lib/utils';
 
 const SAMPLE_MESSAGES = [
   'Hydraulic pressure spike detected',

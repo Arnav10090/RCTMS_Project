@@ -4,17 +4,13 @@ import { useTheme } from 'next-themes';
 import { Button } from './ui/button';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { navigationItems } from '@/components/Sidebar';
+import { formatDateTime } from '@/lib/utils';
 
 interface HeaderProps {
   onToggleSidebar: () => void;
   isSidebarCollapsed: boolean;
 }
 
-function formatDateTime(dt: Date) {
-  const date = dt.toLocaleDateString('en-GB'); // yields DD/MM/YYYY
-  const time = dt.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit', second: '2-digit', hour12: true });
-  return `${time}, ${date}`;
-}
 
 export const Header = ({ onToggleSidebar, isSidebarCollapsed }: HeaderProps) => {
   const [now, setNow] = useState<Date>(new Date());
@@ -68,7 +64,7 @@ export const Header = ({ onToggleSidebar, isSidebarCollapsed }: HeaderProps) => 
 
               {showTooltip && (
                 <div className="absolute left-0 top-full mt-2 z-50 w-max bg-card border border-border/60 text-sm text-muted-foreground px-3 py-2 rounded shadow-sm whitespace-nowrap">
-                  {`Stats last updated at ${now.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit', second: '2-digit', hour12: true })} (${now.toLocaleDateString('en-GB')})`}
+                  {`Stats last updated at ${formatDateTime(now)}`}
                 </div>
               )}
             </div>
