@@ -108,7 +108,7 @@ export const KpiStripOilCellar: React.FC = () => {
         {/* Access Control */}
         <DataCard title="Access Control" icon={Shield} variant="success">
           <div className="space-y-3">
-            <div className="flex items-center justify-between">
+            <div className="space-y-3">
               <div>
                 <div className="text-xs text-muted-foreground">Fire Ext. system</div>
                 <div className="mt-1">
@@ -116,7 +116,7 @@ export const KpiStripOilCellar: React.FC = () => {
                 </div>
               </div>
 
-              <div className="text-sm">
+              <div>
                 <div className="text-xs text-muted-foreground">Unsafe Acts Today</div>
                 <div className="font-mono font-semibold">{systemData.accessControl.unsafeActs}</div>
               </div>
