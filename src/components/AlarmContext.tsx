@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useMemo, useState, useEffect } from 'react';
+import React, { createContext, useContext, useMemo, useState, useEffect, useCallback } from 'react';
 
 export type AckAlarm = {
   id: string;
@@ -23,8 +23,6 @@ interface AlarmContextValue {
   removeAcknowledged: (id: string) => void;
   collapsed: boolean;
   setCollapsed: (v: boolean) => void;
-  pauseNotifications: boolean;
-  setPauseNotifications: (v: boolean) => void;
 }
 
 const AlarmContext = createContext<AlarmContextValue | undefined>(undefined);
@@ -45,46 +43,36 @@ export const AlarmProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       return false;
     }
   });
-
   useEffect(() => {
     try {
       localStorage.setItem('alarmFooterCollapsed', collapsed ? '1' : '0');
     } catch {}
   }, [collapsed]);
 
+  const addAcknowledged = useCallback((a: AckAlarm) => {
+    setAcknowledged((prev) => {
+      const next = [a, ...prev];
+      if (next.length > 10) {
+        const overflow = next[next.length - 1];
+        const trimmed = next.slice(0, 10);
+        setTimeout(() => overflowListeners.forEach((l) => l(overflow)), 0);
+        return trimmed;
+      }
+      return next;
+    });
+  }, []);
+
+  const removeAcknowledged = useCallback((id: string) => {
+    setAcknowledged((prev) => prev.filter((x) => x.id !== id));
+  }, []);
+
   const value = useMemo<AlarmContextValue>(() => ({
     acknowledged,
-    addAcknowledged: (a: AckAlarm) => {
-      setAcknowledged(prev => {
-        const next = [a, ...prev];
-        if (next.length > 10) {
-          const overflow = next[next.length - 1];
-          const trimmed = next.slice(0, 10);
-          // notify listeners outside of render cycle
-          setTimeout(() => overflowListeners.forEach((l) => l(overflow)), 0);
-          return trimmed;
-        }
-        return next;
-      });
-    },
-    removeAcknowledged: (id: string) => setAcknowledged(prev => prev.filter(x => x.id !== id)),
+    addAcknowledged,
+    removeAcknowledged,
     collapsed,
     setCollapsed,
-    pauseNotifications: false,
-    setPauseNotifications: (_v: boolean) => {
-      // placeholder - replaced below with real state
-    },
-  }), [acknowledged, collapsed]);
+  }), [acknowledged, addAcknowledged, removeAcknowledged, collapsed, setCollapsed]);
 
-  // real pause state separate so it can be controlled and persisted if desired
-  const [pauseNotifications, setPauseNotifications] = useState<boolean>(true);
-
-  // recreate value to include the real pause state
-  const finalValue = useMemo<AlarmContextValue>(() => ({
-    ...value,
-    pauseNotifications,
-    setPauseNotifications,
-  }), [value, pauseNotifications]);
-
-  return <AlarmContext.Provider value={finalValue}>{children}</AlarmContext.Provider>;
+  return <AlarmContext.Provider value={value}>{children}</AlarmContext.Provider>;
 };
