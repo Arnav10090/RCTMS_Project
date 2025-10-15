@@ -87,7 +87,6 @@ export const Sidebar = ({ isCollapsed }: SidebarProps) => {
               {!isCollapsed && (
                 <div className="flex-1">
                   <div className="font-medium">{item.name}</div>
-                  <div className="text-xs opacity-70">{item.description}</div>
                 </div>
               )}
             </NavLink>
